@@ -63,6 +63,7 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
 - **react-dom**: React package for working with the DOM
 - **react-router-dom**: Library for routing in React applications
 - **axios**: Promise-based HTTP client for making API requests
+- **sass**: preprocessor that is compiled into Cascading Style Sheets.
 
 ### Dev
 - **nodemon**: Utility to automatically restart the server on file changes
