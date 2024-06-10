@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
-import Login from './components/Login';
-import Register from './components/Register';
-import VehicleManagement from './components/VehicleManagement';
-import Profile from './components/Profile';
-import Notifications from './components/Notifications';
+import Dashboard from './views/Dashboard';
+import Login from './views/Login';
+import Register from './views/Register';
+import VehicleManagement from './views/VehicleManagement';
+import Profile from './views/Profile';
+import Notifications from './views/Notifications';
 
 function App() {
   return (
