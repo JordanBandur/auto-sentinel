@@ -68,6 +68,7 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
 - **@mui/material**: React components for faster and easier web development
 - **@emotion/react**: Library designed for writing css styles with JavaScript
 - **@emotion/styled**: Styled component library for writing actual css code to style components
+- **@mui/icons-material**: Material-UI icons for faster and easier web development
 
 ### Dev
 - **nodemon**: Utility to automatically restart the server on file changes
