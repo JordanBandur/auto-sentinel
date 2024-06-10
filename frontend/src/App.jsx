@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import _Header from './components/_Header';
 import _Footer from './components/_Footer';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import VehicleManagement from './pages/VehicleManagement';
-import Profile from './pages/Profile';
-import Notifications from './pages/Notifications';
-import Maintenance from './pages/Maintenance';
+import Dashboard from './views/Dashboard';
+import Login from './views/Login';
+import Register from './views/Register';
+import VehicleManagement from './views/VehicleManagement';
+import Profile from './views/Profile';
+import Notifications from './views/Notifications';
+import Maintenance from './views/Maintenance';
 
 const App = () => {
   return (
