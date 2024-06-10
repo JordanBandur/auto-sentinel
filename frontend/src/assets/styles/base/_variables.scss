@@ -1,33 +1,40 @@
 // Primary Colors
-$primary-color: #007bff;
-$primary-light-color: #66b2ff;
-$primary-dark-color: #0056b3;
+// Used for main actions, primary buttons, links, and highlights.
+$primary-color: #007bff; // Main primary color, used for primary actions
+$primary-light-color: #66b2ff; // Lighter shade of primary color, used for hover states and highlights
+$primary-dark-color: #0056b3; // Darker shade of primary color, used for active states
 
 // Secondary Colors
-$secondary-color: #6c757d;
-$secondary-light-color: #a6a9ad;
-$secondary-dark-color: #343a40;
+// Used for secondary actions, secondary buttons, and accents.
+$secondary-color: #6c757d; // Main secondary color, used for secondary actions
+$secondary-light-color: #a6a9ad; // Lighter shade of secondary color, used for hover states and highlights
+$secondary-dark-color: #343a40; // Darker shade of secondary color, used for active states
 
 // Accent Colors
-$accent-color: #28a745;
-$accent-light-color: #5cd68d;
-$accent-dark-color: #19692c;
+// Used for success messages, positive actions, and special highlights.
+$accent-color: #28a745; // Main accent color, used for success actions and messages
+$accent-light-color: #5cd68d; // Lighter shade of accent color, used for hover states and highlights
+$accent-dark-color: #19692c; // Darker shade of accent color, used for active states
 
 // Neutral Colors
-$white: #ffffff;
-$black: #000000;
-$grey-light: #f8f9fa;
-$grey-dark: #343a40;
+// Used for backgrounds, text, borders, and neutral elements.
+$white: #ffffff; // Pure white, used for backgrounds and text
+$black: #000000; // Pure black, used for text and accents
+$grey-light: #f8f9fa; // Light grey, used for backgrounds and borders
+$grey-dark: #343a40; // Dark grey, used for text and dark backgrounds
 
 // Text Colors
-$text-color: #212529;
-$text-light-color: #adb5bd;
-$text-dark-color: #0c0c0c;
+// Used for text in various states and emphasis.
+$text-color: #212529; // Main text color, used for primary text
+$text-light-color: #adb5bd; // Light text color, used for secondary text and placeholders
+$text-dark-color: #0c0c0c; // Dark text color, used for headings and emphasized text
 
 // Background Colors
-$background-color: #ffffff;
-$background-dark-color: #343a40;
+// Used for the main backgrounds of the application.
+$background-color: #ffffff; // Main background color, used for primary backgrounds
+$background-dark-color: #343a40; // Dark background color, used for dark mode or sections requiring emphasis
 
 // Border Colors
-$border-color: #dee2e6;
-$border-dark-color: #343a40;
+// Used for borders, dividers, and outlines.
+$border-color: #dee2e6; // Main border color, used for standard borders and dividers
+$border-dark-color: #343a40; // Dark border color, used for dark mode borders or sections requiring emphasis
