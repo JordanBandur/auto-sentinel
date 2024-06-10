@@ -1,11 +1,21 @@
-import './_Footer';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import '../assets/styles/components/_Footer.scss';
 
-const _Footer = () => {
+const Footer = () => {
   return (
-    <footer>
-      <p>&copy; 2024 Auto Sentinel. All rights reserved.</p>
-    </footer>
+    <AppBar position="static" color="primary" sx={{ top: 'auto', bottom: 0, width: '100%' }}>
+      <Toolbar>
+        <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+          <Typography variant="body1" color="inherit">
+            &copy; 2024 Auto Sentinel. All rights reserved.
+          </Typography>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 
-export default _Footer;
+export default Footer;

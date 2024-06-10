@@ -8,6 +8,7 @@ import VehicleManagement from './views/VehicleManagement';
 import Profile from './views/Profile';
 import Notifications from './views/Notifications';
 import Maintenance from './views/Maintenance';
+import './App.scss';
 
 const App = () => {
   return (

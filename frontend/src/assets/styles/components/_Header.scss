@@ -1,45 +1,32 @@
 @import '../base/variables';
 
-/* Header Styles */
 header {
-  background-color: $primary-dark-color;
+  background-color: $primary-color;
   color: $white;
-  padding: 1rem;
 
-  nav ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  nav ul li {
-    margin-right: 1rem;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  nav ul li a {
+  .nav-link {
     color: $white;
     text-decoration: none;
+    margin-right: 1rem;
     font-family: 'Poppins', sans-serif;
 
     &:hover {
       color: $primary-light-color;
+    }
+
+    &.active-link {
+      font-weight: bold;
+      border-bottom: 2px solid $primary-light-color;
     }
   }
 
-  nav ul li button {
-    background: none;
-    border: none;
-    color: $white;
-    cursor: pointer;
+  .auth-button {
+    margin-left: 1rem;
     font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+  }
 
-    &:hover {
-      color: $primary-light-color;
-    }
+  .menu-icon {
+    color: $white;
   }
 }
