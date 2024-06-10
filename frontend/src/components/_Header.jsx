@@ -68,10 +68,10 @@ const Header = () => {
   );
 
   return (
-    <AppBar position="static">
-      <Toolbar>
+    <AppBar position="static" className="header-app-bar">
+      <Toolbar className="header-toolbar">
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6">
+          <Typography variant="h6" className="header-title">
             Auto Sentinel
           </Typography>
           <Hidden smDown>
@@ -91,17 +91,17 @@ const Header = () => {
                 </ListItem>
               </List>
             </Box>
-            <Box>
+            <Box sx={{ display: 'flex' }}>
               {isAuthenticated ? (
-                <Button color="inherit" onClick={handleLogout}>
+                <Button className="auth-button" onClick={handleLogout}>
                   Logout
                 </Button>
               ) : (
                 <>
-                  <Button color="inherit" component={Link} to="/register">
+                  <Button variant="contained" className="register-button" component={Link} to="/register">
                     Register
                   </Button>
-                  <Button color="inherit" component={Link} to="/login">
+                  <Button variant="contained" className="login-button" component={Link} to="/login">
                     Login
                   </Button>
                 </>

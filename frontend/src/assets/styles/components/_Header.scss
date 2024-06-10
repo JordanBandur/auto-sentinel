@@ -1,32 +1,60 @@
 @import '../base/variables';
 
-header {
-  background-color: $primary-color;
+.header-app-bar {
   color: $white;
+}
 
-  .nav-link {
-    color: $white;
-    text-decoration: none;
-    margin-right: 1rem;
-    font-family: 'Poppins', sans-serif;
+.header-toolbar {
+  background-color: $primary-color;
+}
 
-    &:hover {
-      color: $primary-light-color;
-    }
+.header-title {
+  font-family: 'Poppins', sans-serif;
+  color: $white;
+}
 
-    &.active-link {
-      font-weight: bold;
-      border-bottom: 2px solid $primary-light-color;
-    }
+.nav-link {
+  color: $white;
+  text-decoration: none;
+  margin-right: 1rem;
+  font-family: 'Poppins', sans-serif;
+
+  &:hover {
+    color: $secondary-light-color;
   }
 
-  .auth-button {
-    margin-left: 1rem;
+  &.active-link {
+    font-weight: bold;
+    border-bottom: 2px solid $primary-light-color;
+  }
+}
+
+.auth-button {
+  margin-left: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  color: $white;
+}
+
+.menu-icon {
+  color: $white;
+}
+
+.MuiBox-root {
+
+  .register-button,
+  .login-button {
+    margin-left: 0.5rem;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
-  }
-
-  .menu-icon {
     color: $white;
+    background-color: $accent-color;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $accent-dark-color;
+    }
   }
 }

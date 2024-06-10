@@ -1,13 +1,14 @@
 @import '../base/variables';
 
-footer {
-  background-color: $primary-color;
+.footer-app-bar {
   color: $white;
-  padding: 1rem;
-  text-align: center;
+}
 
-  p {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-  }
+.footer-toolbar {
+  background-color: $primary-color;
+}
+
+.footer-text {
+  font-family: 'Poppins', sans-serif;
+  color: $white;
 }

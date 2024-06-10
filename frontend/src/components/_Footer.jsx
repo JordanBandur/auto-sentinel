@@ -6,10 +6,10 @@ import '../assets/styles/components/_Footer.scss';
 
 const Footer = () => {
   return (
-    <AppBar position="static" color="primary" sx={{ top: 'auto', bottom: 0, width: '100%' }}>
-      <Toolbar>
+    <AppBar position="static" className="footer-app-bar">
+      <Toolbar className="footer-toolbar">
         <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
-          <Typography variant="body1" color="inherit">
+          <Typography variant="body1" className="footer-text">
             &copy; 2024 Auto Sentinel. All rights reserved.
           </Typography>
         </Box>
