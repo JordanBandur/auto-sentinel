@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const emailRoutes = require('./src/emailRoutes');
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use(bodyParser.json());
 //app.use('/api/notifications', notificationRoutes);
 //app.use('/api/obd', obdRoutes);
 //app.use('/api/service-reminders', serviceReminderRoutes);
+app.use('/api/email', emailRoutes);
 
 module.exports = app;

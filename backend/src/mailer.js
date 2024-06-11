@@ -1,16 +1,23 @@
 // src/mailer.js
 
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 const AWS = require('aws-sdk');
 
-// configure AWS SDK with your SES credentials
+// Log environment variables for debugging
+console.log('AWS_ACCESS_KEY_ID:', process.env.AWS_ACCESS_KEY_ID);
+console.log('AWS_SECRET_ACCESS_KEY:', process.env.AWS_SECRET_ACCESS_KEY);
+console.log('AWS_REGION:', process.env.AWS_REGION);
+console.log('SES_VERIFIED_EMAIL:', process.env.SES_VERIFIED_EMAIL);
+
+// Configure AWS SDK with your SES credentials
 AWS.config.update({
-  accessKeyId: 'your_access_key_id',
-  secretAccessKey: 'your_secret_access_key',
-  region: 'your_region', // e.g., us-east-1
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
 });
 
-// create a transporter object using SES
+// Create a transporter object using SES
 const transporter = nodemailer.createTransport({
   SES: new AWS.SES({
     apiVersion: '2010-12-01',
@@ -19,11 +26,14 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async (to, subject, text) => {
   const mailOptions = {
-    from: 'your_verified_email@example.com',
+    from: process.env.SES_VERIFIED_EMAIL,
     to: to,
     subject: subject,
     text: text,
   };
+
+  // Logging for debugging
+  console.log('Mail options:', mailOptions);
 
   try {
     let info = await transporter.sendMail(mailOptions);
