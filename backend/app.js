@@ -8,7 +8,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+
 // Routes
+const registerHandler = require('./routes/register');
+const loginHandler = require('./routes/login');
 //const authRoutes = require('./routes/authRoutes');
 //const vehicleRoutes = require('./routes/vehicleRoutes');
 //const maintenanceRoutes = require('./routes/maintenanceRoutes');
@@ -16,6 +19,8 @@ app.use(bodyParser.json());
 //const obdRoutes = require('./routes/obdRoutes');
 //const serviceReminderRoutes = require('./routes/serviceReminderRoutes');
 
+app.post('/register', registerHandler);
+app.post('/login', loginHandler);
 //app.use('/api/auth', authRoutes);
 //app.use('/api/vehicles', vehicleRoutes);
 //app.use('/api/maintenance', maintenanceRoutes);

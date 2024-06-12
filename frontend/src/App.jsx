@@ -9,6 +9,8 @@ import Profile from './views/Profile';
 import Notifications from './views/Notifications';
 import Maintenance from './views/Maintenance';
 import './App.scss';
+import './styles/register.scss';
+import './styles/login.scss';
 
 const App = () => {
   return (

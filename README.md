@@ -42,7 +42,9 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
    ```bash
    npm install
 3. Start the `frontend` server:
+   make sure you are using node 18 or higher.
    ```bash
+   nvm use 18
    npm run dev
 
 ## Dependencies
