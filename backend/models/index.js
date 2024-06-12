@@ -5,6 +5,7 @@ const MaintenanceTask = require('./MaintenanceTask');
 const Notification = require('./Notification');
 const OBD = require('./OBD');
 const ServiceReminder = require('./ServiceReminder');
+const DTC = require('./DTC');
 
 // Associations
 User.hasMany(Vehicle, { foreignKey: 'userId' });
@@ -30,4 +31,5 @@ module.exports = {
   Notification,
   OBD,
   ServiceReminder,
+  DTC,
 };

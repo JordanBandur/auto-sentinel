@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 //const notificationRoutes = require('./routes/notificationRoutes');
 //const obdRoutes = require('./routes/obdRoutes');
 //const serviceReminderRoutes = require('./routes/serviceReminderRoutes');
+const dtcRoutes = require('./routes/dtcRoutes');
 
 //app.use('/api/auth', authRoutes);
 //app.use('/api/vehicles', vehicleRoutes);
@@ -22,5 +23,6 @@ app.use(bodyParser.json());
 //app.use('/api/notifications', notificationRoutes);
 //app.use('/api/obd', obdRoutes);
 //app.use('/api/service-reminders', serviceReminderRoutes);
+app.use('/api/dtc', dtcRoutes);
 
 module.exports = app;
