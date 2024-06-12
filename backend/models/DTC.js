@@ -11,10 +11,6 @@ const DTC = sequelize.define('DTC', {
     type: DataTypes.TEXT,
     allowNull: true
   },
-  meaning: {
-    type: DataTypes.TEXT,
-    allowNull: true
-  },
   symptoms: {
     type: DataTypes.TEXT,
     allowNull: true
