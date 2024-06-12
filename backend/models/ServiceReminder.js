@@ -18,7 +18,7 @@ const ServiceReminder = sequelize.define('ServiceReminder', {
   frequency: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  },
+  }, 
   vehicleId: {
     type: DataTypes.INTEGER,
     allowNull: false,

@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const emailRoutes = require('./src/emailRoutes');
+const textRoutes = require('./src/textRoutes'); 
 
 const app = express();
 
@@ -23,6 +25,8 @@ const dtcRoutes = require('./routes/dtcRoutes');
 //app.use('/api/notifications', notificationRoutes);
 //app.use('/api/obd', obdRoutes);
 //app.use('/api/service-reminders', serviceReminderRoutes);
+app.use('/api/email', emailRoutes);
+app.use('/api/text', textRoutes);
 app.use('/api/dtc', dtcRoutes);
 
 module.exports = app;

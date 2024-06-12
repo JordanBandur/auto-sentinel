@@ -57,6 +57,7 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
 3. Start the `frontend` server:
    ```bash
    npm run dev
+ 
 ## Dependencies
 
 ### Backend
