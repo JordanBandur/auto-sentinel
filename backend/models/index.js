@@ -8,20 +8,20 @@ const ServiceReminder = require('./ServiceReminder');
 const DTC = require('./DTC');
 
 // Associations
-User.hasMany(Vehicle, { foreignKey: 'userId' });
-Vehicle.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Vehicle, { foreignKey: 'user_id' });
+Vehicle.belongsTo(User, { foreignKey: 'user_id' });
 
-Vehicle.hasMany(MaintenanceTask, { foreignKey: 'vehicleId' });
-MaintenanceTask.belongsTo(Vehicle, { foreignKey: 'vehicleId' });
+Vehicle.hasMany(MaintenanceTask, { foreignKey: 'vehicle_id' });
+MaintenanceTask.belongsTo(Vehicle, { foreignKey: 'vehicle_id' });
 
-User.hasMany(Notification, { foreignKey: 'userId' });
-Notification.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Notification, { foreignKey: 'user_id' });
+Notification.belongsTo(User, { foreignKey: 'user_id' });
 
-Vehicle.hasMany(OBD, { foreignKey: 'vehicleId' });
-OBD.belongsTo(Vehicle, { foreignKey: 'vehicleId' });
+Vehicle.hasMany(OBD, { foreignKey: 'vehicle_id' });
+OBD.belongsTo(Vehicle, { foreignKey: 'vehicle_id' });
 
-Vehicle.hasMany(ServiceReminder, { foreignKey: 'vehicleId' });
-ServiceReminder.belongsTo(Vehicle, { foreignKey: 'vehicleId' });
+Vehicle.hasMany(ServiceReminder, { foreignKey: 'vehicle_id' });
+ServiceReminder.belongsTo(Vehicle, { foreignKey: 'vehicle_id' });
 
 module.exports = {
   sequelize,

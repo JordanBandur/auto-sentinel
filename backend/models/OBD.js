@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const OBD = sequelize.define('OBD', {
+const OBD = sequelize.define('obd', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -11,19 +11,22 @@ const OBD = sequelize.define('OBD', {
     type: DataTypes.JSON,
     allowNull: false,
   },
-  vehicleId: {
+  vehicle_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Vehicles',
+      model: 'vehicles',
       key: 'id',
     },
   },
-  createdAt: {
+  created_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
+}, {
+  tableName: 'obds',
+  underscored: true,
 });
 
 module.exports = OBD;

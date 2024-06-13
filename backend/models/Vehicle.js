@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Vehicle = sequelize.define('Vehicle', {
+const Vehicle = sequelize.define('vehicle', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -28,24 +28,27 @@ const Vehicle = sequelize.define('Vehicle', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  userId: {
+  user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Users',
+      model: 'users',
       key: 'id',
     },
   },
-  createdAt: {
+  created_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
-  updatedAt: {
+  updated_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
+}, {
+  tableName: 'vehicles',
+  underscored: true,
 });
 
 module.exports = Vehicle;

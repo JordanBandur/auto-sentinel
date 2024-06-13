@@ -1,7 +1,7 @@
-// models/DTC.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const DTC = sequelize.define('DTC', {
+
+const DTC = sequelize.define('dtc', {
   code: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -24,7 +24,8 @@ const DTC = sequelize.define('DTC', {
     allowNull: true
   }
 }, {
-  tableName: 'dtc_codes'
+  tableName: 'dtc_codes',
+  underscored: true,
 });
 
 module.exports = DTC;
