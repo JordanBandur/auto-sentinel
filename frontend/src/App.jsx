@@ -14,7 +14,7 @@ import './App.scss';
 const App = () => {
   return (
     <Router>
-      <div className="App bg-custom-gray dark:bg-gray-900 text-black dark:text-white">
+      <div className="App bg-gray-900 text-white dark:bg-gray-900 dark:text-white">
         <Header />
         <main>
           <Routes>
