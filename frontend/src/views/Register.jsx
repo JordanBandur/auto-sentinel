@@ -1,32 +1,38 @@
-import {useState} from "react";
-import axios from "axios";
-
+import  { useState } from 'react';
+import axios from 'axios';
+import { useAuth } from '../hooks/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  
-  const handleSubmit = async (e) => {
+  const [name, setName] = useState(''); // Added name field
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5433/register', {
-        name,
+      const response = await axios.post('http://localhost:3000/register', {
         email,
-        password
+        password,
+        name
       });
-      console.log(response.data);
+      login({ name, email }); // Update auth state
+      navigate('/');
+      console.log('Registration successful:', response.data);
     } catch (error) {
-      console.error('Registration error:', error.response ? error.response.data : error.message);
+      console.error('Registration failed:', error);
+      alert('Registration failed');
     }
   };
 
   return (
     <div className="register">
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleRegister}>
       <input 
-          type="text" 
+          type="name" 
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Name"

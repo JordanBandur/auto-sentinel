@@ -57,4 +57,17 @@
       background-color: $accent-dark-color;
     }
   }
-}
+  }
+    .logout-button {
+      background-color: #dc3545; /* Red background */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    
+      &:hover {
+        background-color: #c82333; /* Darker red on hover */
+      }
+    }

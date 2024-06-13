@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,15 +12,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
 import Hidden from '@mui/material/Hidden';
+import { AuthContext } from '../hooks/AuthContext'; // Import AuthContext
 import '../assets/styles/components/_Header.scss';
 
-const Header = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-  };
+const Header = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const { isAuthenticated, logout } = useContext(AuthContext);
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -50,7 +48,7 @@ const Header = () => {
           <ListItemText primary="Notifications" />
         </ListItem>
         {isAuthenticated ? (
-          <ListItem button onClick={handleLogout}>
+          <ListItem button onClick={logout}>
             <ListItemText primary="Logout" />
           </ListItem>
         ) : (
@@ -93,7 +91,7 @@ const Header = () => {
             </Box>
             <Box sx={{ display: 'flex' }}>
               {isAuthenticated ? (
-                <Button className="auth-button" onClick={handleLogout}>
+                <Button className="logout-button" onClick={logout}>
                   Logout
                 </Button>
               ) : (
@@ -128,3 +126,4 @@ const Header = () => {
 };
 
 export default Header;
+

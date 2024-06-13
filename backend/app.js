@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
+console.log("xxx")
 // Routes
 const registerHandler = require('./routes/register');
 const loginHandler = require('./routes/login');
@@ -18,6 +18,10 @@ const loginHandler = require('./routes/login');
 //const notificationRoutes = require('./routes/notificationRoutes');
 //const obdRoutes = require('./routes/obdRoutes');
 //const serviceReminderRoutes = require('./routes/serviceReminderRoutes');
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the Vehicle Maintenance Tracker API');
+});
 
 app.post('/register', registerHandler);
 app.post('/login', loginHandler);
