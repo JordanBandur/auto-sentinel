@@ -6,17 +6,3 @@
     transform: translateX(100vw); /* End off-screen to the right */
   }
 }
-
-.car-container {
-  position: relative;
-  height: 70px; /* Adjust height to create space for the car animation */
-}
-
-.caranimation {
-  position: absolute;
-  bottom: 10px; /* Adjust bottom position to place the car correctly */
-  left: 0;
-  width: 100px;
-  height: 60px;
-  animation: drive 10s linear infinite; /* Adjust duration to 10 seconds */
-}

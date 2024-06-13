@@ -14,7 +14,7 @@ const CarAnimation = () => {
 
   return (
     <div className="car-animation">
-      <Lottie options={defaultOptions} height={400} width={400} />
+      <Lottie options={defaultOptions} height={180} width={400} />
     </div>
   );
 };
