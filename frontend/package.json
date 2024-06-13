@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.19",
+    "@tremor/react": "^3.17.2",
     "aws-sdk": "^2.1639.0",
     "axios": "^1.7.2",
     "body-parser": "^1.20.2",

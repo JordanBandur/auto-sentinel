@@ -7,6 +7,7 @@ import FuelLevelCard from './cards/FuelLevelCard';
 import CoolantTemperatureCard from './cards/CoolantTemperatureCard';
 import OilPercentageCard from './cards/OilPercentageCard';
 import CarAnimation from './animations/CarAnimation';
+import Chart from '../components/Chart';
 
 const Dashboard = () => {
   return (
@@ -27,6 +28,7 @@ const Dashboard = () => {
           <CoolantTemperatureCard />
           <BatteryVoltageCard />
           <OilPercentageCard />
+          <Chart />
           {/* Adding margin-top to bring the animation closer to the cards */}
           <div className="flex justify-center col-span-1 md:col-span-2 lg:col-span-3 mt-6">
             <CarAnimation />
