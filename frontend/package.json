@@ -20,6 +20,8 @@
     "chart.js": "^4.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "echarts": "^5.5.0",
+    "echarts-for-react": "^3.0.2",
     "express": "^4.19.2",
     "lottie-react": "^2.4.0",
     "nodemailer": "^6.9.13",
