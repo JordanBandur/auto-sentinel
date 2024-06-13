@@ -1,6 +1,7 @@
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import _Header from './components/_Header';
-import _Footer from './components/_Footer';
+import Header from './components/_Header';
+import Footer from './components/_Footer';
 import Dashboard from './views/Dashboard';
 import Login from './views/Login';
 import Register from './views/Register';
@@ -13,8 +14,8 @@ import './App.scss';
 const App = () => {
   return (
     <Router>
-      <div className="App">
-        <_Header />
+      <div className="App bg-custom-gray dark:bg-gray-900 text-black dark:text-white">
+        <Header />
         <main>
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -26,7 +27,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
-        <_Footer />
+        <Footer />
       </div>
     </Router>
   );
