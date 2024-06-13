@@ -3,6 +3,7 @@
     "aws-sdk": "^2.1639.0",
     "chart.js": "^4.4.3",
     "dotenv": "^16.4.5",
+    "framer-motion": "^11.2.10",
     "nodemailer": "^6.9.13",
     "react-chartjs-2": "^5.2.0",
     "twilio": "^5.1.1"
