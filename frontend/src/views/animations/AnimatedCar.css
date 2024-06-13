@@ -12,7 +12,7 @@
   height: 70px; /* Adjust height to create space for the car animation */
 }
 
-.car-animation {
+.caranimation {
   position: absolute;
   bottom: 10px; /* Adjust bottom position to place the car correctly */
   left: 0;
