@@ -27,6 +27,7 @@ const OBD = sequelize.define('obd', {
 }, {
   tableName: 'obds',
   underscored: true,
+  timestamps: false,
 });
 
 module.exports = OBD;
