@@ -57,4 +57,18 @@
       background-color: $accent-dark-color;
     }
   }
-}
+  .logout-button {
+    margin-left: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: $white;
+    background-color: $accent-dark-color;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: rgb(220, 82, 82);
+    }
+  }
+  }
