@@ -7,10 +7,10 @@
 @import './base/variables';
 
 // Import component styles
-@import './components/header';
-@import './components/footer';
+@import './components/Header';
+@import './components/Footer';
 
-@import './assets/styles/base/variables'; // Import the color variables
+@import './base/variables'; // Import the color variables
 
 html, body, #root {
   height: 100%;
@@ -35,5 +35,6 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%; // Ensure main takes up full width
+  width: 100%;
+  padding-top: 100px;
 }
