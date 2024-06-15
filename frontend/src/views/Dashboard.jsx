@@ -124,6 +124,15 @@ const Dashboard = () => {
 
   const displayedMetrics = isAdvancedView ? advancedMetrics : simpleMetrics;
 
+  const formatLabel = (label) => {
+    return label.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+  };
+
+  const getFormattedValue = (metric, value) => {
+    const decimals = ['batteryVoltage', 'o2SensorVoltage', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'timingAdvance', 'controlModuleVoltage', 'egrError', 'fuelInjectionTiming', 'engineFuelRate'];
+    return decimals.includes(metric) ? parseFloat(value).toFixed(2) : parseInt(value);
+  };
+
   return (
     <Container maxWidth="md" className="dashboard">
       <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
@@ -179,8 +188,8 @@ const Dashboard = () => {
                       <Grid item xs={12} sm={6} md={4} key={metric}>
                         <Card className="obd-data-card">
                           <CardContent>
-                            <Typography variant="body2" className="obd-data-label">{metric}</Typography>
-                            <Typography variant="h6" className="obd-data-value">{obdData[metric]}</Typography>
+                            <Typography variant="body2" className="obd-data-label">{formatLabel(metric)}</Typography>
+                            <Typography variant="h6" className="obd-data-value">{getFormattedValue(metric, obdData[metric])}</Typography>
                           </CardContent>
                         </Card>
                       </Grid>
