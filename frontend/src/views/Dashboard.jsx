@@ -172,14 +172,14 @@ const Dashboard = () => {
           </StyledCard>
         </Grid>
         {selectedVehicle && (
-          <Grid item xs={12} id="obd-section">
+          <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
             <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
-            <StyledButton variant="contained" color="primary" onClick={toggleView} className="toggle-view-button">
+            <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
               {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
             </StyledButton>
             <StyledCard variant="outlined" className="obd-card">
               <CardContent>
-                <StyledTypography variant="body1" className={`obd-status ${obdStatus ? 'connected' : 'disconnected'}`}>
+                <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
                   Status: {obdStatus ? 'Connected' : 'Disconnected'}
                 </StyledTypography>
                 {obdData && (
