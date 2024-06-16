@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button, Card, CardContent, CardActions, Grid, FormControl, InputLabel, Select, MenuItem, Box, Tabs, Tab } from '@mui/material';
+import { Container, Typography, Button, Card, CardContent, CardActions, Grid, FormControl, InputLabel, Select, MenuItem, Box, Tabs, Tab, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Info as InfoIcon } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import '../assets/styles/views/Dashboard.scss';
@@ -18,6 +19,36 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
+const metricDescriptions = {
+  rpm: "Revolutions per minute (RPM) is the number of times the engine's crankshaft completes one full rotation per minute.",
+  speed: "The current speed of the vehicle in miles per hour (mph).",
+  fuelLevel: "The percentage of fuel remaining in the fuel tank.",
+  throttlePosition: "The position of the throttle as a percentage.",
+  intakeAirTemperature: "The temperature of the air entering the engine.",
+  coolantTemp: "The temperature of the engine coolant.",
+  batteryVoltage: "The voltage of the vehicle's battery.",
+  engineLoad: "Represents the percentage of the engine's capacity being used.",
+  fuelPressure: "Indicates the pressure of the fuel in the fuel rail, important for proper fuel injection.",
+  shortTermFuelTrim: "Adjustments made by the engine control unit to the fuel mixture for optimal combustion.",
+  longTermFuelTrim: "Long-term adjustments to the fuel mixture to correct any persistent deviations from the ideal mixture.",
+  massAirFlowRate: "The amount of air entering the engine, critical for fuel management.",
+  o2SensorVoltage: "Voltage output from the oxygen sensor, which helps in adjusting the air-fuel ratio.",
+  timingAdvance: "Indicates how much the spark timing is advanced from the top dead center.",
+  manifoldAbsolutePressure: "Measures the pressure within the intake manifold, important for engine load calculations.",
+  absoluteThrottlePosition: "The actual position of the throttle plate in the throttle body.",
+  controlModuleVoltage: "Voltage supplied to the vehicle's control modules, which should be consistent for proper function.",
+  fuelRailPressure: "Pressure within the fuel rail, crucial for fuel injection accuracy.",
+  egrCommanded: "The extent to which the Exhaust Gas Recirculation (EGR) valve is open.",
+  egrError: "The difference between the commanded and actual EGR positions.",
+  evaporativePurge: "Measures the purging of fuel vapors from the fuel tank into the intake manifold.",
+  warmupsSinceDtcCleared: "The number of times the engine has been warmed up since the Diagnostic Trouble Codes were cleared.",
+  distanceTraveledSinceDtcCleared: "The distance traveled by the vehicle since the Diagnostic Trouble Codes were cleared.",
+  ambientAirTemperature: "The temperature of the air outside the vehicle.",
+  engineOilTemperature: "The temperature of the engine oil, important for engine protection and performance.",
+  fuelInjectionTiming: "The timing of the fuel injection in relation to the engine's crankshaft position.",
+  engineFuelRate: "The rate at which fuel is being consumed by the engine."
+};
+
 const Dashboard = () => {
   const [vehicles, setVehicles] = useState([]);
   const [selectedVehicle, setSelectedVehicle] = useState('');
@@ -31,6 +62,8 @@ const Dashboard = () => {
     brakingData: []
   });
   const { enqueueSnackbar } = useSnackbar();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedMetric, setSelectedMetric] = useState(null);
 
   useEffect(() => {
     axios.get('/api/vehicles')
@@ -130,6 +163,16 @@ const Dashboard = () => {
     setSelectedTab(newValue);
   };
 
+  const handleOpenModal = (metric) => {
+    setSelectedMetric(metric);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedMetric(null);
+  };
+
   const simpleMetrics = ['rpm', 'speed', 'fuelLevel', 'throttlePosition', 'intakeAirTemperature', 'coolantTemp', 'batteryVoltage'];
   const advancedMetrics = [
     ...simpleMetrics,
@@ -150,7 +193,7 @@ const Dashboard = () => {
   };
 
   const getPerformanceMetrics = () => (
-    performanceData && performanceData.accelerationData ? (
+    performanceData && performanceData.accelerationData.length > 0 ? (
       <Grid container spacing={2} className="performance-data-container">
         <Grid item xs={12}>
           <Typography variant="h6" className="performance-data-title">Acceleration Data</Typography>
@@ -207,6 +250,9 @@ const Dashboard = () => {
             <CardContent>
               <Typography variant="body2" className="obd-data-label">{formatLabel(metric)}</Typography>
               <Typography variant="h6" className="obd-data-value">{getFormattedValue(metric, obdData[metric])}</Typography>
+              <IconButton className='obd-metric-info-button' onClick={() => handleOpenModal(metric)} aria-label={`info about ${metric}`}>
+                <InfoIcon />
+              </IconButton>
             </CardContent>
           </Card>
         </Grid>
@@ -216,107 +262,116 @@ const Dashboard = () => {
 
   return (
     <Container maxWidth="md" className="dashboard">
-    <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
-    <StyledTypography variant="subtitle1" gutterBottom className="dashboard-subtitle">Welcome to Auto Sentinel</StyledTypography>
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <StyledCard variant="outlined" className="vehicle-card">
-          <CardContent>
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel id="vehicle-select-label">Select Vehicle</InputLabel>
-              <Select
-                labelId="vehicle-select-label"
-                id="vehicle-select"
-                value={selectedVehicle}
-                onChange={handleVehicleChange}
-                label="Select Vehicle"
-                className="vehicle-select"
-              >
-                {vehicles.map(vehicle => (
-                  <MenuItem key={vehicle.id} value={vehicle.id}>
-                    {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            {selectedVehicle && (
-              <Box mt={2}>
-                <Typography variant="h6">
-                  {vehicles.find(vehicle => vehicle.id === selectedVehicle).make} {vehicles.find(vehicle => vehicle.id === selectedVehicle).model} ({vehicles.find(vehicle => vehicle.id === selectedVehicle).year})
-                </Typography>
-                <Typography variant="body2">
-                  {vehicles.find(vehicle => vehicle.id === selectedVehicle).license_plate}
-                </Typography>
-                <Box mt={2} display="flex" justifyContent="center" id="obd-buttons">
-                  <StyledButton variant="contained" onClick={connectObd} disabled={obdStatus} className="connect-button obd-button">Connect OBD</StyledButton>
-                  <StyledButton variant="contained" onClick={disconnectObd} disabled={!obdStatus} className="disconnect-button obd-button" color="error">Disconnect OBD</StyledButton>
+      <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
+      <StyledTypography variant="subtitle1" gutterBottom className="dashboard-subtitle">Welcome to Auto Sentinel</StyledTypography>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <StyledCard variant="outlined" className="vehicle-card">
+            <CardContent>
+              <FormControl fullWidth variant="outlined" margin="normal">
+                <InputLabel id="vehicle-select-label">Select Vehicle</InputLabel>
+                <Select
+                  labelId="vehicle-select-label"
+                  id="vehicle-select"
+                  value={selectedVehicle}
+                  onChange={handleVehicleChange}
+                  label="Select Vehicle"
+                  className="vehicle-select"
+                >
+                  {vehicles.map(vehicle => (
+                    <MenuItem key={vehicle.id} value={vehicle.id}>
+                      {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              {selectedVehicle && (
+                <Box mt={2}>
+                  <Typography variant="h6">
+                    {vehicles.find(vehicle => vehicle.id === selectedVehicle).make} {vehicles.find(vehicle => vehicle.id === selectedVehicle).model} ({vehicles.find(vehicle => vehicle.id === selectedVehicle).year})
+                  </Typography>
+                  <Typography variant="body2">
+                    {vehicles.find(vehicle => vehicle.id === selectedVehicle).license_plate}
+                  </Typography>
+                  <Box mt={2} display="flex" justifyContent="center" id="obd-buttons">
+                    <StyledButton variant="contained" onClick={connectObd} disabled={obdStatus} className="connect-button obd-button">Connect OBD</StyledButton>
+                    <StyledButton variant="contained" onClick={disconnectObd} disabled={!obdStatus} className="disconnect-button obd-button" color="error">Disconnect OBD</StyledButton>
+                  </Box>
                 </Box>
-              </Box>
-            )}
-          </CardContent>
-        </StyledCard>
-      </Grid>
-  
-      {selectedVehicle && (
-        <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
-          <Tabs
-            value={selectedTab}
-            onChange={handleTabChange}
-            aria-label="OBD and Performance Views"
-            sx={{ mb: 2 }}
-          >
-            <Tab label="OBD View" />
-            <Tab label="Performance View" />
-          </Tabs>
-          {selectedTab === 0 ? (
-            <>
-              <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
-              <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
-                {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
-              </StyledButton>
-              <StyledCard variant="outlined" className="obd-card">
-                <CardContent>
-                  {obdStatus ? (
-                    <>
-                      <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
-                        Status: {obdStatus ? 'Connected' : 'Disconnected'}
-                      </StyledTypography>
-                      {obdData && getObdMetrics()}
-                    </>
-                  ) : (
-                    <Typography variant="body1">Please connect OBD</Typography>
-                  )}
-                </CardContent>
-                {obdStatus && (
-                  <CardActions className="obd-actions">
-                    <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
-                  </CardActions>
-                )}
-              </StyledCard>
-            </>
-          ) : (
-            <>
-              <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
-              <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
-              <StyledCard variant="outlined" className="performance-card">
-                <CardContent>
-                  {performanceData.accelerationData.length > 0 ? (
-                    getPerformanceMetrics()
-                  ) : (
-                    <Typography variant="body1">No performance data available. Please generate a report.</Typography>
-                  )}
-                </CardContent>
-              </StyledCard>
-            </>
-          )}
+              )}
+            </CardContent>
+          </StyledCard>
         </Grid>
-      )}
-    </Grid>
-  </Container>
-  
+
+        {selectedVehicle && (
+          <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
+            <Tabs
+              value={selectedTab}
+              onChange={handleTabChange}
+              aria-label="OBD and Performance Views"
+              sx={{ mb: 2 }}
+            >
+              <Tab label="OBD View" />
+              <Tab label="Performance View" />
+            </Tabs>
+            {selectedTab === 0 ? (
+              <>
+                <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
+                <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
+                  {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
+                </StyledButton>
+                <StyledCard variant="outlined" className="obd-card">
+                  <CardContent>
+                    {obdStatus ? (
+                      <>
+                        <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
+                          Status: {obdStatus ? 'Connected' : 'Disconnected'}
+                        </StyledTypography>
+                        {obdData && getObdMetrics()}
+                      </>
+                    ) : (
+                      <Typography variant="body1">Please connect OBD</Typography>
+                    )}
+                  </CardContent>
+                  {obdStatus && (
+                    <CardActions className="obd-actions">
+                      <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
+                    </CardActions>
+                  )}
+                </StyledCard>
+              </>
+            ) : (
+              <>
+                <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
+                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
+                <StyledCard variant="outlined" className="performance-card">
+                  <CardContent>
+                    {performanceData.accelerationData.length > 0 ? (
+                      getPerformanceMetrics()
+                    ) : (
+                      <Typography variant="body1">No performance data available. Please generate a report.</Typography>
+                    )}
+                  </CardContent>
+                </StyledCard>
+              </>
+            )}
+          </Grid>
+        )}
+      </Grid>
+
+      <Dialog open={modalOpen} onClose={handleCloseModal}>
+        <DialogTitle>{selectedMetric}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {metricDescriptions[selectedMetric]}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal} color="primary">Close</Button>
+        </DialogActions>
+      </Dialog>
+    </Container>
   );
 };
 
 export default Dashboard;
-
-
