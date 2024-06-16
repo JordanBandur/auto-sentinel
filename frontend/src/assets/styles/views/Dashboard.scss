@@ -1,1 +1,71 @@
 @import '../base/variables';
+
+.MuiTab-root {
+  color: #ffffff;
+  /* White text color */
+  font-size: 16px;
+  /* Increase font size */
+  font-weight: bold;
+  /* Make text bold */
+}
+
+.Mui-selected {
+  color: #00aaff;
+  /* Light blue color for selected tab */
+  border-bottom: 2px solid #00aaff;
+  /* Add underline for selected tab */
+}
+
+.MuiButton-root {
+  color: #ffffff;
+  /* White text color */
+  background-color: #007bff;
+  /* Primary blue background color */
+  font-size: 16px;
+  /* Increase font size */
+  padding: 10px 20px;
+  /* Add padding */
+  border-radius: 5px;
+  /* Round the corners */
+  text-transform: none;
+  /* Remove uppercase transformation */
+}
+
+.MuiButton-containedError {
+  background-color: #dc3545;
+  /* Red background for disconnect button */
+}
+
+.MuiButton-contained:disabled {
+  background-color: #6c757d;
+  /* Gray background for disabled button */
+  color: #ffffff;
+  /* White text color */
+}
+
+.MuiTabs-flexContainer {
+
+  button {
+    color: #e2e2e2;
+  }
+
+}
+
+#generate-report-button {
+  margin-left: 0;
+
+  &:disabled {
+    color: rgba(255, 255, 255, 0.50);
+    box-shadow: none;
+    background-color: rgba(0, 123, 255, 0.50);
+
+  }
+}
+
+#obd-buttons {
+  justify-content: start;
+
+  button {
+    margin-left: 0;
+  }
+}
