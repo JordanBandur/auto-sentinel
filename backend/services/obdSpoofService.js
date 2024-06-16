@@ -1,3 +1,10 @@
+/**
+ * This file simulates an OBD-II (On-Board Diagnostics) device by generating
+ * random data for various vehicle metrics. It provides functions to connect,
+ * disconnect, and get the current status of the OBD-II device, as well as
+ * generating performance data such as acceleration, quarter mile, and braking.
+ */
+
 const EventEmitter = require('events');
 const OBD = require('../models/OBD');
 
@@ -9,6 +16,10 @@ class OBDSpoofService extends EventEmitter {
     this.intervalId = null;
   }
 
+  /**
+   * Initializes OBD data with default values.
+   * @returns {Object} The initialized OBD data.
+   */
   initializeOBDData() {
     return {
       rpm: 1500,
@@ -41,6 +52,9 @@ class OBDSpoofService extends EventEmitter {
     };
   }
 
+  /**
+   * Connects to the OBD-II device (simulated) and starts generating random OBD data.
+   */
   connect() {
     if (this.isConnected) return;
 
@@ -52,6 +66,9 @@ class OBDSpoofService extends EventEmitter {
     console.log('OBD-II Spoof Connected');
   }
 
+  /**
+   * Disconnects from the OBD-II device (simulated) and stops generating random OBD data.
+   */
   disconnect() {
     if (!this.isConnected) return;
 
@@ -61,14 +78,28 @@ class OBDSpoofService extends EventEmitter {
     console.log('OBD-II Spoof Disconnected');
   }
 
+  /**
+   * Gets the connection status of the OBD-II device.
+   * @returns {boolean} The connection status.
+   */
   getStatus() {
     return this.isConnected;
   }
 
+  /**
+   * Gets the current OBD data.
+   * @returns {Object} The current OBD data.
+   */
   getCurrentData() {
     return this.obdData;
   }
 
+  /**
+   * Saves a snapshot of the current OBD data to the database.
+   * @param {number} vehicleId - The ID of the vehicle.
+   * @param {Object} data - The OBD data to save.
+   * @returns {Promise<Object>} The saved OBD snapshot.
+   */
   async saveSnapshot(vehicleId, data) {
     return OBD.create({
       data,
@@ -76,6 +107,9 @@ class OBDSpoofService extends EventEmitter {
     });
   }
 
+  /**
+   * Updates the OBD data with random values within specified ranges.
+   */
   updateOBDData() {
     this.obdData.rpm = parseFloat(this.getNextValue(this.obdData.rpm, 600, 100, 800, 6800).toFixed(0));
     this.obdData.speed = parseFloat(this.getNextValue(this.obdData.speed, 5, 5, 0, 120).toFixed(0));
@@ -106,6 +140,15 @@ class OBDSpoofService extends EventEmitter {
     this.obdData.engineFuelRate = parseFloat(this.getNextValue(this.obdData.engineFuelRate, 0.5, 0.2, 0, 30).toFixed(2));
   }
 
+  /**
+   * Generates a random value within specified ranges.
+   * @param {number} currentValue - The current value.
+   * @param {number} maxChange - The maximum change allowed.
+   * @param {number} minChange - The minimum change allowed.
+   * @param {number} minValue - The minimum value allowed.
+       @param {number} maxValue - The maximum value allowed.
+   * @returns {number} The new value after applying the random change.
+   */
   getNextValue(currentValue, maxChange, minChange, minValue, maxValue) {
     const change = Math.random() * (maxChange - minChange) + minChange;
     const direction = Math.random() > 0.5 ? 1 : -1;
@@ -115,7 +158,10 @@ class OBDSpoofService extends EventEmitter {
     return parseFloat(newValue);
   }
 
-  // Performance spoofing
+  /**
+   * Generates random acceleration data.
+   * @returns {Array} Array of acceleration data points.
+   */
   generateAccelerationData() {
     const accelerationData = [];
     let speed = 0;
@@ -131,6 +177,10 @@ class OBDSpoofService extends EventEmitter {
     return accelerationData;
   }
 
+  /**
+   * Generates random quarter mile data.
+   * @returns {Array} Array of quarter mile data points.
+   */
   generateQuarterMileData() {
     const quarterMileData = [];
     let speed = 0;
@@ -149,11 +199,15 @@ class OBDSpoofService extends EventEmitter {
     return quarterMileData;
   }
 
+  /**
+   * Generates random braking data.
+   * @returns {Array} Array of braking data points.
+   */
   generateBrakingData() {
     const brakingData = [];
     let speed = 100; // Assume starting speed
     let time = 0;
-    const interval = 0.1; // time interval in seconds
+    const interval = 0.1; // Time interval in seconds
     let distance = 0;
 
     while (speed > 0) {
@@ -173,4 +227,3 @@ const obdSpoofService = new OBDSpoofService();
 obdSpoofService.disconnect();
 
 module.exports = obdSpoofService;
-
