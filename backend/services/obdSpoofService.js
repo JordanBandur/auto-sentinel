@@ -114,6 +114,58 @@ class OBDSpoofService extends EventEmitter {
     if (newValue > maxValue) newValue = maxValue;
     return parseFloat(newValue);
   }
+
+  // Performance spoofing
+  generateAccelerationData() {
+    const accelerationData = [];
+    let speed = 0;
+    let time = 0;
+    const interval = 0.1; // Time interval in seconds
+
+    while (speed < 60) {
+      speed += Math.random() * 3; // Random acceleration
+      time += interval;
+      accelerationData.push({ time: time.toFixed(1), speed: speed.toFixed(1) });
+    }
+
+    return accelerationData;
+  }
+
+  generateQuarterMileData() {
+    const quarterMileData = [];
+    let speed = 0;
+    let time = 0;
+    let distance = 0;
+    const interval = 0.1; // Time interval in seconds
+    const quarterMile = 402.336; // meters
+
+    while (distance < quarterMile) {
+      speed += Math.random() * 3;
+      distance += (speed * interval) / 3.6; // Convert speed to m/s and multiply by interval
+      time += interval;
+      quarterMileData.push({ time: time.toFixed(1), speed: speed.toFixed(1), distance: distance.toFixed(1) });
+    }
+
+    return quarterMileData;
+  }
+
+  generateBrakingData() {
+    const brakingData = [];
+    let speed = 100; // Assume starting speed
+    let time = 0;
+    const interval = 0.1; // time interval in seconds
+    let distance = 0;
+
+    while (speed > 0) {
+      speed -= Math.random() * 5; // Random deceleration
+      if (speed < 0) speed = 0;
+      distance += (speed * interval) / 3.6; // Convert speed to m/s and multiply by interval
+      time += interval;
+      brakingData.push({ time: time.toFixed(1), speed: speed.toFixed(1), distance: distance.toFixed(1) });
+    }
+
+    return brakingData;
+  }
 }
 
 // Ensure initial state is disconnected
@@ -121,3 +173,4 @@ const obdSpoofService = new OBDSpoofService();
 obdSpoofService.disconnect();
 
 module.exports = obdSpoofService;
+
