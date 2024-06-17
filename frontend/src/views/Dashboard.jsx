@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 import BatteryVoltageCard from './cards/BatteryVoltageCard';
 import EngineRPMCard from './cards/EngineRPMCard';
 import VehicleSpeedCard from './cards/VehicleSpeedCard';
@@ -10,6 +11,15 @@ import CarAnimation from './animations/CarAnimation';
 import Chart from '../components/Chart';
 
 const Dashboard = () => {
+  const sendReport = async () => {
+    try {
+      await axios.post('/api/emails/send-report');
+      alert('Report sent successfully!');
+    } catch (error) {
+      alert('Failed to send report');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <motion.header
@@ -29,9 +39,16 @@ const Dashboard = () => {
           <BatteryVoltageCard />
           <OilPercentageCard />
           <Chart />
-          {/* Adding margin-top to bring the animation closer to the cards */}
-          <div className="flex justify-center col-span-1 md:col-span-2 lg:col-span-3 mt-6">
+          <div className="flex justify-center items-center col-span-1 md:col-span-2 lg:col-span-3 mt-6">
             <CarAnimation />
+          </div>
+          <div className="flex justify-center items-center col-span-1 md:col-span-2 lg:col-span-3 mt-4">
+            <button
+              onClick={sendReport}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Email OBD Report 
+            </button>
           </div>
         </div>
       </main>
