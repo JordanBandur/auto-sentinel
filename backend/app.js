@@ -1,12 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const maintenanceRoutes = require('./src/maintenance');
 
 const app = express();
 
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
+
 
 // Routes
 const registerHandler = require('./routes/register');
@@ -36,5 +39,6 @@ app.use('/api/obd', obdRoutes);
 //app.use('/api/email', emailRoutes);
 //app.use('/api/text', textRoutes);
 //app.use('/api/dtc', dtcRoutes);
+app.use('/api/maintenance', maintenanceRoutes);
 
 module.exports = app;

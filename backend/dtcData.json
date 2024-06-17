@@ -1,0 +1,702 @@
+[
+  {
+    "code": "P0000 OBD-II Trouble Code",
+    "description": "This is a code that is not often seen, that is quite simply because it's not a valid diagnostic trouble code so not many code reading devices display this code.",
+    "symptoms": "There will no symptoms as a result of the P0000 code. You may, however, have symptoms related to other trouble codes. You may or may not have the Malfunction Indicator Lamp illuminated.",
+    "causes": "If you still need help regarding the P0000 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "There will no symptoms as a result of the P0000 code. You may, however, have symptoms related to other trouble codes. You may or may not have the Malfunction Indicator Lamp illuminated."
+  },
+  {
+    "code": "P0001 Fuel Volume Regulator Control Circuit/Open",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Ford, Dodge, Vauxhall, VW, Mazda, etc. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "Symptoms of a P0001 DTC may include:",
+    "causes": "If you still need help regarding the P0001 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, check for known Technical Service Bulletins (TSBs) for your year/make/model. If there is a known TSB that addresses this issue, it can save you time & money during diagnosis."
+  },
+  {
+    "code": "P0002 Fuel Volume Regulator Control Circuit Range/Performance",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Ford, Dodge, Vauxhall, VW, Mazda, etc. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "Symptoms of a P0002 DTC may include:",
+    "causes": "If you still need help regarding the P0002 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, check for known Technical Service Bulletins (TSBs) for your year/make/model. If there is a known TSB that addresses this issue, it can save you time & money during diagnosis."
+  },
+  {
+    "code": "P0003 Fuel Volume Regulator Control Circuit Low",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Ford, Dodge, Vauxhall, VW, Mazda, etc. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "Symptoms of a P0003 DTC may include:",
+    "causes": "If you still need help regarding the P0003 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, check for known Technical Service Bulletins (TSBs) for your year/make/model. If there is a known TSB that addresses this issue, it can save you time & money during diagnosis."
+  },
+  {
+    "code": "P0004 Fuel Volume Regulator Control Circuit High",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Ford, Dodge, Vauxhall, VW, Mazda, etc. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "Symptoms of a P0004 DTC may include:",
+    "causes": "If you still need help regarding the P0004 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, check for known Technical Service Bulletins (TSBs) for your year/make/model. If there is a known TSB that addresses this issue, it can save you time & money during diagnosis."
+  },
+  {
+    "code": "P0005 Fuel Shutoff Valve A Control Circuit/Open",
+    "description": "The P0005 DTC code is generic, so that means it applies to all makes of vehicles. It's a very rarely seen DTC.",
+    "symptoms": "Symptoms of a P0005 DTC will include MIL (Malfunction indicator lamp) illumination, although there may be other symptoms.",
+    "causes": "If you still need help regarding the P0005 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Please consult a factory service manual for more specific troubleshooting steps."
+  },
+  {
+    "code": "P0006 Fuel Shutoff Valve 'A' Control Circuit Low",
+    "description": "The P0006 DTC code is generic, so that means it applies to all makes of vehicles. It's a very rarely seen DTC.",
+    "symptoms": "Symptoms of a P0006 DTC will include MIL (Malfunction indicator lamp) illumination, although there may be other symptoms.",
+    "causes": "If you still need help regarding the P0006 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Please consult a factory service manual for more specific troubleshooting steps."
+  },
+  {
+    "code": "P0007 Fuel Shutoff Valve 'A' Control Circuit High",
+    "description": "The P0007 DTC code is generic, so that means it applies to all makes of vehicles. It's a very rarely seen DTC.",
+    "symptoms": "Symptoms of a P0007 DTC will include MIL (Malfunction indicator lamp) illumination, although there may be other symptoms.",
+    "causes": "If you still need help regarding the P0007 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Please consult a factory service manual for more specific troubleshooting steps."
+  },
+  {
+    "code": "P0008 Engine Positions System Performance Bank 1",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Cadillac, GMC, Chevrolet, etc. ",
+    "symptoms": "Symptoms of a P0008 DTC may include:",
+    "causes": "If you still need help regarding the P0008 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "If your vehicle is new enough that it still has powertrain warranty left, by all means let the dealer perform the fix. Generally, diagnosing and fixing this DTC will involve inspecting the timing chains and tensioners for excessive wear or misalignment, and inspecting the crank reluctor wheel for proper positioning. Then replacing parts as required. As said earlier, there are known issues with some GM engines so there may be updated or revised replacement parts. Please consult a factory service manual for more vehicle make & model specific troubleshooting steps."
+  },
+  {
+    "code": "P0009 Engine Positions System Performance Bank 2",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Cadillac, GMC, etc. ",
+    "symptoms": "Symptoms of a P0009 DTC may include:",
+    "causes": "If you still need help regarding the P0009 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "If your vehicle is new enough that it still has powertrain warranty left, by all means let the dealer perform the fix. Generally, diagnosing and fixing this DTC will involve inspecting the timing chains and tensioners for excessive wear or misalignment, and inspecting the crank reluctor wheel for proper positioning. Then replacing parts as required. As said earlier, there are known issues with some GM engines so there may be updated or revised replacement parts. Please consult a factory service manual for more vehicle make & model specific troubleshooting steps."
+  },
+  {
+    "code": "P0010 - 'A' Camshaft Position Actuator Circuit (Bank 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Symptoms may include:  Check Engine Light illuminated (Malfunction Indicator Lamp) Rough running other symptoms may also be present  ",
+    "causes": "If you still need help regarding the P0010 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Some recommended troubleshooting and repair steps are:"
+  },
+  {
+    "code": "P0011 - 'A' Camshaft Position - Timing Over-Advanced or System Performance (Bank 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Most likely a P0011 DTC will result in one of the following: hard starting, poor idle, and/or stalling. There are potentially other symptoms as well. Of course, when trouble codes are set, the MIL (malfunction indicator lamp, a.k.a. the check engine light) illuminates.",
+    "causes": "If you still need help regarding the P0011 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "This DTC code is a result of a mechanical fault of the VCT unit or related components, so there is no need for electrical diagnosis. Refer to vehicle specific repair manual to perform component tests for the VCT unit. Notes: Dealer techs have advanced tools and the ability to follow detailed troubleshooting steps, including the ability to test components using a scan tool."
+  },
+  {
+    "code": "P0012 - 'A' Camshaft Position - Timing Over-Retarded (Bank 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Most likely a P0012 DTC will result in one of the following:",
+    "causes": "If you still need help regarding the P0012 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "The main thing to check is to verify the operation of the VCT solenoid. You're looking for a sticking or stuck VCt solenoid valve caused by contamination. Refer to vehicle specific repair manual to perform component tests for the VCT unit. Notes: Dealer techs have advanced tools and the ability to follow detailed troubleshooting steps, including the ability to test components using a scan tool."
+  },
+  {
+    "code": "P0013 - 'B' Camshaft Position Actuator Circuit (Bank 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Symptoms may include:  Check Engine Light illuminated (Malfunction Indicator Lamp) Rough running Other symptoms may also be present  ",
+    "causes": "If you still need help regarding the P0013 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Ideally you'll want to refer to a factory service manual for make & model specific steps and specifications. You should use a digital volt ohm meter (DVOM) and measure the resistance of the terminals on the camshaft oil control valve (OCV). Refer to the factory spec on the reading, if it's not good, replace the OCV assembly. Also use the DVOM to verify wiring, connectors, etc. leading from the OCV back to the PCM."
+  },
+  {
+    "code": "P0014 - 'B' Camshaft Position - Timing Over-Advanced or System Performance (Bank 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Most likely a P0014 DTC will result in one of the following: hard starting, poor idle, and/or stalling. There are potentially other symptoms as well. Of course, when trouble codes are set, the MIL (malfunction indicator lamp, a.k.a. the check engine light) illuminates.",
+    "causes": "If you still need help regarding the P0014 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "This DTC code is a result of a mechanical fault of the VCT unit or related components, so there is no need for electrical diagnosis. Refer to vehicle specific repair manual to perform component tests for the VCT unit. Notes: Dealer techs have advanced tools and the ability to follow detailed troubleshooting steps, including the ability to test components using a scan tool."
+  },
+  {
+    "code": "P0015 - 'B' Camshaft Position - Timing Over-Retarded (Bank 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Honda, Ford, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Most likely a P0015 DTC will result in one of the following:",
+    "causes": "If you still need help regarding the P0015 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "The main thing to check is to verify the operation of the VCT solenoid. You're looking for a sticking or stuck VCt solenoid valve caused by contamination. Refer to vehicle specific repair manual to perform component tests for the VCT unit. Notes: Dealer techs have advanced tools and the ability to follow detailed troubleshooting steps, including the ability to test components using a scan tool."
+  },
+  {
+    "code": "P0016 - Crankshaft Position - Camshaft Position Correlation (Bank 1 Sensor A)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Ford, Dodge, Toyota, VW, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Symptoms of a P0016 will or may include:",
+    "causes": "If you still need help regarding the P0016 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "If you still need help regarding the P0016 trouble code, please post your question in our FREE car repair forums."
+  },
+  {
+    "code": "P0017 - Crankshaft Position - Camshaft Position Correlation (Bank 1 Sensor B)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Ford, Dodge, Toyota, VW, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Symptoms of a P0017 will or may include:",
+    "causes": "If you still need help regarding the P0017 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "If your vehicle is new enough that is still has powertrain warranty, please let the dealer perform the repairs."
+  },
+  {
+    "code": "P0018 - Crankshaft Position - Camshaft Position Correlation (Bank 2 Sensor A)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Ford, Dodge, Toyota, VW, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Symptoms of a P0018 will or may include:",
+    "causes": "If you still need help regarding the P0018 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "If your vehicle is new enough that is still has powertrain warranty, please let the dealer perform the repairs."
+  },
+  {
+    "code": "P0019 - Crankshaft Position - Camshaft Position Correlation (Bank 2 Sensor B)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Ford, Dodge, Toyota, VW, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Symptoms of a P0019 will or may include:",
+    "causes": "If you still need help regarding the P0019 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "If your vehicle is new enough that is still has powertrain warranty, please let the dealer perform the repairs."
+  },
+  {
+    "code": "P0020 - 'B' Camshaft Position Actuator Circuit (Bank 2)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Symptoms may include:  Check Engine Light illuminated (Malfunction Indicator Lamp) Rough running other symptoms may also be present  ",
+    "causes": "If you still need help regarding the P0020 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Some recommended troubleshooting and repair steps are:"
+  },
+  {
+    "code": "P0021 - 'A' Camshaft Position - Timing Over-Advanced or System Performance (Bank 2)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Most likely a P0021 DTC will result in one of the following: hard starting, poor idle, and/or stalling. There are potentially other symptoms as well. Of course, when trouble codes are set, the MIL (malfunction indicator lamp, a.k.a. the check engine light) illuminates.",
+    "causes": "If you still need help regarding the P0021 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "This DTC code is a result of a mechanical fault of the VCT unit or related components, so there is no need for electrical diagnosis. Refer to vehicle specific repair manual to perform component tests for the VCT unit. Notes: Dealer techs have advanced tools and the ability to follow detailed troubleshooting steps, including the ability to test components using a scan tool."
+  },
+  {
+    "code": "P0022 - 'A' Camshaft Position - Timing Over-Retarded (Bank 2)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Most likely a P0022 DTC will result in one of the following:",
+    "causes": "If you still need help regarding the P0022 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "The main thing to check is to verify the operation of the VCT solenoid. You're looking for a sticking or stuck VCt solenoid valve caused by contamination. Refer to vehicle specific repair manual to perform component tests for the VCT unit. Notes: Dealer techs have advanced tools and the ability to follow detailed troubleshooting steps, including the ability to test components using a scan tool."
+  },
+  {
+    "code": "P0023 - 'B' Camshaft Position Actuator Circuit (Bank 2)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Symptoms may include:  Check Engine Light illuminated (Malfunction Indicator Lamp) Rough running Other symptoms may also be present  ",
+    "causes": "If you still need help regarding the P0023 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Ideally you'll want to refer to a factory service manual for make & model specific steps and specifications. You should use a digital volt ohm meter (DVOM) and measure the resistance of the terminals on the camshaft oil control valve (OCV). Refer to the factory spec on the reading, if it's not good, replace the OCV assembly. Also use the DVOM to verify wiring, connectors, etc. leading from the OCV back to the PCM."
+  },
+  {
+    "code": "P0024 - 'B' Camshaft Position - Timing Over-Advanced or System Performance (Bank 2)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Most likely a P0024 DTC will result in one of the following: hard starting, poor idle, and/or stalling. There are potentially other symptoms as well. Of course, when trouble codes are set, the MIL (malfunction indicator lamp, a.k.a. the check engine light) illuminates.",
+    "causes": "If you still need help regarding the P0024 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "This DTC code is a result of a mechanical fault of the VCT unit or related components, so there is no need for electrical diagnosis. Refer to vehicle specific repair manual to perform component tests for the VCT unit. Notes: Dealer techs have advanced tools and the ability to follow detailed troubleshooting steps, including the ability to test components using a scan tool."
+  },
+  {
+    "code": "P0025 - 'B' Camshaft Position - Timing Over-Retarded (Bank 2)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. ",
+    "symptoms": "Most likely a P0025 DTC will result in one of the following:",
+    "causes": "If you still need help regarding the P0025 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "The main thing to check is to verify the operation of the VCT solenoid. You're looking for a sticking or stuck VCT solenoid valve caused by contamination. Refer to vehicle specific repair manual to perform component tests for the VCT unit. Notes: Dealer techs have advanced tools and the ability to follow detailed troubleshooting steps, including the ability to test components using a scan tool."
+  },
+  {
+    "code": "P0026 Intake Valve Control Solenoid Circuit Range/Perf. B1",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0026 DTC may include:",
+    "causes": "If you still need help regarding the P0026 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Engine oil - Check the engine oil level to make sure engine oil capacity is sufficient. Since the actuators work on oil pressure, the proper amount of oil is critical to ensure proper operation of the VVT system. Dirty or contaminated fluid may cause buildup which can lead to failure of the control solenoid or the camshaft actuator."
+  },
+  {
+    "code": "P0027 Exhaust Valve Control Solenoid Circuit Range/Perf. B1",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0027 DTC may include:",
+    "causes": "If you still need help regarding the P0027 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Engine oil - Check the engine oil level to make sure engine oil capacity is sufficient. Since the actuators work on oil pressure, the proper amount of oil is critical to ensure proper operation of the VVT system. Dirty or contaminated fluid may cause buildup which can lead to failure of the control solenoid or the camshaft actuator."
+  },
+  {
+    "code": "P0028 Intake Valve Control Solenoid Circuit Range/Perf. B2",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0028 DTC may include:",
+    "causes": "If you still need help regarding the P0028 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Engine oil - Check the engine oil level to make sure engine oil capacity is sufficient. Since the actuators work on oil pressure, the proper amount of oil is critical to ensure proper operation of the VVT system. Dirty or contaminated fluid may cause buildup which can lead to failure of the control solenoid or the camshaft actuator."
+  },
+  {
+    "code": "P0029 Exhaust Valve Control Solenoid Circuit Range/Perf. B2",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0029 DTC may include:",
+    "causes": "If you still need help regarding the P0029 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Engine oil - Check the engine oil level to make sure engine oil capacity is sufficient. Since the actuators work on oil pressure, the proper amount of oil is critical to ensure proper operation of the VVT system. Dirty or contaminated fluid may cause buildup which can lead to failure of the control solenoid or the camshaft actuator."
+  },
+  {
+    "code": "P0030 HO2S Heater Control Circuit B1S1",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0030 DTC may include:",
+    "causes": "If you still need help regarding the P0030 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Many times a HO2 sensors heater element may go bad due to age or impact. Keep this in mind when making your inspection. Make a visual inspection of the Bank 1,1 O2 sensor. Repair any damaged wiring from contact with exhaust."
+  },
+  {
+    "code": "P0031 - Oxygen (A/F) Sensor Heater Control Circuit Low (Bank 1 Sensor 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Nissan, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Most likely you'll not notice any symptoms other than the MIL (malfunction indicator lamp, a.k.a. the check engine light) will illuminate.",
+    "causes": "If you still need help regarding the P0031 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": " To fix a P0031 DTC code, you'll need to do a proper diagnosis. To do that, you'll want to inspect the wiring and connectors leading to the sensor. Also if equipped with a heater relay and fuse, you'll want to check those as well. Use a digital volt ohm meter to:"
+  },
+  {
+    "code": "P0032 - Oxygen (A/F) Sensor Heater Control Circuit High (Bank 1 Sensor 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Nissan, Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Most likely you'll not notice any symptoms other than the MIL (malfunction indicator lamp, a.k.a. the check engine light) will illuminate.",
+    "causes": "If you still need help regarding the P0032 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": " To fix a P0032 DTC code, you'll need to do a proper diagnosis. To do that, you'll want to inspect the wiring and connectors leading to the sensor. Also if equipped with a heater relay and fuse, you'll want to check those as well. Use a digital volt ohm meter to:"
+  },
+  {
+    "code": "P0033 Turbo Charger Bypass Valve Control Circuit",
+    "description": "This diagnostic trouble code (DTC) is a generic OBD-II powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the make and model.",
+    "symptoms": "Symptoms of a P0033 engine code may include:",
+    "causes": "If you still need help regarding the P0033 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0034 Turbo Charger Bypass Valve Control Circuit Low",
+    "description": "This diagnostic trouble code (DTC) is a generic OBD-II powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the make and model. ",
+    "symptoms": "Symptoms of a P0034 trouble code may include:",
+    "causes": "If you still need help regarding the P0034 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0035 Turbo Charger Bypass Valve Control Circuit High",
+    "description": "This diagnostic trouble code (DTC) is a generic OBD-II powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the make and model. ",
+    "symptoms": "Symptoms of a P0035 engine code may include:",
+    "causes": "If you still need help regarding the P0035 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0036 Heated Oxygen Sensor Control Circuit B1S2",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0036 DTC includes MIL (Malfunction indicator lamp) illumination. You will probably not notice anyother symptoms associated with the failure of the heated circuit since it only runs momentarily when the vehicle is first started. This sensor is also after the catalytic converter, so it will not affect the air/fuel ratio input to the PCM/ECM; it is primarily used to verify the catalytic converters efficiency.",
+    "causes": "If you still need help regarding the P0036 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Visually inspect the oxygen sensor wiring for damaged or loose wiring to the sensor."
+  },
+  {
+    "code": "P0037 HO2S Heater Control Circuit Low B1S2",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Acura, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0037 DTC may include:",
+    "causes": "If you still need help regarding the P0037 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Do a visual inspection of the Bank 1, 2 HO2S and wiring harness. If there is any damage to the sensor or any damage to the wiring, repair/replace as needed. Make sure wiring is routed away from exhaust. If all appears okay, unplug the Bank 1, 2 HO2S and verify that there is 12 volts B+ present with the key on engine off, (or ground is present, depending on the system)."
+  },
+  {
+    "code": "P0038 HO2S Heater Control Circuit High (Bank 1 Sensor 2)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Nissan, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0038 DTC may include:",
+    "causes": "If you still need help regarding the P0038 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, do a visual inspection of the Bank 1, 2 HO2S (heated oxygen sensor) and it's wiring harness. If there is any damage to the sensor or any damage to the wiring, fix it as needed. Check for bare wires where wiring enters sensor. This often can fatigue and cause shorts. Make sure wiring is routed away from exhaust. Repair wiring or replace sensor as necessary"
+  },
+  {
+    "code": "P0039 Turbo Charger Bypass Valve Control Circuit Range Performance",
+    "description": "This diagnostic trouble code (DTC) is a generic OBD-II powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the make and model. ",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0039 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0040 O2 Sensor Signals Swapped Bank 1 Bank 2 Sensor 1",
+    "description": "This diagnostic trouble code (DTC) is a generic OBD-II powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the make and model. Owners of these these brands may include but are not limited to Ford, Dodge, BMW, Chrysler, Mercedes Benz, Nissan, VW, etc.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0040 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good first step is to find out if there was any recent work done in the area of the exhaust and O2 sensors. If there was, then there is a good chance that the most likely cause is the issue. That is, swapped wiring connectors for the first O2 sensor from bank 1 to bank 2."
+  },
+  {
+    "code": "P0041 O2 Sensor Signals Swapped Bank 1 Bank 2 Sensor 2",
+    "description": "This diagnostic trouble code (DTC) is a generic OBD-II powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the make and model. Owners of these these brands may include but are not limited to BMW, Dodge, Ford, Chrylser, Audi, VW, Mazda, Jeep, etc.",
+    "symptoms": "Symptoms of a P0041 engine code may include:",
+    "causes": "If you still need help regarding the P0041 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good first step is to find out if there was any recent work done in the area of the exhaust and O2 sensors. If there was, then there is a good chance that the most likely cause is the issue. That is, swapped wiring connectors for the second O2 sensor from bank 1 to bank 2."
+  },
+  {
+    "code": "P0042 Heated Oxygen Sensor Control Circuit B1S3",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to VW Volkswagen, Audi, Mazda, Ford, Chevy, etc. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "Symptoms of a P0042 DTC includes MIL (Malfunction indicator lamp) illumination. You will probably not notice anyother symptoms associated with the failure of the heated circuit since it only runs momentarily when the vehicle is first started. This sensor is also after the catalytic converter, so it will not affect the air/fuel ratio input to the PCM/ECM; it is primarily used to verify the catalytic converters efficiency.",
+    "causes": "If you still need help regarding the P0042 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Visually inspect the oxygen sensor wiring for damaged or loose wiring to the sensor."
+  },
+  {
+    "code": "P0043 HO2S Heater Control Circuit Low B1S3",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Nissan, Toyota, Mazda, Mitsubishi, Lexus, Infiniti, VW, etc. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "Symptoms of a P0043 DTC may include:",
+    "causes": "If you still need help regarding the P0043 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Do a visual inspection of the bank 1, sensor 3 HO2S and wiring harness. If there is any damage to the sensor or any damage to the wiring, repair/replace as needed. Make sure wiring is routed away from exhaust. If all appears okay, unplug the Bank 1,3 HO2S and verify that there is 12 volts B+ present with the key on engine off, (or ground is present, depending on the system)."
+  },
+  {
+    "code": "P0044 HO2S Heater Control Circuit High (Bank 1 Sensor 3)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Nissan, Mitsubishi, Mazda, Subaru, Toyota, VW, etc. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "Symptoms of a P0044 DTC may include:",
+    "causes": "If you still need help regarding the P0044 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, do a visual inspection of the third HO2S oxygen sensor downstream from the engine on bank 1 and it's wiring harness. If there is any damage to the sensor or any damage to the wiring, fix it as needed. Check for bare wires where wiring enters sensor. This often can fatigue and cause shorts. Make sure wiring is routed away from exhaust. Repair wiring or replace sensor as necessary"
+  },
+  {
+    "code": "P0045 Turbo/Supercharger Boost Control A Circuit Open",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles that have a supercharger or turbocharger (Chevrolet / GMC / Duramax, Isuzu, Ford, Toyota, Nissan, VW, Hino, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0045 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Begin by visually inspecting the turbo and turbo control system. Look for loose connections, damaged wiring, vacuum leaks etc. Next, check for technical service bulletins (TSBs) regarding the issue. If nothing is found, you will need to move forward to step by step diagnosis of the system."
+  },
+  {
+    "code": "P0046 Turbo/Supercharger Boost Control A Circuit Range Performance",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles that have a supercharger or turbocharger (Ford Powerstroke, Chevrolet GMC Duramax, Toyota, Dodge, Jeep, Chrysler, VW, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0046 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Begin by visually inspecting the turbo and turbo control system. Look for loose connections, damaged wiring, vacuum leaks etc. Next, check for technical service bulletins (TSBs) regarding the issue. If nothing is found, you will need to move forward to step by step diagnosis of the system."
+  },
+  {
+    "code": "P0047 Turbo/Supercharger Boost Control A Circuit Low",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles that have a supercharger or turbocharger (Toyota, Hyundai, Ford Powerstroke, GMC Chevy Duramax, VW, Kia, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0047 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Begin by visually inspecting the turbo and turbo control system. Look for loose connections, damaged wiring, vacuum leaks etc. Next, check for technical service bulletins (TSBs) regarding the issue. If nothing is found, you will need to move forward to step by step diagnosis of the system."
+  },
+  {
+    "code": "P0048 Turbo/Supercharger Boost Control A Circuit High",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles that have a supercharger or turbocharger (Toyota, GMC Chevrolet Duramax, Mazda, Chrysler, Jeep, Ford Powerstroke, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0048 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Begin by visually inspecting the turbo and turbo control system. Look for loose connections, damaged wiring, vacuum leaks etc. Next, check for technical service bulletins (TSBs) regarding the issue. If nothing is found, you will need to move forward to step by step diagnosis of the system."
+  },
+  {
+    "code": "P0049 Turbo / Supercharger Turbine Overspeed",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles (Dodge, Ram, Ford, GMC, Chevrolet, VW, Toyota, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0049 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0050 HO2S Heater Control Circuit B2S1",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Jeep, Nissan, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0050 DTC may include:",
+    "causes": "If you still need help regarding the P0050 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Many times a HO2 sensors heater element may go bad due to age or impact. Keep this in mind when making your inspection. Make a visual inspection of the Bank 2, Sensor 1 O2 sensor. Repair any damaged wiring from contact with exhaust."
+  },
+  {
+    "code": "P0051 - Oxygen (A/F) Sensor Heater Control Circuit Low (Bank 2 Sensor 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Nissan, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Most likely you'll not notice any symptoms other than the MIL (malfunction indicator lamp, a.k.a. the check engine light) will illuminate.",
+    "causes": "If you still need help regarding the P0051 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "To fix a P0051 DTC code, you'll need to do a proper diagnosis. To do that, you'll want to inspect the wiring and connectors leading to the sensor. Also if equipped with a heater relay and fuse, you'll want to check those as well. Use a digital volt ohm meter to:"
+  },
+  {
+    "code": "P0052 - Oxygen (A/F) Sensor Heater Control Circuit High (Bank 2 Sensor 1)",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Nissan, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Most likely you'll not notice any symptoms other than the MIL (malfunction indicator lamp, a.k.a. the check engine light) will illuminate.",
+    "causes": "If you still need help regarding the P0052 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": " To fix a P0052 DTC code, you'll need to do a proper diagnosis. To do that, you'll want to inspect the wiring and connectors leading to the sensor. Also if equipped with a heater relay and fuse, you'll want to check those as well. Use a digital volt ohm meter to:"
+  },
+  {
+    "code": "P0053 HO2S Heater Resistance Bank 1 Sensor 1",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Chevrolet, Ford, GMC, Mazda, Pontiac, Isuzu, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0053 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0054 HO2S Heater Resistance Bank 1 Sensor 2",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Chevrolet, Ford, GMC, Mazda, Pontiac, Isuzu, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0054 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0055 HO2S Heater Resistance Bank 1 Sensor 3",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Chevrolet, Ford, GMC, Mazda, Pontiac, Isuzu, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0055 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0056 Heated Oxygen Sensor Control Circuit B1S2",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles, including but not limited to Toyota, VW, Ford, Dodge, Honda, Chevrolet, Hyundai, Audi, Nissan, etc. Specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0056 DTC includes MIL (Malfunction indicator lamp) illumination. You will probably not notice anyother symptoms associated with the failure of the heated circuit since it only runs momentarily when the vehicle is first started. This sensor is also after the catalytic converter, so it will not affect the air/fuel ratio input to the PCM/ECM; it is primarily used to verify the catalytic converters efficiency.",
+    "causes": "If you still need help regarding the P0056 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Visually inspect the oxygen sensor wiring for damaged or loose wiring to the sensor."
+  },
+  {
+    "code": "P0057 HO2S Heater Control Circuit Low B2S2",
+    "description": "This code is a generic powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may be slightly different depending on the model. ",
+    "symptoms": "Symptoms of a P0057 DTC may include:",
+    "causes": "If you still need help regarding the P0057 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Do a visual inspection of the Bank 2,2 HO2S and wiring harness. If there is any damage to the sensor or any damage to the wiring, repair/replace as needed. Make sure wiring is routed away from exhaust. If all appears okay, unplug the Bank 2,2 HO2S and verify that there is 12 volts B+ present with the key on engine off, (or ground is present, depending on the system)."
+  },
+  {
+    "code": "P0058 HO2S Heater Control Circuit High (Bank 2 Sensor 2)",
+    "description": "This code is a generic powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may be slightly different depending on the model.",
+    "symptoms": "Symptoms of a P0058 DTC may include:",
+    "causes": "If you still need help regarding the P0058 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, do a visual inspection of the Bank 2, 2 HO2S (heated oxygen sensor) and it's wiring harness. If there is any damage to the sensor or any damage to the wiring, fix it as needed. Check for bare wires where wiring enters sensor. This often can fatigue and cause shorts. Make sure wiring is routed away from exhaust. Repair wiring or replace sensor as necessary"
+  },
+  {
+    "code": "P0059 HO2S Heater Resistance Bank 2 Sensor 1",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Chevrolet, Ford, GMC, Mazda, Pontiac, Isuzu, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0059 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0060 HO2S Heater Resistance Bank 2 Sensor 2",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Chevrolet, Ford, GMC, Mazda, Pontiac, Isuzu, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0060 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0061 HO2S Heater Resistance Bank 2 Sensor 3",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Chevrolet, Ford, GMC, Mazda, Pontiac, Isuzu, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0061 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0062 HO2S Heater Control Circuit B2S3",
+    "description": "This diagnostic trouble code (DTC) is a generic OBD-II powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the make and model. Owners of these these brands may include but are not limited to VW, Dodge, Saab, Pontiac, Ford, GM, etc. ",
+    "symptoms": "Symptoms of a P0062 DTC includes MIL (Malfunction indicator lamp) illumination. You will probably not notice any other symptoms associated with the failure of the heated circuit since it only runs momentarily when the vehicle is first started. This sensor is also after the catalytic converter, so it will not affect the air/fuel ratio input to the PCM/ECM; it is primarily used to verify the catalytic converters efficiency.",
+    "causes": "If you still need help regarding the P0062 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Visually inspect the oxygen sensor wiring for damaged or loose wiring to the sensor, especially sensor #3 on bank 2."
+  },
+  {
+    "code": "P0063 HO2S Heater Control Circuit Low B2S3",
+    "description": "This code is a generic powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may be slightly different depending on the model.",
+    "symptoms": "Symptoms of a P0063 DTC may include:",
+    "causes": "If you still need help regarding the P0063 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Do a visual inspection of the Bank 2, 3 HO2S and wiring harness. If there is any damage to the sensor or any damage to the wiring, repair/replace as needed. Make sure wiring is routed away from exhaust. If all appears okay, unplug the Bank 2, 3 HO2S and verify that there is 12 volts B+ present with the key on engine off, (or ground is present, depending on the system)."
+  },
+  {
+    "code": "P0064 HO2S Heater Control Circuit High (Bank 2 Sensor 3)",
+    "description": "This code is a generic powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may be slightly different depending on the model.",
+    "symptoms": "Symptoms of a P0064 DTC may include:",
+    "causes": "If you still need help regarding the P0064 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, do a visual inspection of the Bank 2, 3 HO2S (heated oxygen sensor) and it's wiring harness. If there is any damage to the sensor or any damage to the wiring, fix it as needed. Check for bare wires where wiring enters sensor. This often can fatigue and cause shorts. Make sure wiring is routed away from exhaust. Repair wiring or replace sensor as necessary"
+  },
+  {
+    "code": "P0065 Air Assisted Injector Control Range Performance",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles that have an air assisted fuel injector. Brands of vehicles may include but are not limited to Subaru, Jaguar, Chevy, Dodge, VW, Toyota, Honda, etc. but mainly only shows up on Subaru and Jaguar vehicles. Although generic, the specific repair steps may vary depending on make/model/engine.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0065 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": ""
+  },
+  {
+    "code": "P0066 Air Assisted Injector Control Circuit Or Circuit Low",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles that have an air assisted fuel injector. Brands of vehicles may include but are not limited to Subaru, Jaguar, Chevy, Dodge, VW, Toyota, Honda, etc. but mainly only shows up on Subaru and Jaguar vehicles. Although generic, the specific repair steps may vary depending on make/model/engine.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0066 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": ""
+  },
+  {
+    "code": "P0067 Air Assisted Injector Control Circuit High",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles that have an air assisted fuel injector. Brands of vehicles may include but are not limited to Subaru, Jaguar, Chevy, Dodge, VW, Toyota, Honda, etc. but mainly only shows up on Subaru and Jaguar vehicles. Although generic, the specific repair steps may vary depending on make/model/engine.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0067 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": ""
+  },
+  {
+    "code": "P0068 MAP/MAF - Throttle Position Correlation",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may be slightly different depending on the model.",
+    "symptoms": "The symptoms displayed for a P0068 code will depend on the cause of the overboost condition:",
+    "causes": "If you still need help regarding the P0068 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Like an auto technician, start with the most common problems. You will need a volt/ohmmeter, wire-piercing probe for the meter, a can of carburetor cleaner and a can of intake cleaner. Repair any problems as they are found and start the vehicle to determine if the problem is corrected -- if not continue the procedures. "
+  },
+  {
+    "code": "P0069 Manifold Absolute Pressure - Barometric Pressure Correlation",
+    "description": "This generic powertrain/engine diagnostic trouble code typically applies to all OBDII equipped engines, but shows up more often in certain Audi, Ford, Mazda, Mitsubishi, Saturn and VW vehicles. ",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0069 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0070 Ambient Air Temperature Sensor Circuit ",
+    "description": "This generic powertrain/engine diagnostic trouble code typically applies to all OBDII equipped engines, but shows up more often in certain Audi, BMW, Chrysler, Dodge, Ford, Jeep, Mazda, Mitsubishi, and VW vehicles. ",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0070 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0071 Ambient Air Temperature Sensor Performance",
+    "description": "This generic powertrain/engine diagnostic trouble code typically applies to all OBDII equipped engines, but shows up more often in certain Audi, BMW, Chrysler, Dodge, Ford, Jeep, Mazda, Mitsubishi, and VW vehicles. ",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0071 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0072 Ambient Air Temperature Sensor Circuit Low",
+    "description": "This generic powertrain/engine diagnostic trouble code typically applies to all OBDII equipped engines, but shows up more often in certain Audi, BMW, Chrysler, Dodge, Ford, Jeep, Mazda, Mitsubishi, VW and Volvo vehicles. ",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0072 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0073 Ambient Air Temperature Sensor Circuit High",
+    "description": "This generic powertrain/engine diagnostic trouble code typically applies to all OBDII equipped engines, but shows up more often in certain Audi, BMW, Chrysler, Dodge, Ford, Jeep, Mazda, Mitsubishi, and VW vehicles. ",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0073 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0074 Ambient Air Temperature Sensor Circuit Intermittent",
+    "description": "This generic powertrain/engine diagnostic trouble code typically applies to all OBDII equipped vehicles. ",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0074 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0075 Intake Valve Control Solenoid Circuit B1",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0075 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Check for unplugged harness connections, look for corrosion or loose wires to connectors. Unplug harness connectors from solenoid and PCM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the ohms setting, check for resistance between each end of the wire. An over limit reading on the DVOM may be an open in the wiring, loose connection or terminal. Resistance should be around 1 ohm or less, if there is excessive resistance there may be corrosion or bad wiring between the solenoid and PCM/ECM."
+  },
+  {
+    "code": "P0076 Intake Valve Control Solenoid Circuit Low B1",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0076 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Unplug harness connectors from the PCM/ECM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the volts setting, check for voltage with the positive lead on the vehicle battery and the negative lead on each wire to the control solenoid. Depending on the application, if the solenoid is grounded to chassis, test the power lead to the control solenoid at the PCM/ECM wiring harness, there should be no voltage present. If there is voltage present, check for a short to ground in the wiring up to the control solenoid by unplugging connectors and working back to the solenoid."
+  },
+  {
+    "code": "P0077 Intake Valve Control Solenoid Circuit High B1",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0077 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Check for unplugged harness connections, look for corrosion or loose wires to connectors. Unplug harness connectors from Solenoid and PCM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the ohms setting, check for resistance between each end of the wire. An over limit reading on the DVOM may be an open in the wiring, loose connection or terminal. "
+  },
+  {
+    "code": "P0078 Exhaust Valve Control Solenoid Circuit B1",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0078 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Check for unplugged harness connections, look for corrosion or loose wires to connectors. Unplug harness connectors from Solenoid and PCM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the ohms setting, check for resistance between each end of the wire. An over limit reading on the DVOM may be an open in the wiring, loose connection or terminal. Resistance should be around 1 ohm or less, if there is excessive resistance there may be corrosion or bad wiring between the solenoid and PCM/ECM."
+  },
+  {
+    "code": "P0079 Exhaust Valve Control Solenoid Circuit Low B1",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0079 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Unplug harness connectors from the PCM/ECM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the volts setting, check for voltage with the positive lead on the vehicle battery and the negative lead on each wire to the control solenoid. Depending on the application, if the solenoid is grounded to chassis, test the power lead to the control solenoid at the PCM/ECM wiring harness, there should be no voltage present. If there is voltage present, check for a short to ground in the wiring up to the control solenoid by unplugging connectors and working back to the solenoid."
+  },
+  {
+    "code": "P0080 Exhaust Valve Control Solenoid Circuit High B1",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0080 may include:",
+    "causes": "If you still need help regarding the P0080 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Check for unplugged harness connections, look for corrosion or loose wires to connectors. Unplug harness connectors from Solenoid and PCM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the ohms setting, check for resistance between each end of the wire. An over limit reading on the DVOM may be an open in the wiring, loose connection or terminal."
+  },
+  {
+    "code": "P0081 Intake Valve Control Solenoid Circuit B2",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0081 DTC may include:",
+    "causes": "If you still need help regarding the P0081 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Check for unplugged harness connections, look for corrosion or loose wires to connectors. Unplug harness connectors from solenoid and PCM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the ohms setting, check for resistance between each end of the wire. An over limit reading on the DVOM may be an open in the wiring, loose connection or terminal. Resistance should be around 1 ohm or less, if there is excessive resistance there may be corrosion or bad wiring between the solenoid and PCM/ECM."
+  },
+  {
+    "code": "P0082 Intake Valve Control Solenoid Circuit Low B2",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0082 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Unplug harness connectors from the PCM/ECM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the volts setting, check for voltage with the positive lead on the vehicle battery and the negative lead on each wire to the control solenoid. Depending on the application, if the solenoid is grounded to chassis, test the power lead to the control solenoid at the PCM/ECM wiring harness, there should be no voltage present. If there is voltage present, check for a short to ground in the wiring up to the control solenoid by unplugging connectors and working back to the solenoid."
+  },
+  {
+    "code": "P0083 Exhaust Valve Control Solenoid Circuit High B2",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0083 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Check for unplugged harness connections, look for corrosion or loose wires to connectors. Unplug harness connectors from Solenoid and PCM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the ohms setting, check for resistance between each end of the wire. An over limit reading on the DVOM may be an open in the wiring, loose connection or terminal. "
+  },
+  {
+    "code": "P0084 Exhaust Valve Control Solenoid Circuit B2",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0084 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Check for unplugged harness connections, look for corrosion or loose wires to connectors. Unplug harness connectors from Solenoid and PCM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the ohms setting, check for resistance between each end of the wire. An over limit reading on the DVOM may be an open in the wiring, loose connection or terminal. Resistance should be around 1 ohm or less, if there is excessive resistance there may be corrosion or bad wiring between the solenoid and PCM/ECM."
+  },
+  {
+    "code": "P0085 Exhaust Valve Control Solenoid Circuit Low B2",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms may include:",
+    "causes": "If you still need help regarding the P0085 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Unplug harness connectors from the PCM/ECM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the volts setting, check for voltage with the positive lead on the vehicle battery and the negative lead on each wire to the control solenoid. Depending on the application, if the solenoid is grounded to chassis, test the power lead to the control solenoid at the PCM/ECM wiring harness, there should be no voltage present. If there is voltage present, check for a short to ground in the wiring up to the control solenoid by unplugging connectors and working back to the solenoid."
+  },
+  {
+    "code": "P0086 Exhaust Valve Control Solenoid Circuit High Bank 2",
+    "description": "This code is a generic OBD-II powertrain code, that means it applies to all makes and models of vehicles (1996-newer), although specific repair steps may vary depending on the model.",
+    "symptoms": "Symptoms of a P0086 may include:",
+    "causes": "If you still need help regarding the P0086 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Wire harness - Check for unplugged harness connections, look for corrosion or loose wires to connectors. Unplug harness connectors from Solenoid and PCM, using a wiring diagram locate the + and - wires to the solenoid. The solenoid can be ground side or power side controlled, depending on the application. Check with factory wiring diagrams to determine the power flow in the circuit. Using a digital volt ohm meter (DVOM) set to the ohms setting, check for resistance between each end of the wire. An over limit reading on the DVOM may be an open in the wiring, loose connection or terminal."
+  },
+  {
+    "code": "P0087 Fuel Rail/System Pressure - Too Low",
+    "description": "This generic powertrain/engine diagnostic trouble code typically applies to all OBDII equipped vehicles. ",
+    "symptoms": "Symptoms of a P0087 DTC may include:",
+    "causes": "If you still need help regarding the P0087 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "If vehicle is equipped with a fuel pressure test port at the fuel rail or line, check fuel pressure using a mechanical pressure gauge to determine if it is within specifications. Fuel pressure should also be tested under load with vehicle in gear or during acceleration. If fuel pressure is below spefications, visually inspect all fuel lines going back to the tank to see if there is a restriction such as a bent fuel line."
+  },
+  {
+    "code": "P0088 Fuel Rail/System Pressure - Too High",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Audi, Dodge, Isuzu, Toyota, VW, Jeep, Chevrolet, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0088 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0089 Fuel Pressure Regulator 1 Performance",
+    "description": "The fuel pressure regulator is responsible for maintaining a steady fuel pressure. Some vehicles have a fuel pressure built into the fuel rail assembly. Other vehicles with a returnless fuel supply, the regulator is a part of the fuel pump module inside of the tank. ",
+    "symptoms": "Symptoms of a P0089 DTC may include:",
+    "causes": "If you still need help regarding the P0089 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Fuel pressure - Fuel pressure can be checked by using a mechanical gauge attached to the fuel rail. If the fuel pressure is within factory specificaions, there may be a fault with the fuel pressure sensor giving false readings to the PCM/ECM. If a fuel pressure test port is unavailable, the fuel pressure can only be checked using an advanced scan tool or by splicing adapter fittings in between the fuel lines and fuel rail."
+  },
+  {
+    "code": "P0090 Fuel Pressure Regulator 1 Control Circuit Open",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles (GMC, Chevy, Chrsyler, Dodge, Jeep, Mitsubishi, VW, Toyota, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0090 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A diagnostic scanner, a digital volt/ohmmeter (DVOM), a suitable fuel pressure gauge, and a reliable vehicle information source (such as All Data DIY) will be necessary for diagnosing a code P0090. "
+  },
+  {
+    "code": "P0091 Fuel Pressure Regulator 1 Control Circuit Low",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles (Isuzu, Mazda, Dodge, Chrysler, Ford, GMC, Chevy, Toyota, Honda, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0091 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "In order to diagnose a code P0091, a diagnostic scanner, a digital volt/ohmmeter (DVOM), a suitable fuel pressure gauge, and a reliable vehicle information source (such as All Data DIY) will be required. "
+  },
+  {
+    "code": "P0092 Fuel Pressure Regulator 1 Control Circuit High",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles (Isuzu, Mazda, Dodge, Chrysler, Ford, GMC, Chevy, Toyota, Honda, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0092 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Diagnosing a code P0092 will require access to a diagnostic scanner, a digital volt/ohmmeter (DVOM), a suitable fuel pressure gauge, and a reliable vehicle information source (such as All Data DIY). "
+  },
+  {
+    "code": "P0093 Fuel System Large Leak Detected",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code. It is considered generic because it applies to all makes and models of vehicles (1996-newer), although specific repair steps may be slightly different depending on the model.",
+    "symptoms": "Symptoms of a P0093 diagnostic trouble code may include:",
+    "causes": "If you still need help regarding the P0093 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": " Start with the engine off and doing a walkaround inspection for obvious fuel leaks between the fuel tank and the engine. Lift the hood and check the oil and level. If the oil level has risen, smell the oil. If it is heavily contaminated by fuel, an injector most likely failed in the open position. Do not start the engine again until the oil and filter is changed. Look under the hood for leaks. Start at the injector pump and follow the fuel lines to the fuel injector rail. Look at the injectors for signs of leaks. Pull the electrical connector off the fuel pressure sensor and look for fuel in the connector. A failed sensor will allow fuel up through the sensor into the connector. Check when you last changed the fuel filter. A plugged fuel filter will drop the volume enough to set the code. Check all electrical connectors on the sensors and wiring harness to the injectors for missing insulation, corrosion or loose connections. If no obvious leaks have been found, go online and look up the TSBs (technical service bulletins) for your year and make vehicle. Diesels have no lack of problems as the TSBs will indicate.  "
+  },
+  {
+    "code": "P0094 Fuel System Small Leak Detected",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Ford, GMC, Chevrolet, VW, Dodge, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0094 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  },
+  {
+    "code": "P0095 IAT Sensor 2 Circuit Malfunction",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "There may be no noticeable symptoms other than MIL (Malfunction Indicator Lamp) illumination. However, it could be possible that you may experience poor drivability complaints. ",
+    "causes": "If you still need help regarding the P0095 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First visually check that the IAT is in place and hasn't been dislodged. As a quick check of the IAT, use a scan tool & check for IAT reading with KOEO (Key on engine off). If the engine is cold, the IAT reading should be the same as the CTS (Coolant temperature sensor) reading. If it shows more than a few degrees variance (for example, if it indicates a temperature extreme like negative 40 deg. or 300 deg. then obviously there's a problem) unplug the IAT and do a resistance test across the two terminals."
+  },
+  {
+    "code": "P0096 IAT Sensor 2 Circuit Malfunction",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "Since this code is likely pointing to an intermittent problem on the IAT circuit, there may not be any symptoms at present. However, the MIL will likely be on. The car MAY exhibit some drivability problems, but it is more likely that there will be no noticeable symptoms to the driver.",
+    "causes": "If you still need help regarding the P0096 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "If there are other IAT codes present, diagnose them first. If not, then, using a scan tool verify the IAT voltage with KOEO (Key on engine off)."
+  },
+  {
+    "code": "P0097 IAT Sensor 2 Circuit Low Input",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "There may be no noticeable symptoms of a P0097 code other than an MIL (Malfunction Indicator Lamp). However, a emissions test may reveal higher Nox readings depending on the type of IAT failure. Or the engine may ping under load, depending on the type of IAT failure.",
+    "causes": "If you still need help regarding the P0097 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "Hook up your scan tool or code reader and read the IAT reading. With a cold engine, the IAT should roughly match the coolant reading, since both will read ambient temperature. If the IAT is reading excessively high, check the IAT connector for damage. If you find none, unplug the IAT sensor and recheck the reading. It should now read the minimum, around -20 deg. If it does, then replace the IAT sensor."
+  },
+  {
+    "code": "P0098 IAT Sensor 2 Circuit High",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to OBD-II equipped vehicles. Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "There will likely be no symptoms other than illumination of the Malfunction Indicator Lamp (MIL - Check Engine Light / Service Engine Soon).",
+    "causes": "If you still need help regarding the P0098 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "First, if you have access to a scan tool, is there an IAT reading? If the IAT reading is logical then the problem is likely intermittent. If the reading is less than -30 degrees, unplug the connector. Install a jumper wire between the harness connector signal and ground circuits. The IAT temperature reading on the scan tool should be maxed out at the high end. For example it should be 280 degrees Farenheit or higher. If it is, the wiring is okay, and it may have been the connection. If it isn't install the jumper wire between the IAT signal circuit and the chassis ground."
+  },
+  {
+    "code": "P0099 IAT Circuit Sensor 2 Intermittent",
+    "description": "This diagnostic trouble code (DTC) is a generic powertrain code, which means that it applies to all 1996-newer vehicles (Ford, Mazda, Mercedes Benz, etc.). Although generic, the specific repair steps may vary depending on make/model.",
+    "symptoms": "",
+    "causes": "If you still need help regarding the P0099 trouble code, please post your question in our FREE car repair forums.",
+    "diagnostic": "A good starting point is always to check for technical service bulletins (TSB) for your particular vehicle. Your issue may be a known issue with a known fix put out by the manufacturer and can save you time and money during diagnosis."
+  }
+]
