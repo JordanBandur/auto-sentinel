@@ -1,13 +1,13 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const MaintenanceTask = sequelize.define('MaintenanceTask', {
+const MaintenanceTask = sequelize.define('maintenance_task', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  taskType: {
+  task_type: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -19,24 +19,27 @@ const MaintenanceTask = sequelize.define('MaintenanceTask', {
     type: DataTypes.TEXT,
     allowNull: true,
   },
-  vehicleId: {
+  vehicle_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Vehicles',
+      model: 'vehicles',
       key: 'id',
     },
   },
-  createdAt: {
+  created_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
-  updatedAt: {
+  updated_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
+}, {
+  tableName: 'maintenance_tasks',
+  underscored: true,
 });
 
 module.exports = MaintenanceTask;

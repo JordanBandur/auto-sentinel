@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Notification = sequelize.define('Notification', {
+const Notification = sequelize.define('notification', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -16,19 +16,22 @@ const Notification = sequelize.define('Notification', {
     allowNull: false,
     defaultValue: false,
   },
-  userId: {
+  user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Users',
+      model: 'users',
       key: 'id',
     },
   },
-  createdAt: {
+  created_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
+}, {
+  tableName: 'notifications',
+  underscored: true,
 });
 
 module.exports = Notification;

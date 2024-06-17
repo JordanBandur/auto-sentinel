@@ -66,7 +66,7 @@ const Header = () => {
   );
 
   return (
-    <AppBar position="static" className="header-app-bar">
+    <AppBar position="fixed" className="header-app-bar">
       <Toolbar className="header-toolbar">
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h6" className="header-title">

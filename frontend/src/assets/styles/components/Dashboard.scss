@@ -1,0 +1,150 @@
+.dashboard {
+  padding: 2rem 0;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .dashboard-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .dashboard-subtitle {
+    color: #666;
+  }
+
+  h5 {
+    margin-bottom: 1rem;
+  }
+
+  .vehicle-card,
+  .obd-card {
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+
+  .snapshot-button {
+    background-color: #ff4081;
+    color: #fff;
+
+    &:hover {
+      background-color: #e73370;
+    }
+  }
+
+  .obd-status {
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+    &.connected {
+      color: green;
+    }
+
+    &.disconnected {
+      color: red;
+    }
+  }
+
+
+  .obd-data-container {
+    margin-top: 1rem;
+  }
+
+  .obd-data-card {
+    background: linear-gradient(135deg, #eceff1, #ffffff);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  .obd-data-label {
+    color: #00796b;
+    font-weight: bold;
+  }
+
+  .obd-data-value {
+    color: #333;
+  }
+
+  .obd-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .obd-button {
+    margin-right: 0.5rem;
+
+    &:first-of-type {
+      background-color: #00796b;
+      color: #fff;
+
+      &:hover {
+        background-color: #004d40;
+      }
+    }
+
+    &:last-of-type {
+      background-color: #d32f2f;
+      color: #fff;
+
+      &:hover {
+        background-color: #b71c1c;
+      }
+    }
+  }
+
+  .vehicle-select {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .MuiSelect-select {
+    padding: 10px 14px;
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border-color: #007bff;
+  }
+
+  .MuiInputLabel-outlined {
+    color: #333;
+  }
+
+  .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #0056b3;
+  }
+
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #003c7c;
+  }
+
+  #obd-section {
+    margin-bottom: 4rem;
+  }
+
+  .footer {
+    margin-top: auto;
+  }
+
+  .toggle-view-button {
+    margin-bottom: 1.5rem;
+    margin-left: 0;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
