@@ -6,6 +6,7 @@ import { styled } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import '../assets/styles/views/Dashboard.scss';
 
+// Styled components for consistent theming
 const StyledCard = styled(Card)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   padding: theme.spacing(2),
@@ -19,6 +20,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
+// Descriptions for OBD metrics to be displayed in the modal
 const metricDescriptions = {
   rpm: "Revolutions per minute (RPM) is the number of times the engine's crankshaft completes one full rotation per minute.",
   speed: "The current speed of the vehicle in miles per hour (mph).",
@@ -65,6 +67,28 @@ const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMetric, setSelectedMetric] = useState(null);
 
+  /**
+   * Formats the OBD metric labels to a more readable format.
+   * @param {string} label - The label to format.
+   * @returns {string} - The formatted label.
+   */
+  const formatLabel = (label) => {
+    if (!label) return '';
+    return label.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+  };
+
+  /**
+   * Formats the OBD metric values based on the metric type.
+   * @param {string} metric - The metric type.
+   * @param {string|number} value - The metric value.
+   * @returns {string|number} - The formatted value.
+   */
+  const getFormattedValue = (metric, value) => {
+    const decimals = ['batteryVoltage', 'o2SensorVoltage', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'timingAdvance', 'controlModuleVoltage', 'egrError', 'fuelInjectionTiming', 'engineFuelRate'];
+    return decimals.includes(metric) ? parseFloat(value).toFixed(2) : parseInt(value);
+  };
+
+  // Fetch vehicle data on component mount
   useEffect(() => {
     axios.get('/api/vehicles')
       .then(response => setVehicles(response.data))
@@ -75,6 +99,7 @@ const Dashboard = () => {
       .then(() => setObdStatus(false))
       .catch(error => console.error('Error disconnecting OBD on mount:', error));
 
+    // Periodically check OBD status
     const checkObdStatus = () => {
       axios.get('/api/obd/status')
         .then(response => setObdStatus(response.data.connected))
@@ -86,6 +111,9 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
+  /**
+   * Connects to the OBD device.
+   */
   const connectObd = () => {
     axios.post('/api/obd/connect')
       .then(() => {
@@ -98,6 +126,9 @@ const Dashboard = () => {
       });
   };
 
+  /**
+   * Disconnects from the OBD device.
+   */
   const disconnectObd = () => {
     axios.post('/api/obd/disconnect')
       .then(() => {
@@ -110,6 +141,9 @@ const Dashboard = () => {
       });
   };
 
+  /**
+   * Saves a snapshot of the current OBD data.
+   */
   const saveSnapshot = () => {
     if (!obdData) {
       enqueueSnackbar('No OBD data to save', { variant: 'warning' });
@@ -122,7 +156,7 @@ const Dashboard = () => {
     }
 
     axios.post('/api/obd/snapshot', { vehicleId: selectedVehicle, data: obdData })
-      .then(response => {
+      .then(() => {
         enqueueSnackbar('Snapshot saved successfully', { variant: 'success' });
       })
       .catch(error => {
@@ -131,6 +165,7 @@ const Dashboard = () => {
       });
   };
 
+  // Fetch OBD data periodically when the OBD is connected
   useEffect(() => {
     const fetchObdData = () => {
       if (obdStatus) {
@@ -145,35 +180,58 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, [obdStatus]);
 
+  /**
+   * Generates post-drive performance analysis data.
+   */
   const generatePostDriveAnalysis = () => {
     axios.post('/api/obd/generatePerformanceData')
       .then(response => setPerformanceData(response.data))
       .catch(error => console.error('Error generating performance data:', error));
   };
 
+  /**
+   * Handles the vehicle selection change.
+   * @param {object} event - The change event object.
+   */
   const handleVehicleChange = (event) => {
     setSelectedVehicle(event.target.value);
   };
 
+  /**
+   * Toggles between simple and advanced view for OBD metrics.
+   */
   const toggleView = () => {
     setIsAdvancedView(!isAdvancedView);
   };
 
+  /**  Handles tab change between OBD view and performance view.
+    * @param { object; } event - The event object.
+    * @param { number; } newValue - The new value of the tab.
+   */
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
 
+  /**
+   * Opens the modal with the description of the selected OBD metric.
+   * @param {string} metric - The selected metric.
+   */
   const handleOpenModal = (metric) => {
     setSelectedMetric(metric);
     setModalOpen(true);
   };
 
+  /**
+   * Closes the modal and clears the selected metric.
+   */
   const handleCloseModal = () => {
     setModalOpen(false);
     setSelectedMetric(null);
   };
 
+  // Simple metrics displayed in the simple view
   const simpleMetrics = ['rpm', 'speed', 'fuelLevel', 'throttlePosition', 'intakeAirTemperature', 'coolantTemp', 'batteryVoltage'];
+  // Additional metrics displayed in the advanced view
   const advancedMetrics = [
     ...simpleMetrics,
     'engineLoad', 'fuelPressure', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'o2SensorVoltage', 'timingAdvance', 'manifoldAbsolutePressure',
@@ -181,17 +239,13 @@ const Dashboard = () => {
     'distanceTraveledSinceDtcCleared', 'ambientAirTemperature', 'engineOilTemperature', 'fuelInjectionTiming', 'engineFuelRate'
   ];
 
+  // Select the metrics to be displayed based on the current view (simple or advanced)
   const displayedMetrics = isAdvancedView ? advancedMetrics : simpleMetrics;
 
-  const formatLabel = (label) => {
-    return label.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-  };
-
-  const getFormattedValue = (metric, value) => {
-    const decimals = ['batteryVoltage', 'o2SensorVoltage', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'timingAdvance', 'controlModuleVoltage', 'egrError', 'fuelInjectionTiming', 'engineFuelRate'];
-    return decimals.includes(metric) ? parseFloat(value).toFixed(2) : parseInt(value);
-  };
-
+  /**
+   * Renders performance metrics data.
+   * @returns {JSX.Element} - The rendered performance metrics.
+   */
   const getPerformanceMetrics = () => (
     performanceData && performanceData.accelerationData.length > 0 ? (
       <Grid container spacing={2} className="performance-data-container">
@@ -242,6 +296,10 @@ const Dashboard = () => {
     )
   );
 
+  /**
+   * Renders OBD metrics data.
+   * @returns {JSX.Element} - The rendered OBD metrics.
+   */
   const getObdMetrics = () => (
     <Grid container spacing={2} className="obd-data-container">
       {displayedMetrics.map((metric) => (
@@ -343,7 +401,9 @@ const Dashboard = () => {
             ) : (
               <>
                 <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
-                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
+                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">
+                  {obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}
+                </StyledButton>
                 <StyledCard variant="outlined" className="performance-card">
                   <CardContent>
                     {performanceData.accelerationData.length > 0 ? (
@@ -359,8 +419,9 @@ const Dashboard = () => {
         )}
       </Grid>
 
+      {/* Modal to display the description of the selected OBD metric */}
       <Dialog open={modalOpen} onClose={handleCloseModal}>
-        <DialogTitle>{selectedMetric}</DialogTitle>
+        <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             {metricDescriptions[selectedMetric]}
@@ -375,3 +436,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
