@@ -5,6 +5,7 @@ import { styled } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import VehicleFormDialog from '../components/VehicleFormDialog';
 import VehicleCard from '../components/VehicleCard';
+import '../assets/styles/views/VehicleManagement.scss';
 
 const StyledButton = styled(Button)(({ theme }) => ({
   margin: theme.spacing(1),
@@ -81,7 +82,7 @@ const VehicleManagement = () => {
             <VehicleCard vehicle={vehicle} handleEdit={() => handleOpenDialog('edit', vehicle)} handleDelete={handleDelete} />
           </Grid>
         ))}
-        <Grid item xs={12}>
+        <Grid item xs={12} id='add-vehicle-button'>
           <StyledButton variant="contained" color="primary" onClick={() => handleOpenDialog('create')}>Add New Vehicle</StyledButton>
         </Grid>
       </Grid>
