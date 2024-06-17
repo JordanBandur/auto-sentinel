@@ -13,48 +13,31 @@ import './assets/styles/main.scss';
 import './App.scss';
 import './styles/register.scss';
 import './styles/login.scss';
-import {AuthProvider} from './hooks/AuthContext';
+import { AuthProvider } from './hooks/AuthContext';
 
 const App = () => {
   return (
     <SnackbarProvider maxSnack={3}>
-      <Router>
-        <div className="App">
-          <_Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/vehicles" element={<VehicleManagement />} />
-              <Route path="/maintenance" element={<Maintenance />} />
-              <Route path="/notifications" element={<Notifications />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </main>
-          <_Footer />
-        </div>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <div className="App">
+            <_Header />
+            <main>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/vehicles" element={<VehicleManagement />} />
+                <Route path="/maintenance" element={<Maintenance />} />
+                <Route path="/notifications" element={<Notifications />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+            </main>
+            <_Footer />
+          </div>
+        </Router>
+      </AuthProvider>
     </SnackbarProvider>
-    <AuthProvider>
-      <Router>
-        <div className="App">
-          <_Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/vehicles" element={<VehicleManagement />} />
-              <Route path="/maintenance" element={<Maintenance />} />
-              <Route path="/notifications" element={<Notifications />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </main>
-          <_Footer />
-        </div>
-      </Router>
-    </AuthProvider>
   );
 };
 

@@ -8,7 +8,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-console.log("xxx")
 // Routes
 const registerHandler = require('./routes/register');
 const loginHandler = require('./routes/login');
