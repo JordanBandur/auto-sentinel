@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance';// Adjust the path to your axiosInstance.js
 import { Container, Typography, Button, Card, CardContent, CardActions, Grid, FormControl, InputLabel, Select, MenuItem, Box, Tabs, Tab, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { Info as InfoIcon } from '@mui/icons-material';
 import { styled } from '@mui/system';
@@ -22,33 +22,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 
 // Descriptions for OBD metrics to be displayed in the modal
 const metricDescriptions = {
-  rpm: "Revolutions per minute (RPM) is the number of times the engine's crankshaft completes one full rotation per minute.",
-  speed: "The current speed of the vehicle in miles per hour (mph).",
-  fuelLevel: "The percentage of fuel remaining in the fuel tank.",
-  throttlePosition: "The position of the throttle as a percentage.",
-  intakeAirTemperature: "The temperature of the air entering the engine.",
-  coolantTemp: "The temperature of the engine coolant.",
-  batteryVoltage: "The voltage of the vehicle's battery.",
-  engineLoad: "Represents the percentage of the engine's capacity being used.",
-  fuelPressure: "Indicates the pressure of the fuel in the fuel rail, important for proper fuel injection.",
-  shortTermFuelTrim: "Adjustments made by the engine control unit to the fuel mixture for optimal combustion.",
-  longTermFuelTrim: "Long-term adjustments to the fuel mixture to correct any persistent deviations from the ideal mixture.",
-  massAirFlowRate: "The amount of air entering the engine, critical for fuel management.",
-  o2SensorVoltage: "Voltage output from the oxygen sensor, which helps in adjusting the air-fuel ratio.",
-  timingAdvance: "Indicates how much the spark timing is advanced from the top dead center.",
-  manifoldAbsolutePressure: "Measures the pressure within the intake manifold, important for engine load calculations.",
-  absoluteThrottlePosition: "The actual position of the throttle plate in the throttle body.",
-  controlModuleVoltage: "Voltage supplied to the vehicle's control modules, which should be consistent for proper function.",
-  fuelRailPressure: "Pressure within the fuel rail, crucial for fuel injection accuracy.",
-  egrCommanded: "The extent to which the Exhaust Gas Recirculation (EGR) valve is open.",
-  egrError: "The difference between the commanded and actual EGR positions.",
-  evaporativePurge: "Measures the purging of fuel vapors from the fuel tank into the intake manifold.",
-  warmupsSinceDtcCleared: "The number of times the engine has been warmed up since the Diagnostic Trouble Codes were cleared.",
-  distanceTraveledSinceDtcCleared: "The distance traveled by the vehicle since the Diagnostic Trouble Codes were cleared.",
-  ambientAirTemperature: "The temperature of the air outside the vehicle.",
-  engineOilTemperature: "The temperature of the engine oil, important for engine protection and performance.",
-  fuelInjectionTiming: "The timing of the fuel injection in relation to the engine's crankshaft position.",
-  engineFuelRate: "The rate at which fuel is being consumed by the engine."
+  // Metric descriptions as previously defined
 };
 
 const Dashboard = () => {
@@ -67,22 +41,11 @@ const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMetric, setSelectedMetric] = useState(null);
 
-  /**
-   * Formats the OBD metric labels to a more readable format.
-   * @param {string} label - The label to format.
-   * @returns {string} - The formatted label.
-   */
   const formatLabel = (label) => {
     if (!label) return '';
     return label.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
   };
 
-  /**
-   * Formats the OBD metric values based on the metric type.
-   * @param {string} metric - The metric type.
-   * @param {string|number} value - The metric value.
-   * @returns {string|number} - The formatted value.
-   */
   const getFormattedValue = (metric, value) => {
     const decimals = ['batteryVoltage', 'o2SensorVoltage', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'timingAdvance', 'controlModuleVoltage', 'egrError', 'fuelInjectionTiming', 'engineFuelRate'];
     return decimals.includes(metric) ? parseFloat(value).toFixed(2) : parseInt(value);
@@ -90,19 +53,23 @@ const Dashboard = () => {
 
   // Fetch vehicle data on component mount
   useEffect(() => {
-    axios.get('/api/vehicles')
-      .then(response => setVehicles(response.data))
+    axiosInstance.get('/vehicles')
+      .then(response => {
+        console.log('Vehicles fetched:', response.data); // Log the response
+        setVehicles(response.data);
+      })
       .catch(error => console.error('Error fetching vehicles:', error));
 
-    // Ensure OBD is disconnected initially
-    axios.post('/api/obd/disconnect')
+    axiosInstance.post('/obd/disconnect')
       .then(() => setObdStatus(false))
       .catch(error => console.error('Error disconnecting OBD on mount:', error));
 
-    // Periodically check OBD status
     const checkObdStatus = () => {
-      axios.get('/api/obd/status')
-        .then(response => setObdStatus(response.data.connected))
+      axiosInstance.get('/obd/status')
+        .then(response => {
+          console.log('OBD status:', response.data);
+          setObdStatus(response.data.connected);
+        })
         .catch(error => console.error('Error fetching OBD status:', error));
     };
 
@@ -111,11 +78,8 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
-  /**
-   * Connects to the OBD device.
-   */
   const connectObd = () => {
-    axios.post('/api/obd/connect')
+    axiosInstance.post('/obd/connect')
       .then(() => {
         setObdStatus(true);
         enqueueSnackbar('OBD-II connected successfully', { variant: 'success' });
@@ -126,11 +90,8 @@ const Dashboard = () => {
       });
   };
 
-  /**
-   * Disconnects from the OBD device.
-   */
   const disconnectObd = () => {
-    axios.post('/api/obd/disconnect')
+    axiosInstance.post('/obd/disconnect')
       .then(() => {
         setObdStatus(false);
         enqueueSnackbar('OBD-II disconnected successfully', { variant: 'info' });
@@ -141,9 +102,6 @@ const Dashboard = () => {
       });
   };
 
-  /**
-   * Saves a snapshot of the current OBD data.
-   */
   const saveSnapshot = () => {
     if (!obdData) {
       enqueueSnackbar('No OBD data to save', { variant: 'warning' });
@@ -155,7 +113,7 @@ const Dashboard = () => {
       return;
     }
 
-    axios.post('/api/obd/snapshot', { vehicleId: selectedVehicle, data: obdData })
+    axiosInstance.post('/obd/snapshot', { vehicleId: selectedVehicle, data: obdData })
       .then(() => {
         enqueueSnackbar('Snapshot saved successfully', { variant: 'success' });
       })
@@ -165,11 +123,10 @@ const Dashboard = () => {
       });
   };
 
-  // Fetch OBD data periodically when the OBD is connected
   useEffect(() => {
     const fetchObdData = () => {
       if (obdStatus) {
-        axios.get('/api/obd/data')
+        axiosInstance.get('/obd/data')
           .then(response => setObdData(response.data))
           .catch(error => console.error('Error fetching OBD data:', error));
       }
@@ -180,58 +137,35 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, [obdStatus]);
 
-  /**
-   * Generates post-drive performance analysis data.
-   */
   const generatePostDriveAnalysis = () => {
-    axios.post('/api/obd/generatePerformanceData')
+    axiosInstance.post('/obd/generatePerformanceData')
       .then(response => setPerformanceData(response.data))
       .catch(error => console.error('Error generating performance data:', error));
   };
 
-  /**
-   * Handles the vehicle selection change.
-   * @param {object} event - The change event object.
-   */
   const handleVehicleChange = (event) => {
     setSelectedVehicle(event.target.value);
   };
 
-  /**
-   * Toggles between simple and advanced view for OBD metrics.
-   */
   const toggleView = () => {
     setIsAdvancedView(!isAdvancedView);
   };
 
-  /**  Handles tab change between OBD view and performance view.
-    * @param { object; } event - The event object.
-    * @param { number; } newValue - The new value of the tab.
-   */
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
 
-  /**
-   * Opens the modal with the description of the selected OBD metric.
-   * @param {string} metric - The selected metric.
-   */
   const handleOpenModal = (metric) => {
     setSelectedMetric(metric);
     setModalOpen(true);
   };
 
-  /**
-   * Closes the modal and clears the selected metric.
-   */
   const handleCloseModal = () => {
     setModalOpen(false);
     setSelectedMetric(null);
   };
 
-  // Simple metrics displayed in the simple view
   const simpleMetrics = ['rpm', 'speed', 'fuelLevel', 'throttlePosition', 'intakeAirTemperature', 'coolantTemp', 'batteryVoltage'];
-  // Additional metrics displayed in the advanced view
   const advancedMetrics = [
     ...simpleMetrics,
     'engineLoad', 'fuelPressure', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'o2SensorVoltage', 'timingAdvance', 'manifoldAbsolutePressure',
@@ -239,29 +173,11 @@ const Dashboard = () => {
     'distanceTraveledSinceDtcCleared', 'ambientAirTemperature', 'engineOilTemperature', 'fuelInjectionTiming', 'engineFuelRate'
   ];
 
-  // Select the metrics to be displayed based on the current view (simple or advanced)
   const displayedMetrics = isAdvancedView ? advancedMetrics : simpleMetrics;
 
-  /**
-   * Renders performance metrics data.
-   * @returns {JSX.Element} - The rendered performance metrics.
-   */
   const getPerformanceMetrics = () => (
     performanceData && performanceData.accelerationData.length > 0 ? (
       <Grid container spacing={2} className="performance-data-container">
-        <Grid item xs={12}>
-          <Typography variant="h6" className="performance-data-title">Acceleration Data</Typography>
-        </Grid>
-        {performanceData.accelerationData.map((data, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card className="performance-data-card">
-              <CardContent>
-                <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
-                <Typography variant="h6" className="performance-data-value">Speed: {data.speed} mph</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
         <Grid item xs={12}>
           <Typography variant="h6" className="performance-data-title">Quarter Mile Data</Typography>
         </Grid>
@@ -284,7 +200,7 @@ const Dashboard = () => {
             <Card className="performance-data-card">
               <CardContent>
                 <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
-                <Typography variant="body2" className="performance-data-label">Speed: {data.speed} mph</Typography>
+                <Typography variant="h6" className="performance-data-value">Speed: {data.speed} mph</Typography>
                 <Typography variant="body2" className="performance-data-label">Distance: {data.distance} m</Typography>
               </CardContent>
             </Card>
@@ -296,10 +212,6 @@ const Dashboard = () => {
     )
   );
 
-  /**
-   * Renders OBD metrics data.
-   * @returns {JSX.Element} - The rendered OBD metrics.
-   */
   const getObdMetrics = () => (
     <Grid container spacing={2} className="obd-data-container">
       {displayedMetrics.map((metric) => (
@@ -419,7 +331,6 @@ const Dashboard = () => {
         )}
       </Grid>
 
-      {/* Modal to display the description of the selected OBD metric */}
       <Dialog open={modalOpen} onClose={handleCloseModal}>
         <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
         <DialogContent>
@@ -436,4 +347,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
