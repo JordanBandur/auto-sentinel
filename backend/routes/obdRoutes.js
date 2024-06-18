@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const obdSpoofService = require('../services/obdSpoofService');
 const OBD = require('../models/OBD');
-const sendEmail = require('../src/mailer'); // Ensure the path to mailer is correct
+const sendEmail = require('../src/mailer');
+const sendTextMessage = require('../src/twilioService');
 
 router.get('/status', (req, res) => {
   res.json({ connected: obdSpoofService.getStatus() });
@@ -41,7 +42,7 @@ router.post('/snapshot', async (req, res) => {
     const formattedData = formatSnapshotData(snapshotDetails.data);
 
     // List of recipients
-    const recipients = ['miguelmasche@gmail.com', 'jhanicmusic@gmail.com'];
+    const recipients = ['miguelmasche@gmail.com', 'rodriguezruizsergio@gmail.com', 'jordanbandur@hotmail.ca'];
 
     // Send an email with the snapshot details to each recipient
     for (const recipient of recipients) {
@@ -57,6 +58,25 @@ router.post('/snapshot', async (req, res) => {
     res.json(snapshot);
   } catch (error) {
     res.status(500).json({ error: 'Failed to save snapshot and send email', details: error });
+  }
+});
+
+router.post('/send-text', async (req, res) => {
+  const { vehicleId, data, phoneNumber } = req.body;
+  try {
+    const snapshot = await obdSpoofService.saveSnapshot(vehicleId, data);
+    
+    // Fetch the snapshot details from the database
+    const snapshotDetails = await obdSpoofService.getSnapshotDetails(snapshot.id);
+    const snapshotData = Object.entries(snapshotDetails.data)
+      .slice(0, 5) // Take only the first 5 entries
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
+    await sendTextMessage(phoneNumber, snapshotData);
+
+    res.json({ message: 'Snapshot saved and text message sent', snapshot });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to save snapshot and send text message', details: error });
   }
 });
 
