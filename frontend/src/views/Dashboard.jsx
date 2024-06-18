@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Card, CardContent, CardActions, Grid, FormControl, InputLabel, Select, MenuItem, Box, Tabs, Tab, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { Info as InfoIcon } from '@mui/icons-material';
+import { Info as InfoIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import '../assets/styles/views/Dashboard.scss';
 
-// Styled components for consistent theming
 const StyledCard = styled(Card)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   padding: theme.spacing(2),
+  flex: '1 0 21%',
+  minHeight: '140px'
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -18,6 +19,16 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
+}));
+
+const StyledDialog = styled(Dialog)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  '& .MuiDialog-paper': {
+    width: '80%',
+    maxWidth: '800px'
+  }
 }));
 
 // Descriptions for OBD metrics to be displayed in the modal
@@ -44,7 +55,7 @@ const metricDescriptions = {
   egrError: "The difference between the commanded and actual EGR positions.",
   evaporativePurge: "Measures the purging of fuel vapors from the fuel tank into the intake manifold.",
   warmupsSinceDtcCleared: "The number of times the engine has been warmed up since the Diagnostic Trouble Codes were cleared.",
-  distanceTraveledSinceDtcCleared: "The distance traveled by the vehicle since the Diagnostic Trouble Codes were cleared.",
+  distanceSinceDtcCleared: "The distance traveled by the vehicle since the Diagnostic Trouble Codes were cleared.",
   ambientAirTemperature: "The temperature of the air outside the vehicle.",
   engineOilTemperature: "The temperature of the engine oil, important for engine protection and performance.",
   fuelInjectionTiming: "The timing of the fuel injection in relation to the engine's crankshaft position.",
@@ -63,9 +74,12 @@ const Dashboard = () => {
     quarterMileData: [],
     brakingData: []
   });
+  const [historyData, setHistoryData] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const [modalOpen, setModalOpen] = useState(false);
+  const [historymodalOpen, setHistoryModalOpen] = useState(false);
   const [selectedMetric, setSelectedMetric] = useState(null);
+  const [selectedHistoryEntry, setSelectedHistoryEntry] = useState(null);
 
   /**
    * Formats the OBD metric labels to a more readable format.
@@ -110,6 +124,21 @@ const Dashboard = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (selectedVehicle) {
+      fetchHistoryData();
+    }
+  }, [selectedVehicle]);
+
+  const fetchHistoryData = async () => {
+    try {
+      const response = await axios.get(`/api/obd/history/${selectedVehicle}`);
+      setHistoryData(response.data);
+    } catch (error) {
+      console.error('Error fetching historical OBD data:', error);
+    }
+  };
 
   /**
    * Connects to the OBD device.
@@ -229,6 +258,49 @@ const Dashboard = () => {
     setSelectedMetric(null);
   };
 
+  const handleOpenHistoryModal = (entry) => {
+    setSelectedHistoryEntry(entry.data);
+    //setSelectedHistoryEntry(null);
+    setHistoryModalOpen(true);
+  };
+
+  const handleClosHistoryModal = () => {
+    setHistoryModalOpen(false);
+    setSelectedHistoryEntry(null);
+  };
+
+  const handleDeleteHistoryEntry = async (id) => {
+    try {
+      await axios.delete(`/api/obd/history/${id}`);
+      enqueueSnackbar('OBD entry deleted successfully', { variant: 'info' });
+      fetchHistoryData();
+    } catch (error) {
+      console.error('Error deleting OBD entry:', error);
+      enqueueSnackbar('Error deleting OBD entry', { variant: 'error' });
+    }
+  };
+
+  /**
+   * Renders history metrics data inside the modal.
+   * @returns {JSX.Element} - The rendered history metrics.
+   */
+  const renderHistoryMetrics = () => (
+    selectedHistoryEntry ? (
+      <Grid container spacing={2} className="obd-data-container">
+        {Object.keys(selectedHistoryEntry).map((metric) => (
+          <Grid item xs={12} sm={6} md={4} key={metric}>
+            <StyledCard className="obd-data-card">
+              <CardContent>
+                <Typography variant="body2" className="obd-data-label">{formatLabel(metric)}</Typography>
+                <Typography variant="h6" className="obd-data-value">{getFormattedValue(metric, selectedHistoryEntry[metric])}</Typography>
+              </CardContent>
+            </StyledCard>
+          </Grid>
+        ))}
+      </Grid>
+    ) : null
+  );
+
   // Simple metrics displayed in the simple view
   const simpleMetrics = ['rpm', 'speed', 'fuelLevel', 'throttlePosition', 'intakeAirTemperature', 'coolantTemp', 'batteryVoltage'];
   // Additional metrics displayed in the advanced view
@@ -236,7 +308,7 @@ const Dashboard = () => {
     ...simpleMetrics,
     'engineLoad', 'fuelPressure', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'o2SensorVoltage', 'timingAdvance', 'manifoldAbsolutePressure',
     'absoluteThrottlePosition', 'controlModuleVoltage', 'fuelRailPressure', 'egrCommanded', 'egrError', 'evaporativePurge', 'warmupsSinceDtcCleared',
-    'distanceTraveledSinceDtcCleared', 'ambientAirTemperature', 'engineOilTemperature', 'fuelInjectionTiming', 'engineFuelRate'
+    'distanceSinceDtcCleared', 'ambientAirTemperature', 'engineOilTemperature', 'fuelInjectionTiming', 'engineFuelRate'
   ];
 
   // Select the metrics to be displayed based on the current view (simple or advanced)
@@ -318,6 +390,26 @@ const Dashboard = () => {
     </Grid>
   );
 
+  const getHistoryData = () => (
+    <Grid container spacing={2} className="history-data-container">
+      {historyData.map((entry) => (
+        <Grid item xs={12} key={entry.id}>
+          <Card className="history-data-card">
+            <CardContent>
+              <Typography variant="body2">Date: {new Date(entry.created_at).toLocaleString()}</Typography>
+              <IconButton className='history-metric-info-button' onClick={() => handleOpenHistoryModal(entry)} aria-label="info">
+                <InfoIcon />
+              </IconButton>
+              <IconButton className='history-metric-delete-button' onClick={() => handleDeleteHistoryEntry(entry.id)} aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            </CardContent>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
+  );
+
   return (
     <Container maxWidth="md" className="dashboard">
       <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
@@ -371,6 +463,7 @@ const Dashboard = () => {
             >
               <Tab label="OBD View" />
               <Tab label="Performance View" />
+              <Tab label="History" />
             </Tabs>
             {selectedTab === 0 ? (
               <>
@@ -398,12 +491,10 @@ const Dashboard = () => {
                   )}
                 </StyledCard>
               </>
-            ) : (
+            ) : selectedTab === 1 ? (
               <>
                 <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
-                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">
-                  {obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}
-                </StyledButton>
+                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
                 <StyledCard variant="outlined" className="performance-card">
                   <CardContent>
                     {performanceData.accelerationData.length > 0 ? (
@@ -414,26 +505,53 @@ const Dashboard = () => {
                   </CardContent>
                 </StyledCard>
               </>
+            ) : (
+              <>
+                <StyledTypography variant="h5" gutterBottom className="history-title">Historical OBD Data</StyledTypography>
+                <StyledCard variant="outlined" className="history-card">
+                  <CardContent>
+                    {historyData.length > 0 ? (
+                      getHistoryData()
+                    ) : (
+                      <Typography variant="body1">No historical data available.</Typography>
+                    )}
+                  </CardContent>
+                </StyledCard>
+              </>
             )}
           </Grid>
         )}
       </Grid>
 
-      {/* Modal to display the description of the selected OBD metric */}
       <Dialog open={modalOpen} onClose={handleCloseModal}>
         <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {metricDescriptions[selectedMetric]}
+            {selectedMetric ? metricDescriptions[selectedMetric] : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseModal} color="primary">Close</Button>
         </DialogActions>
       </Dialog>
+
+      <StyledDialog open={historymodalOpen} onClose={handleClosHistoryModal} maxWidth='md' fullWidth>
+        <DialogTitle>Historical OBD Data</DialogTitle>
+        <DialogContent>
+          {selectedHistoryEntry ? (
+            renderHistoryMetrics()
+          ) : (
+            <DialogContentText>No data available</DialogContentText>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosHistoryModal} color="primary">Close</Button>
+        </DialogActions>
+      </StyledDialog>
+
+
     </Container>
   );
 };
 
 export default Dashboard;
-
