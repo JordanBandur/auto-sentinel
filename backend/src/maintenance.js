@@ -24,10 +24,12 @@ router.post('/send-reminder', async (req, res) => {
   Tire Pressure: ${sensorData.tirePressure}`;
 
   try {
-    await sendTextMessage(phoneNumber, message);
-    res.status(200).send({ success: true, message: 'Reminder sent successfully!' });
+    console.log(`Received request to send reminder to ${phoneNumber}`);
+    const messageId = await sendTextMessage(phoneNumber, message);
+    res.status(200).send({ success: true, message: 'Reminder sent successfully!', messageId });
   } catch (error) {
-    res.status(500).send({ success: false, message: 'Failed to send reminder.', error });
+    console.error('Error in /send-reminder route:', error);
+    res.status(403).send({ success: false, message: 'Failed to send reminder.', error: error.message });
   }
 });
 

@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const maintenanceRoutes = require('./src/maintenance');
+const vehicleRoutes = require('./routes/vehicleRoutes');
+const obdRoutes = require('./routes/obdRoutes');
 
 const app = express();
 
@@ -10,15 +12,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
+console.log('Setting up routes...');
 
 // Routes
 const registerHandler = require('./routes/register');
 const loginHandler = require('./routes/login');
 //const authRoutes = require('./routes/authRoutes');
-const vehicleRoutes = require('./routes/vehicleRoutes');
+
 //const maintenanceRoutes = require('./routes/maintenanceRoutes');
 //const notificationRoutes = require('./routes/notificationRoutes');
-const obdRoutes = require('./routes/obdRoutes');
+
 //const serviceReminderRoutes = require('./routes/serviceReminderRoutes');
 //const dtcRoutes = require('./routes/dtcRoutes');
 //const emailRoutes = require('./src/emailRoutes');

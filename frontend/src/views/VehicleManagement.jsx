@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance'; // Adjust the path as needed
 import { Container, Typography, Grid, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { useSnackbar } from 'notistack';
@@ -28,7 +28,7 @@ const VehicleManagement = () => {
 
   const fetchVehicles = async () => {
     try {
-      const response = await axios.get('/api/vehicles');
+      const response = await axiosInstance.get('/vehicles');
       setVehicles(response.data);
     } catch (error) {
       console.error('Error fetching vehicles:', error);
@@ -48,10 +48,10 @@ const VehicleManagement = () => {
   const handleSubmit = async (formData) => {
     try {
       if (dialogType === 'create') {
-        await axios.post('/api/vehicles', formData);
+        await axiosInstance.post('/vehicles', formData);
         enqueueSnackbar('Vehicle created successfully', { variant: 'success' });
       } else if (dialogType === 'edit') {
-        await axios.put(`/api/vehicles/${selectedVehicle.id}`, formData);
+        await axiosInstance.put(`/vehicles/${selectedVehicle.id}`, formData);
         enqueueSnackbar('Vehicle updated successfully', { variant: 'success' });
       }
       fetchVehicles();
@@ -64,7 +64,7 @@ const VehicleManagement = () => {
 
   const handleDelete = async (vehicleId) => {
     try {
-      await axios.delete(`/api/vehicles/${vehicleId}`);
+      await axiosInstance.delete(`/vehicles/${vehicleId}`);
       enqueueSnackbar('Vehicle deleted successfully', { variant: 'info' });
       fetchVehicles();
     } catch (error) {
@@ -79,7 +79,7 @@ const VehicleManagement = () => {
       <Grid container spacing={3}>
         {vehicles.map(vehicle => (
           <Grid item xs={12} key={vehicle.id}>
-            <VehicleCard vehicle={vehicle} handleEdit={() => handleOpenDialog('edit', vehicle)} handleDelete={handleDelete} />
+            <VehicleCard vehicle={vehicle} handleEdit={() => handleOpenDialog('edit', vehicle)} handleDelete={() => handleDelete(vehicle.id)} />
           </Grid>
         ))}
         <Grid item xs={12} id='add-vehicle-button'>
