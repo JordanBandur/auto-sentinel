@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import axiosInstance from "/Users/miguelaugusto/lighthouse/finalproject/auto-sentinel/frontend/src/utils/axiosInstance.js";
-import { Container, TextField, Button, Typography } from '@mui/material';
+import axiosInstance from '/Users/miguelaugusto/lighthouse/finalproject/auto-sentinel/frontend/src/utils/axiosInstance.js';
+import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { useSnackbar } from 'notistack';
+import '../assets/styles/views/Notifications.scss';  // Corrected import path
 
 const Notifications = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [message, setMessage] = useState('This is a test message.');
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSendText = () => {
     axiosInstance.post('/notifications/send-text', {
       to: phoneNumber,
-      body: message
+      body: 'This is a test message.'
     })
     .then(response => {
       enqueueSnackbar(response.data.message, { variant: 'success' });
@@ -23,30 +23,30 @@ const Notifications = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className="notifications">
       <Typography variant="h4" gutterBottom>
-        Send Test Text Message
+        Send Text Report
       </Typography>
-      <TextField
-        label="Phone Number"
-        variant="outlined"
-        fullWidth
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        margin="normal"
-      />
-      <TextField
-        label="Message"
-        variant="outlined"
-        fullWidth
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        margin="normal"
-      />
+      <Box className="phone-input-container">
+        <Typography variant="body1" className="phone-label">
+          Phone Number
+        </Typography>
+        <TextField
+          variant="outlined"
+          fullWidth
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          className="phone-input"
+          InputProps={{
+            style: { backgroundColor: 'white' }
+          }}
+        />
+      </Box>
       <Button
         variant="contained"
         color="primary"
         onClick={handleSendText}
+        className="send-button"
       >
         Send Text
       </Button>
