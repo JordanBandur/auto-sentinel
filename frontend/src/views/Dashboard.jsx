@@ -452,7 +452,7 @@ const Dashboard = () => {
                     </CardContent>
                     {obdStatus && (
                       <CardActions className="obd-actions">
-                        <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
+                        <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot & Send Email</Button>
                         <Button size="small" onClick={sendSnapshotText} className="snapshot-button">Send Snapshot via Text</Button>
                         <TextField
                           label="Phone Number"
