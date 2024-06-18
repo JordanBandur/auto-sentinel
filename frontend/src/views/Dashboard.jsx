@@ -218,6 +218,40 @@ const Dashboard = () => {
       .catch(error => console.error('Error generating performance data:', error));
   };
 
+  const convertToCSV = (data) => {
+    const headers = Object.keys(data[0]);
+    const csvRows = [];
+
+    // Add headers
+    csvRows.push(headers.join(','));
+
+    // Add rows
+    for (const row of data) {
+      const values = headers.map(header => {
+        const escaped = ('' + row[header]).replace(/"/g, '\\"');
+        return `"${escaped}"`;
+      });
+      csvRows.push(values.join(','));
+    }
+
+    return csvRows.join('\n');
+  };
+
+  const downloadCSV = (data, filename = 'obd_data.csv') => {
+    const csv = convertToCSV(data);
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', filename);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+
   /**
    * Handles the vehicle selection change.
    * @param {object} event - The change event object.
@@ -403,6 +437,7 @@ const Dashboard = () => {
               <IconButton className='history-metric-delete-button' onClick={() => handleDeleteHistoryEntry(entry.id)} aria-label="delete">
                 <DeleteIcon />
               </IconButton>
+              <Button className='download-csv-button' variant="contained" onClick={() => downloadCSV(historyData)}>Download CSV</Button>
             </CardContent>
           </Card>
         </Grid>
@@ -548,8 +583,6 @@ const Dashboard = () => {
           <Button onClick={handleClosHistoryModal} color="primary">Close</Button>
         </DialogActions>
       </StyledDialog>
-
-
     </Container>
   );
 };
