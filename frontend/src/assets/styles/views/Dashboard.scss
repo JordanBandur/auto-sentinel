@@ -51,6 +51,21 @@
 
 }
 
+.obd-data-card {
+
+  div {
+    height: 150px;
+  }
+}
+
+.history-data-card {
+  
+  .download-csv-button {
+    display: block;
+    margin-top: 10px;
+  }
+}
+
 #generate-report-button {
   margin-left: 0;
 

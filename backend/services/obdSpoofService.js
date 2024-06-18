@@ -44,7 +44,7 @@ class OBDSpoofService extends EventEmitter {
       egrError: 0,
       evaporativePurge: 0,
       warmupsSinceDtcCleared: 0,
-      distanceTraveledSinceDtcCleared: 0,
+      distanceSinceDtcCleared: 0,
       ambientAirTemperature: 25,
       engineOilTemperature: 90,
       fuelInjectionTiming: 0,
@@ -133,7 +133,7 @@ class OBDSpoofService extends EventEmitter {
     this.obdData.egrError = parseFloat(this.getNextValue(this.obdData.egrError, 1, 0.5, -100, 100).toFixed(2));
     this.obdData.evaporativePurge = parseFloat(this.getNextValue(this.obdData.evaporativePurge, 2, 1, 0, 100).toFixed(1));
     this.obdData.warmupsSinceDtcCleared = parseFloat(this.getNextValue(this.obdData.warmupsSinceDtcCleared, 1, 0.5, 0, 255).toFixed(0));
-    this.obdData.distanceTraveledSinceDtcCleared = parseFloat(this.getNextValue(this.obdData.distanceTraveledSinceDtcCleared, 50, 20, 0, 65535).toFixed(0));
+    this.obdData.distanceSinceDtcCleared = parseFloat(this.getNextValue(this.obdData.distanceSinceDtcCleared, 50, 20, 0, 65535).toFixed(0));
     this.obdData.ambientAirTemperature = parseFloat(this.getNextValue(this.obdData.ambientAirTemperature, 1, 0.5, -40, 50).toFixed(1));
     this.obdData.engineOilTemperature = parseFloat(this.getNextValue(this.obdData.engineOilTemperature, 1, 0.5, -40, 150).toFixed(1));
     this.obdData.fuelInjectionTiming = parseFloat(this.getNextValue(this.obdData.fuelInjectionTiming, 5, 2, -360, 360).toFixed(2));
