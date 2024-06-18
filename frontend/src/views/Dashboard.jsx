@@ -161,12 +161,12 @@ const Dashboard = () => {
       enqueueSnackbar('No OBD data to save', { variant: 'warning' });
       return;
     }
-  
+
     if (!selectedVehicle) {
       enqueueSnackbar('No vehicle selected', { variant: 'warning' });
       return;
     }
-  
+
     axiosInstance.post('/obd/snapshot', { vehicleId: selectedVehicle, data: obdData })
       .then(() => {
         enqueueSnackbar('Snapshot saved successfully', { variant: 'success' });
@@ -178,25 +178,25 @@ const Dashboard = () => {
       });
   };
 
-// Add state for the email
-const [email, setEmail] = useState('');
+  // Add state for the email
+  const [email, setEmail] = useState('');
 
-// Function to send snapshot email
-const handleSendSnapshotEmail = (data) => {
-  if (!verifiedEmails.includes(email)) {
-    enqueueSnackbar('Please enter a verified email', { variant: 'warning' });
-    return;
-  }
+  // Function to send snapshot email
+  const handleSendSnapshotEmail = (data) => {
+    if (!verifiedEmails.includes(email)) {
+      enqueueSnackbar('Please enter a verified email', { variant: 'warning' });
+      return;
+    }
 
-  axiosInstance.post('/obd/snapshot-email', { vehicleId: selectedVehicle, data, email })
-    .then(() => {
-      enqueueSnackbar('Snapshot saved and email sent successfully', { variant: 'success' });
-    })
-    .catch(error => {
-      console.error('Error saving snapshot and sending email:', error.response ? error.response.data : error.message);
-      enqueueSnackbar('Error saving snapshot and sending email', { variant: 'error' });
-    });
-};
+    axiosInstance.post('/obd/snapshot-email', { vehicleId: selectedVehicle, data, email })
+      .then(() => {
+        enqueueSnackbar('Snapshot saved and email sent successfully', { variant: 'success' });
+      })
+      .catch(error => {
+        console.error('Error saving snapshot and sending email:', error.response ? error.response.data : error.message);
+        enqueueSnackbar('Error saving snapshot and sending email', { variant: 'error' });
+      });
+  };
 
 
   // Function to send snapshot text
@@ -342,9 +342,26 @@ const handleSendSnapshotEmail = (data) => {
 
   const displayedMetrics = isAdvancedView ? advancedMetrics : simpleMetrics;
 
+  /**
+   * Renders performance metrics data.
+   * @returns {JSX.Element} - The rendered performance metrics.
+   */
   const getPerformanceMetrics = () => (
     performanceData && performanceData.accelerationData.length > 0 ? (
       <Grid container spacing={2} className="performance-data-container">
+        <Grid item xs={12}>
+          <Typography variant="h6" className="performance-data-title">Acceleration Data</Typography>
+        </Grid>
+        {performanceData.accelerationData.map((data, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Card className="performance-data-card">
+              <CardContent>
+                <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
+                <Typography variant="h6" className="performance-data-value">Speed: {data.speed} mph</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
         <Grid item xs={12}>
           <Typography variant="h6" className="performance-data-title">Quarter Mile Data</Typography>
         </Grid>
@@ -367,7 +384,7 @@ const handleSendSnapshotEmail = (data) => {
             <Card className="performance-data-card">
               <CardContent>
                 <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
-                <Typography variant="h6" className="performance-data-value">Speed: {data.speed} mph</Typography>
+                <Typography variant="body2" className="performance-data-label">Speed: {data.speed} mph</Typography>
                 <Typography variant="body2" className="performance-data-label">Distance: {data.distance} m</Typography>
               </CardContent>
             </Card>
@@ -497,90 +514,90 @@ const handleSendSnapshotEmail = (data) => {
               <Tab label="History" />
             </Tabs>
             {selectedTab === 0 ? (
-                <>
-                  <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
-                  <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
-                    {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
-                  </StyledButton>
-                  <StyledCard variant="outlined" className="obd-card">
-                    <CardContent>
-                      {obdStatus ? (
-                        <>
-                          <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
-                            Status: {obdStatus ? 'Connected' : 'Disconnected'}
-                          </StyledTypography>
-                          {obdData && getObdMetrics()}
-                        </>
-                      ) : (
-                        <Typography variant="body1">Please connect OBD</Typography>
-                      )}
-                    </CardContent>
-                    {obdStatus && (
-                      <CardActions className="obd-actions">
-                        <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
-                      </CardActions>
+              <>
+                <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
+                <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
+                  {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
+                </StyledButton>
+                <StyledCard variant="outlined" className="obd-card">
+                  <CardContent>
+                    {obdStatus ? (
+                      <>
+                        <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
+                          Status: {obdStatus ? 'Connected' : 'Disconnected'}
+                        </StyledTypography>
+                        {obdData && getObdMetrics()}
+                      </>
+                    ) : (
+                      <Typography variant="body1">Please connect OBD</Typography>
                     )}
-                  </StyledCard>
-                </>
-              ) : selectedTab === 1 ? (
-                <>
-                  <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
-                  <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
-                  <StyledCard variant="outlined" className="performance-card">
-                    <CardContent>
-                      {performanceData.accelerationData.length > 0 ? (
-                        getPerformanceMetrics()
-                      ) : (
-                        <Typography variant="body1">No performance data available. Please generate a report.</Typography>
-                      )}
-                    </CardContent>
-                  </StyledCard>
-                </>
-              ) : (
-                <>
-                  <StyledTypography variant="h5" gutterBottom className="history-title">Historical OBD Data</StyledTypography>
-                  <StyledCard variant="outlined" className="history-card">
-                    <CardContent>
-                      {historyData.length > 0 ? (
-                        getHistoryData()
-                      ) : (
-                        <Typography variant="body1">No historical data available.</Typography>
-                      )}
-                    </CardContent>
-                  </StyledCard>
-                </>
-              )}
-            </Grid>
-          )}
-        </Grid>
-
-        <Dialog open={modalOpen} onClose={handleCloseModal}>
-          <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {selectedMetric ? metricDescriptions[selectedMetric] : ''}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseModal} color="primary">Close</Button>
-          </DialogActions>
-        </Dialog>
-
-        <StyledDialog open={historyModalOpen} onClose={handleCloseHistoryModal} maxWidth='md' fullWidth>
-          <DialogTitle>Historical OBD Data</DialogTitle>
-          <DialogContent>
-            {selectedHistoryEntry ? (
-              renderHistoryMetrics()
+                  </CardContent>
+                  {obdStatus && (
+                    <CardActions className="obd-actions">
+                      <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
+                    </CardActions>
+                  )}
+                </StyledCard>
+              </>
+            ) : selectedTab === 1 ? (
+              <>
+                <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
+                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
+                <StyledCard variant="outlined" className="performance-card">
+                  <CardContent>
+                    {performanceData.accelerationData.length > 0 ? (
+                      getPerformanceMetrics()
+                    ) : (
+                      <Typography variant="body1">No performance data available. Please generate a report.</Typography>
+                    )}
+                  </CardContent>
+                </StyledCard>
+              </>
             ) : (
-              <DialogContentText>No data available</DialogContentText>
+              <>
+                <StyledTypography variant="h5" gutterBottom className="history-title">Historical OBD Data</StyledTypography>
+                <StyledCard variant="outlined" className="history-card">
+                  <CardContent>
+                    {historyData.length > 0 ? (
+                      getHistoryData()
+                    ) : (
+                      <Typography variant="body1">No historical data available.</Typography>
+                    )}
+                  </CardContent>
+                </StyledCard>
+              </>
             )}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseHistoryModal} color="primary">Close</Button>
-          </DialogActions>
-        </StyledDialog>
-      </Container>
-    );
-  };
+          </Grid>
+        )}
+      </Grid>
 
-  export default Dashboard;
+      <Dialog open={modalOpen} onClose={handleCloseModal}>
+        <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {selectedMetric ? metricDescriptions[selectedMetric] : ''}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal} color="primary">Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      <StyledDialog open={historyModalOpen} onClose={handleCloseHistoryModal} maxWidth='md' fullWidth>
+        <DialogTitle>Historical OBD Data</DialogTitle>
+        <DialogContent>
+          {selectedHistoryEntry ? (
+            renderHistoryMetrics()
+          ) : (
+            <DialogContentText>No data available</DialogContentText>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseHistoryModal} color="primary">Close</Button>
+        </DialogActions>
+      </StyledDialog>
+    </Container>
+  );
+};
+
+export default Dashboard;
