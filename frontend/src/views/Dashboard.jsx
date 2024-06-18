@@ -315,9 +315,26 @@ const Dashboard = () => {
 
   const displayedMetrics = isAdvancedView ? advancedMetrics : simpleMetrics;
 
+  /**
+  * Renders performance metrics data.
+  * @returns {JSX.Element} - The rendered performance metrics.
+  */
   const getPerformanceMetrics = () => (
     performanceData && performanceData.accelerationData.length > 0 ? (
       <Grid container spacing={2} className="performance-data-container">
+        <Grid item xs={12}>
+          <Typography variant="h6" className="performance-data-title">Acceleration Data</Typography>
+        </Grid>
+        {performanceData.accelerationData.map((data, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Card className="performance-data-card">
+              <CardContent>
+                <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
+                <Typography variant="h6" className="performance-data-value">Speed: {data.speed} mph</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
         <Grid item xs={12}>
           <Typography variant="h6" className="performance-data-title">Quarter Mile Data</Typography>
         </Grid>
@@ -340,7 +357,7 @@ const Dashboard = () => {
             <Card className="performance-data-card">
               <CardContent>
                 <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
-                <Typography variant="h6" className="performance-data-value">Speed: {data.speed} mph</Typography>
+                <Typography variant="body2" className="performance-data-label">Speed: {data.speed} mph</Typography>
                 <Typography variant="body2" className="performance-data-label">Distance: {data.distance} m</Typography>
               </CardContent>
             </Card>
