@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '/Users/miguelaugusto/lighthouse/finalproject/auto-sentinel/frontend/src/utils/axiosInstance.js';
+import axiosInstance from '../utils/axiosInstance';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import '../assets/styles/views/Notifications.scss';  // Corrected import path
