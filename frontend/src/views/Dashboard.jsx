@@ -5,6 +5,7 @@ import { Info as InfoIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import '../assets/styles/views/Dashboard.scss';
+import CarAnimation from '../components/CarAnimation';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -499,8 +500,10 @@ const handleSendSnapshotEmail = (data) => {
               )}
             </CardContent>
           </StyledCard>
+          {/* Add the car animation here */}
+          <CarAnimation />
         </Grid>
-
+  
         {selectedVehicle && (
           <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
             <Tabs
@@ -570,7 +573,7 @@ const handleSendSnapshotEmail = (data) => {
             </Grid>
           )}
         </Grid>
-
+  
         <Dialog open={modalOpen} onClose={handleCloseModal}>
           <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
           <DialogContent>
@@ -582,7 +585,7 @@ const handleSendSnapshotEmail = (data) => {
             <Button onClick={handleCloseModal} color="primary">Close</Button>
           </DialogActions>
         </Dialog>
-
+  
         <StyledDialog open={historyModalOpen} onClose={handleCloseHistoryModal} maxWidth='md' fullWidth>
           <DialogTitle>Historical OBD Data</DialogTitle>
           <DialogContent>
@@ -599,5 +602,5 @@ const handleSendSnapshotEmail = (data) => {
       </Container>
     );
   };
-
+  
   export default Dashboard;
