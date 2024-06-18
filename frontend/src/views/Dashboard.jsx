@@ -126,7 +126,7 @@ const Dashboard = () => {
 
   const fetchHistoryData = async () => {
     try {
-      const response = await axios.get(`/api/obd/history/${selectedVehicle}`);
+      const response = await axiosInstance.get(`/obd/history/${selectedVehicle}`);
       setHistoryData(response.data);
     } catch (error) {
       console.error('Error fetching historical OBD data:', error);
@@ -274,7 +274,7 @@ const Dashboard = () => {
 
   const handleDeleteHistoryEntry = async (id) => {
     try {
-      await axios.delete(`/api/obd/history/${id}`);
+      await axiosInstance.delete(`/obd/history/${id}`);
       enqueueSnackbar('OBD entry deleted successfully', { variant: 'info' });
       fetchHistoryData();
     } catch (error) {
