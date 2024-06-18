@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const obdSpoofService = require('../services/obdSpoofService');
 const OBD = require('../models/OBD');
-const sendEmail = require('../src/mailer');
+const sendEmail = require('../src/mailer'); // Ensure the path to mailer is correct
 const sendTextMessage = require('../src/twilioService');
+const multer = require('multer');
+const upload = multer();
 
 router.get('/status', (req, res) => {
   res.json({ connected: obdSpoofService.getStatus() });
@@ -32,7 +34,6 @@ const formatSnapshotData = (data) => {
   return Object.entries(data).map(([key, value]) => `<b>${key}</b>: ${value}`).join('<br>');
 };
 
-// Modified route to only save snapshot
 router.post('/snapshot', async (req, res) => {
   const { vehicleId, data } = req.body;
   try {
@@ -43,37 +44,33 @@ router.post('/snapshot', async (req, res) => {
   }
 });
 
-// New route to save snapshot and send email
-router.post('/snapshot-email', async (req, res) => {
+router.post('/snapshot-email', upload.single('csv'), async (req, res) => {
   const { vehicleId, data, email } = req.body;
-  const verifiedEmails = ['miguelmasche@gmail.com', 'rodriguezruizsergio@gmail.com', 'jordanbandur@hotmail.ca'];
-
-  if (!verifiedEmails.includes(email)) {
-    return res.status(400).json({ error: 'Please enter a verified email' });
-  }
+  const csv = req.file;
 
   try {
-    const snapshot = await obdSpoofService.saveSnapshot(vehicleId, data);
-    
-    // Fetch the snapshot details from the database
+    const snapshot = await obdSpoofService.saveSnapshot(vehicleId, JSON.parse(data));
     const snapshotDetails = await obdSpoofService.getSnapshotDetails(snapshot.id);
     const formattedData = formatSnapshotData(snapshotDetails.data);
 
-    // Send an email with the snapshot details
     await sendEmail(
       email,
       'Snapshot Saved',
       `<h1 style="color: Black">Vehicle Maintenance Tracker</h1>
-        <p>Snapshot details:</p>
-        <p>${formattedData}</p>`
+       <p>Snapshot details:</p>
+       <p>${formattedData}</p>`,
+      {
+        filename: csv.originalname,
+        content: csv.buffer,
+        contentType: 'text/csv'
+      }
     );
 
-    res.json(snapshot);
+    res.json({ message: 'Snapshot saved and email sent', snapshot });
   } catch (error) {
     res.status(500).json({ error: 'Failed to save snapshot and send email', details: error });
   }
 });
-
 
 router.post('/send-text', async (req, res) => {
   const { vehicleId, data, phoneNumber } = req.body;
@@ -94,7 +91,6 @@ router.post('/send-text', async (req, res) => {
   }
 });
 
-// Route to generate performance data
 router.post('/generatePerformanceData', (req, res) => {
   try {
     const performanceData = {
@@ -109,7 +105,6 @@ router.post('/generatePerformanceData', (req, res) => {
   }
 });
 
-// Fetch historical OBD data for a specific vehicle
 router.get('/history/:vehicleId', async (req, res) => {
   try {
     const { vehicleId } = req.params;
@@ -118,7 +113,6 @@ router.get('/history/:vehicleId', async (req, res) => {
       order: [['created_at', 'DESC']]
     });
 
-    // Parse the stored JSON data if necessary
     const parsedHistoryData = historyData.map(entry => ({
       ...entry.dataValues,
       data: entry.dataValues.data
@@ -131,7 +125,6 @@ router.get('/history/:vehicleId', async (req, res) => {
   }
 });
 
-// Delete an OBD entry
 router.delete('/history/:id', async (req, res) => {
   try {
     const { id } = req.params;

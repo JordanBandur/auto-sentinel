@@ -188,7 +188,20 @@ const handleSendSnapshotEmail = (data) => {
     return;
   }
 
-  axiosInstance.post('/obd/snapshot-email', { vehicleId: selectedVehicle, data, email })
+  // Generate CSV data from the snapshot data
+  const csvData = convertToCSV([data]);
+  const blob = new Blob([csvData], { type: 'text/csv' });
+  const formData = new FormData();
+  formData.append('csv', blob, 'snapshot.csv');
+  formData.append('vehicleId', selectedVehicle);
+  formData.append('data', JSON.stringify(data));
+  formData.append('email', email);
+
+  axiosInstance.post('/obd/snapshot-email', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
     .then(() => {
       enqueueSnackbar('Snapshot saved and email sent successfully', { variant: 'success' });
     })
@@ -197,6 +210,10 @@ const handleSendSnapshotEmail = (data) => {
       enqueueSnackbar('Error saving snapshot and sending email', { variant: 'error' });
     });
 };
+
+
+
+
 
 
   // Function to send snapshot text

@@ -8,15 +8,21 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-const sendEmail = async (to, subject, htmlContent) => {
+const sendEmail = async (to, subject, htmlContent, attachment) => {
   const mailOptions = {
     from: 'auto.sentinelx@gmail.com',
     to: to,
     subject: subject,
-    html: htmlContent // Use the dynamic HTML content here
+    html: htmlContent,
+    attachments: [
+      {
+        filename: attachment.filename,
+        content: attachment.content,
+        contentType: attachment.contentType
+      }
+    ]
   };
 
-  // Logging for debugging
   console.log('Mail options:', mailOptions);
 
   try {
