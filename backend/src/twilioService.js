@@ -1,10 +1,14 @@
-
+// src/twilioService.js
+const dotenv = require('dotenv');
 const twilio = require('twilio');
 
-// Hard code your Twilio credentials here
-const accountSid = 'AC312714242f4b7432c28cef88e28e41e8';
-const authToken = 'e92558016d656bcfba9ea957f9dac4f4';
-const twilioPhoneNumber = '+19188563315';
+// Load environment variables from .env file
+dotenv.config({ path: '../.env' });
+
+// Access Twilio credentials from environment variables
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 
 const client = new twilio(accountSid, authToken);
 
