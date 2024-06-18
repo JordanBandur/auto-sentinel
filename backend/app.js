@@ -4,6 +4,7 @@ const cors = require('cors');
 const maintenanceRoutes = require('./src/maintenance');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const obdRoutes = require('./routes/obdRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use('/api/obd', obdRoutes);
 //app.use('/api/email', emailRoutes);
 //app.use('/api/text', textRoutes);
 //app.use('/api/dtc', dtcRoutes);
+app.use('/api/notifications', notificationRoutes);
 app.use('/api/maintenance', maintenanceRoutes);
 
 module.exports = app;
