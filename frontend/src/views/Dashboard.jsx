@@ -31,7 +31,6 @@ const StyledDialog = styled(Dialog)(() => ({
   }
 }));
 
-// Descriptions for OBD metrics to be displayed in the modal
 const metricDescriptions = {
   rpm: "Revolutions per minute (RPM) is the number of times the engine's crankshaft completes one full rotation per minute.",
   speed: "The current speed of the vehicle in miles per hour (mph).",
@@ -91,11 +90,10 @@ const Dashboard = () => {
     return decimals.includes(metric) ? parseFloat(value).toFixed(2) : parseInt(value);
   };
 
-  // Fetch vehicle data on component mount
   useEffect(() => {
     axiosInstance.get('/vehicles')
       .then(response => {
-        console.log('Vehicles fetched:', response.data); // Log the response
+        console.log('Vehicles fetched:', response.data);
         setVehicles(response.data);
       })
       .catch(error => console.error('Error fetching vehicles:', error));
@@ -133,9 +131,6 @@ const Dashboard = () => {
     }
   };
 
-  /**
-   * Connects to the OBD device.
-   */
   const connectObd = () => {
     axiosInstance.post('/obd/connect')
       .then(() => {
@@ -173,11 +168,11 @@ const Dashboard = () => {
 
     axiosInstance.post('/obd/snapshot', { vehicleId: selectedVehicle, data: obdData })
       .then(() => {
-        enqueueSnackbar('Snapshot saved successfully', { variant: 'success' });
+        enqueueSnackbar('Snapshot saved successfully and email sent', { variant: 'success' });
       })
       .catch(error => {
-        console.error('Error saving snapshot:', error.response ? error.response.data : error.message);
-        enqueueSnackbar('Error saving snapshot', { variant: 'error' });
+        console.error('Error saving snapshot and sending email:', error.response ? error.response.data : error.message);
+        enqueueSnackbar('Error saving snapshot and sending email', { variant: 'error' });
       });
   };
 
@@ -234,11 +229,6 @@ const Dashboard = () => {
     document.body.removeChild(a);
   };
 
-
-  /**
-   * Handles the vehicle selection change.
-   * @param {object} event - The change event object.
-   */
   const handleVehicleChange = (event) => {
     setSelectedVehicle(event.target.value);
   };
@@ -263,7 +253,6 @@ const Dashboard = () => {
 
   const handleOpenHistoryModal = (entry) => {
     setSelectedHistoryEntry(entry.data);
-    //setSelectedHistoryEntry(null);
     setHistoryModalOpen(true);
   };
 
@@ -274,7 +263,7 @@ const Dashboard = () => {
 
   const handleDeleteHistoryEntry = async (id) => {
     try {
-      await axios.delete(`/api/obd/history/${id}`);
+      await axiosInstance.delete(`/obd/history/${id}`);
       enqueueSnackbar('OBD entry deleted successfully', { variant: 'info' });
       fetchHistoryData();
     } catch (error) {
@@ -283,10 +272,6 @@ const Dashboard = () => {
     }
   };
 
-  /**
-   * Renders history metrics data inside the modal.
-   * @returns {JSX.Element} - The rendered history metrics.
-   */
   const renderHistoryMetrics = () => (
     selectedHistoryEntry ? (
       <Grid container spacing={2} className="obd-data-container">
@@ -304,7 +289,6 @@ const Dashboard = () => {
     ) : null
   );
 
-  // Simple metrics displayed in the simple view
   const simpleMetrics = ['rpm', 'speed', 'fuelLevel', 'throttlePosition', 'intakeAirTemperature', 'coolantTemp', 'batteryVoltage'];
   const advancedMetrics = [
     ...simpleMetrics,

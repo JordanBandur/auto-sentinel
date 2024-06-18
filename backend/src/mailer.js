@@ -1,35 +1,19 @@
-// src/mailer.js
+var nodemailer = require('nodemailer');
 
-require('dotenv').config();
-const nodemailer = require('nodemailer');
-const AWS = require('aws-sdk');
-
-// Log environment variables for debugging
-console.log('AWS_ACCESS_KEY_ID:', process.env.AWS_ACCESS_KEY_ID);
-console.log('AWS_SECRET_ACCESS_KEY:', process.env.AWS_SECRET_ACCESS_KEY);
-console.log('AWS_REGION:', process.env.AWS_REGION);
-console.log('SES_VERIFIED_EMAIL:', process.env.SES_VERIFIED_EMAIL);
-
-// Configure AWS SDK with your SES credentials
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'auto.sentinelx@gmail.com',
+    pass: 'yvbplodxrbqqvxzt'
+  }
 });
 
-// Create a transporter object using SES
-const transporter = nodemailer.createTransport({
-  SES: new AWS.SES({
-    apiVersion: '2010-12-01',
-  }),
-});
-
-const sendEmail = async (to, subject, text) => {
+const sendEmail = async (to, subject, htmlContent) => {
   const mailOptions = {
-    from: process.env.SES_VERIFIED_EMAIL,
+    from: 'auto.sentinelx@gmail.com',
     to: to,
     subject: subject,
-    text: text,
+    html: htmlContent // Use the dynamic HTML content here
   };
 
   // Logging for debugging

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const obdSpoofService = require('../services/obdSpoofService');
 const OBD = require('../models/OBD');
+const sendEmail = require('../src/mailer'); // Ensure the path to mailer is correct
 
 router.get('/status', (req, res) => {
   res.json({ connected: obdSpoofService.getStatus() });
@@ -26,13 +27,36 @@ router.get('/data', (req, res) => {
   }
 });
 
+const formatSnapshotData = (data) => {
+  return Object.entries(data).map(([key, value]) => `<b>${key}</b>: ${value}`).join('<br>');
+};
+
 router.post('/snapshot', async (req, res) => {
   const { vehicleId, data } = req.body;
   try {
     const snapshot = await obdSpoofService.saveSnapshot(vehicleId, data);
+    
+    // Fetch the snapshot details from the database
+    const snapshotDetails = await obdSpoofService.getSnapshotDetails(snapshot.id);
+    const formattedData = formatSnapshotData(snapshotDetails.data);
+
+    // List of recipients
+    const recipients = ['miguelmasche@gmail.com', 'jhanicmusic@gmail.com'];
+
+    // Send an email with the snapshot details to each recipient
+    for (const recipient of recipients) {
+      await sendEmail(
+        recipient,
+        'Snapshot Saved',
+        `<h1 style="color: Black">Vehicle Maintenance Tracker</h1>
+         <p>Snapshot details:</p>
+         <p>${formattedData}</p>`
+      );
+    }
+
     res.json(snapshot);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to save snapshot' });
+    res.status(500).json({ error: 'Failed to save snapshot and send email', details: error });
   }
 });
 
@@ -89,6 +113,5 @@ router.delete('/history/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 module.exports = router;

@@ -8,6 +8,8 @@
 const EventEmitter = require('events');
 const OBD = require('../models/OBD');
 
+// Existing code...
+
 class OBDSpoofService extends EventEmitter {
   constructor() {
     super();
@@ -108,6 +110,17 @@ class OBDSpoofService extends EventEmitter {
   }
 
   /**
+   * Fetches snapshot details from the database.
+   * @param {number} snapshotId - The ID of the snapshot.
+   * @returns {Promise<Object>} The snapshot details.
+   */
+  async getSnapshotDetails(snapshotId) {
+    return OBD.findOne({
+      where: { id: snapshotId },
+    });
+  }
+
+  /**
    * Updates the OBD data with random values within specified ranges.
    */
   updateOBDData() {
@@ -146,7 +159,7 @@ class OBDSpoofService extends EventEmitter {
    * @param {number} maxChange - The maximum change allowed.
    * @param {number} minChange - The minimum change allowed.
    * @param {number} minValue - The minimum value allowed.
-       @param {number} maxValue - The maximum value allowed.
+   * @param {number} maxValue - The maximum value allowed.
    * @returns {number} The new value after applying the random change.
    */
   getNextValue(currentValue, maxChange, minChange, minValue, maxValue) {
@@ -219,6 +232,17 @@ class OBDSpoofService extends EventEmitter {
     }
 
     return brakingData;
+  }
+
+  /**
+   * Fetches snapshot details from the database.
+   * @param {number} snapshotId - The ID of the snapshot.
+   * @returns {Promise<Object>} The snapshot details.
+   */
+  async getSnapshotDetails(snapshotId) {
+    return OBD.findOne({
+      where: { id: snapshotId },
+    });
   }
 }
 
