@@ -32,8 +32,26 @@ const formatSnapshotData = (data) => {
   return Object.entries(data).map(([key, value]) => `<b>${key}</b>: ${value}`).join('<br>');
 };
 
+// Modified route to only save snapshot
 router.post('/snapshot', async (req, res) => {
   const { vehicleId, data } = req.body;
+  try {
+    const snapshot = await obdSpoofService.saveSnapshot(vehicleId, data);
+    res.json(snapshot);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to save snapshot', details: error });
+  }
+});
+
+// New route to save snapshot and send email
+router.post('/snapshot-email', async (req, res) => {
+  const { vehicleId, data, email } = req.body;
+  const verifiedEmails = ['miguelmasche@gmail.com', 'rodriguezruizsergio@gmail.com', 'jordanbandur@hotmail.ca'];
+
+  if (!verifiedEmails.includes(email)) {
+    return res.status(400).json({ error: 'Please enter a verified email' });
+  }
+
   try {
     const snapshot = await obdSpoofService.saveSnapshot(vehicleId, data);
     
@@ -41,25 +59,21 @@ router.post('/snapshot', async (req, res) => {
     const snapshotDetails = await obdSpoofService.getSnapshotDetails(snapshot.id);
     const formattedData = formatSnapshotData(snapshotDetails.data);
 
-    // List of recipients
-    const recipients = ['miguelmasche@gmail.com', 'rodriguezruizsergio@gmail.com', 'jordanbandur@hotmail.ca'];
-
-    // Send an email with the snapshot details to each recipient
-    for (const recipient of recipients) {
-      await sendEmail(
-        recipient,
-        'Snapshot Saved',
-        `<h1 style="color: Black">Vehicle Maintenance Tracker</h1>
-         <p>Snapshot details:</p>
-         <p>${formattedData}</p>`
-      );
-    }
+    // Send an email with the snapshot details
+    await sendEmail(
+      email,
+      'Snapshot Saved',
+      `<h1 style="color: Black">Vehicle Maintenance Tracker</h1>
+        <p>Snapshot details:</p>
+        <p>${formattedData}</p>`
+    );
 
     res.json(snapshot);
   } catch (error) {
     res.status(500).json({ error: 'Failed to save snapshot and send email', details: error });
   }
 });
+
 
 router.post('/send-text', async (req, res) => {
   const { vehicleId, data, phoneNumber } = req.body;
