@@ -15,7 +15,6 @@ import Hidden from '@mui/material/Hidden';
 import { AuthContext } from '../hooks/AuthContext'; // Import AuthContext
 import '../assets/styles/components/_Header.scss';
 
-
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { isAuthenticated, logout } = useContext(AuthContext);
@@ -44,9 +43,7 @@ const Header = () => {
         <ListItem button component={NavLink} to="/maintenance" className="nav-link">
           <ListItemText primary="Maintenance" />
         </ListItem>
-        <ListItem button component={NavLink} to="/notifications" className="nav-link">
-          <ListItemText primary="Notifications" />
-        </ListItem>
+        {/* Remove Notifications list item */}
         {isAuthenticated ? (
           <ListItem button onClick={logout}>
             <ListItemText primary="Logout" />
@@ -84,9 +81,7 @@ const Header = () => {
                 <ListItem button component={NavLink} to="/maintenance" className="nav-link">
                   <ListItemText primary="Maintenance" />
                 </ListItem>
-                <ListItem button component={NavLink} to="/notifications" className="nav-link">
-                  <ListItemText primary="Notifications" />
-                </ListItem>
+                {/* Remove Notifications list item */}
               </List>
             </Box>
             <Box sx={{ display: 'flex' }}>
@@ -126,4 +121,3 @@ const Header = () => {
 };
 
 export default Header;
-
