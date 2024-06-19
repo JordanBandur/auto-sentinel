@@ -393,13 +393,13 @@ const getPerformanceMetrics = () => {
   return (
     <Grid container spacing={2} className="performance-data-container">
       <Grid item xs={12}>
-        <PerformanceGraph data={accelerationChartData} title="Acceleration Data" />
+        <PerformanceGraph data={accelerationChartData} title="Acceleration Data" yAxisLabel="Speed (mph)" xAxisLabel="Time (s)" />
       </Grid>
       <Grid item xs={12}>
-        <PerformanceGraph data={quarterMileChartData} title="Quarter Mile Data" />
+        <PerformanceGraph data={quarterMileChartData} title="Quarter Mile Data" yAxisLabel="Speed (mph)" xAxisLabel="Time (s)" />
       </Grid>
       <Grid item xs={12}>
-        <PerformanceGraph data={brakingChartData} title="Braking Data" />
+        <PerformanceGraph data={brakingChartData} title="Braking Data" yAxisLabel="Speed (mph)" xAxisLabel="Time (s)" />
       </Grid>
     </Grid>
   );
