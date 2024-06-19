@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { Container, Typography, Button, Card, CardContent, CardActions, Grid, FormControl, InputLabel, Select, MenuItem, Box, Tabs, Tab, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import { Info as InfoIcon, Delete as DeleteIcon } from '@mui/icons-material';
@@ -6,7 +6,7 @@ import { styled } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import '../assets/styles/views/Dashboard.scss';
 import Maintenance from './Maintenance';
-import { useContext } from 'react';
+import PerformanceGraph from '../components/PerformanceChart';// Import the PerformanceGraph component
 import { MaintenanceContext } from '../context/MaintenanceContext';
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -202,450 +202,434 @@ const saveSnapshot = () => {
     });
 };
 
+// Add state for the email
+const [email, setEmail] = useState('');
 
-  // Add state for the email
-  const [email, setEmail] = useState('');
+// Function to send snapshot email
+const handleSendSnapshotEmail = (data) => {
+  if (!verifiedEmails.includes(email)) {
+    enqueueSnackbar('Please enter a verified email', { variant: 'warning' });
+    return;
+  }
 
-  // Function to send snapshot email
-  const handleSendSnapshotEmail = (data) => {
-    if (!verifiedEmails.includes(email)) {
-      enqueueSnackbar('Please enter a verified email', { variant: 'warning' });
-      return;
-    }
+  axiosInstance.post('/obd/snapshot-email', { vehicleId: selectedVehicle, data, email })
+    .then(() => {
+      enqueueSnackbar('Snapshot saved and email sent successfully', { variant: 'success' });
+    })
+    .catch(error => {
+      console.error('Error saving snapshot and sending email:', error.response ? error.response.data : error.message);
+      enqueueSnackbar('Error saving snapshot and sending email', { variant: 'error' });
+    });
+};
 
-    axiosInstance.post('/obd/snapshot-email', { vehicleId: selectedVehicle, data, email })
-      .then(() => {
-        enqueueSnackbar('Snapshot saved and email sent successfully', { variant: 'success' });
-      })
-      .catch(error => {
-        console.error('Error saving snapshot and sending email:', error.response ? error.response.data : error.message);
-        enqueueSnackbar('Error saving snapshot and sending email', { variant: 'error' });
-      });
-  };
+// Function to send snapshot text
+const handleSendSnapshotText = (data) => {
+  if (!phoneNumber) {
+    enqueueSnackbar('No phone number entered', { variant: 'warning' });
+    return;
+  }
 
+  axiosInstance.post('/obd/send-text', { vehicleId: selectedVehicle, data, phoneNumber })
+    .then(() => {
+      enqueueSnackbar('Snapshot saved successfully and text message sent', { variant: 'success' });
+    })
+    .catch(error => {
+      console.error('Error saving snapshot and sending text message:', error.response ? error.response.data : error.message);
+      enqueueSnackbar('Error saving snapshot and sending text message', { variant: 'error' });
+    });
+};
 
-  // Function to send snapshot text
-  const handleSendSnapshotText = (data) => {
-    if (!phoneNumber) {
-      enqueueSnackbar('No phone number entered', { variant: 'warning' });
-      return;
-    }
-
-    axiosInstance.post('/obd/send-text', { vehicleId: selectedVehicle, data, phoneNumber })
-      .then(() => {
-        enqueueSnackbar('Snapshot saved successfully and text message sent', { variant: 'success' });
-      })
-      .catch(error => {
-        console.error('Error saving snapshot and sending text message:', error.response ? error.response.data : error.message);
-        enqueueSnackbar('Error saving snapshot and sending text message', { variant: 'error' });
-      });
-  };
-
-  useEffect(() => {
-    const fetchObdData = () => {
-      if (obdStatus) {
-        axiosInstance.get('/obd/data')
-          .then(response => setObdData(response.data))
-          .catch(error => console.error('Error fetching OBD data:', error));
-      }
-    };
-
-    const interval = setInterval(fetchObdData, 1000);
-
-    return () => clearInterval(interval);
-  }, [obdStatus]);
-
-  const generatePostDriveAnalysis = () => {
-    axiosInstance.post('/obd/generatePerformanceData')
-      .then(response => setPerformanceData(response.data))
-      .catch(error => console.error('Error generating performance data:', error));
-  };
-
-  const convertToCSV = (data) => {
-    const headers = Object.keys(data[0]);
-    const csvRows = [];
-
-    // Add headers
-    csvRows.push(headers.join(','));
-
-    // Add rows
-    for (const row of data) {
-      const values = headers.map(header => {
-        const escaped = ('' + row[header]).replace(/"/g, '\\"');
-        return `"${escaped}"`;
-      });
-      csvRows.push(values.join(','));
-    }
-
-    return csvRows.join('\n');
-  };
-
-  const downloadCSV = (data, filename = 'obd_data.csv') => {
-    const csv = convertToCSV(data);
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.setAttribute('hidden', '');
-    a.setAttribute('href', url);
-    a.setAttribute('download', filename);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
-
-  const handleVehicleChange = (event) => {
-    setSelectedVehicle(event.target.value);
-  };
-
-  const toggleView = () => {
-    setIsAdvancedView(!isAdvancedView);
-  };
-
-  const handleTabChange = (event, newValue) => {
-    setSelectedTab(newValue);
-    if (newValue === 2) { // Assuming 'History' tab is the third tab
-      fetchHistoryData(); // Fetch historical data when History tab is selected
+useEffect(() => {
+  const fetchObdData = () => {
+    if (obdStatus) {
+      axiosInstance.get('/obd/data')
+        .then(response => setObdData(response.data))
+        .catch(error => console.error('Error fetching OBD data:', error));
     }
   };
 
-  const handleOpenModal = (metric) => {
-    setSelectedMetric(metric);
-    setModalOpen(true);
-  };
+  const interval = setInterval(fetchObdData, 1000);
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setSelectedMetric(null);
-  };
+  return () => clearInterval(interval);
+}, [obdStatus]);
 
-  const handleOpenHistoryModal = (entry) => {
-    setSelectedHistoryEntry(entry.data);
-    setHistoryModalOpen(true);
-  };
+const generatePostDriveAnalysis = () => {
+  axiosInstance.post('/obd/generatePerformanceData')
+    .then(response => setPerformanceData(response.data))
+    .catch(error => console.error('Error generating performance data:', error));
+};
 
-  const handleCloseHistoryModal = () => {
-    setHistoryModalOpen(false);
-    setSelectedHistoryEntry(null);
-  };
+const convertToCSV = (data) => {
+  const headers = Object.keys(data[0]);
+  const csvRows = [];
 
-  const handleDeleteHistoryEntry = async (id) => {
-    try {
-      await axiosInstance.delete(`/obd/history/${id}`);
-      enqueueSnackbar('OBD entry deleted successfully', { variant: 'info' });
-      fetchHistoryData();
-    } catch (error) {
-      console.error('Error deleting OBD entry:', error);
-      enqueueSnackbar('Error deleting OBD entry', { variant: 'error' });
-    }
-  };
+  // Add headers
+  csvRows.push(headers.join(','));
 
-  const renderHistoryMetrics = () => (
-    selectedHistoryEntry ? (
-      <Grid container spacing={2} className="obd-data-container">
-        {Object.keys(selectedHistoryEntry).map((metric) => (
-          <Grid item xs={12} sm={6} md={4} key={metric}>
-            <StyledCard className="obd-data-card">
-              <CardContent>
-                <Typography variant="body2" className="obd-data-label">{formatLabel(metric)}</Typography>
-                <Typography variant="h6" className="obd-data-value">{getFormattedValue(metric, selectedHistoryEntry[metric])}</Typography>
-              </CardContent>
-            </StyledCard>
-          </Grid>
-        ))}
-      </Grid>
-    ) : null
-  );
+  // Add rows
+  for (const row of data) {
+    const values = headers.map(header => {
+      const escaped = ('' + row[header]).replace(/"/g, '\\"');
+      return `"${escaped}"`;
+    });
+    csvRows.push(values.join(','));
+  }
 
-  const simpleMetrics = ['rpm', 'speed', 'fuelLevel', 'throttlePosition', 'intakeAirTemperature', 'coolantTemp', 'batteryVoltage'];
-  const advancedMetrics = [
-    ...simpleMetrics,
-    'engineLoad', 'fuelPressure', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'o2SensorVoltage', 'timingAdvance', 'manifoldAbsolutePressure',
-    'absoluteThrottlePosition', 'controlModuleVoltage', 'fuelRailPressure', 'egrCommanded', 'egrError', 'evaporativePurge', 'warmupsSinceDtcCleared',
-    'distanceSinceDtcCleared', 'ambientAirTemperature', 'engineOilTemperature', 'fuelInjectionTiming', 'engineFuelRate'
-  ];
+  return csvRows.join('\n');
+};
 
-  const displayedMetrics = isAdvancedView ? advancedMetrics : simpleMetrics;
+const downloadCSV = (data, filename = 'obd_data.csv') => {
+  const csv = convertToCSV(data);
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
 
-  /**
-   * Renders performance metrics data.
-   * @returns {JSX.Element} - The rendered performance metrics.
-   */
-  const getPerformanceMetrics = () => (
-    performanceData && performanceData.accelerationData.length > 0 ? (
-      <Grid container spacing={2} className="performance-data-container">
-        <Grid item xs={12}>
-          <Typography variant="h6" className="performance-data-title">Acceleration Data</Typography>
-        </Grid>
-        {performanceData.accelerationData.map((data, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card className="performance-data-card">
-              <CardContent>
-                <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
-                <Typography variant="h6" className="performance-data-value">Speed: {data.speed} mph</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-        <Grid item xs={12}>
-          <Typography variant="h6" className="performance-data-title">Quarter Mile Data</Typography>
-        </Grid>
-        {performanceData.quarterMileData.map((data, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card className="performance-data-card">
-              <CardContent>
-                <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
-                <Typography variant="body2" className="performance-data-label">Speed: {data.speed} mph</Typography>
-                <Typography variant="body2" className="performance-data-label">Distance: {data.distance} m</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-        <Grid item xs={12}>
-          <Typography variant="h6" className="performance-data-title">Braking Data</Typography>
-        </Grid>
-        {performanceData.brakingData.map((data, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card className="performance-data-card">
-              <CardContent>
-                <Typography variant="body2" className="performance-data-label">Time: {data.time}s</Typography>
-                <Typography variant="body2" className="performance-data-label">Speed: {data.speed} mph</Typography>
-                <Typography variant="body2" className="performance-data-label">Distance: {data.distance} m</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    ) : (
-      <Typography variant="body1">Loading performance data...</Typography>
-    )
-  );
+  const a = document.createElement('a');
+  a.setAttribute('hidden', '');
+  a.setAttribute('href', url);
+  a.setAttribute('download', filename);
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};
 
-  const getObdMetrics = () => (
+const handleVehicleChange = (event) => {
+  setSelectedVehicle(event.target.value);
+};
+
+const toggleView = () => {
+  setIsAdvancedView(!isAdvancedView);
+};
+
+const handleTabChange = (event, newValue) => {
+  setSelectedTab(newValue);
+  if (newValue === 2) { // Assuming 'History' tab is the third tab
+    fetchHistoryData(); // Fetch historical data when History tab is selected
+  }
+};
+
+const handleOpenModal = (metric) => {
+  setSelectedMetric(metric);
+  setModalOpen(true);
+};
+
+const handleCloseModal = () => {
+  setModalOpen(false);
+  setSelectedMetric(null);
+};
+
+const handleOpenHistoryModal = (entry) => {
+  setSelectedHistoryEntry(entry.data);
+  setHistoryModalOpen(true);
+};
+
+const handleCloseHistoryModal = () => {
+  setHistoryModalOpen(false);
+  setSelectedHistoryEntry(null);
+};
+
+const handleDeleteHistoryEntry = async (id) => {
+  try {
+    await axiosInstance.delete(`/obd/history/${id}`);
+    enqueueSnackbar('OBD entry deleted successfully', { variant: 'info' });
+    fetchHistoryData();
+  } catch (error) {
+    console.error('Error deleting OBD entry:', error);
+    enqueueSnackbar('Error deleting OBD entry', { variant: 'error' });
+  }
+};
+
+const renderHistoryMetrics = () => (
+  selectedHistoryEntry ? (
     <Grid container spacing={2} className="obd-data-container">
-      {displayedMetrics.map((metric) => (
+      {Object.keys(selectedHistoryEntry).map((metric) => (
         <Grid item xs={12} sm={6} md={4} key={metric}>
-          <Card className="obd-data-card">
+          <StyledCard className="obd-data-card">
             <CardContent>
               <Typography variant="body2" className="obd-data-label">{formatLabel(metric)}</Typography>
-              <Typography variant="h6" className="obd-data-value">{getFormattedValue(metric, obdData[metric])}</Typography>
-              <IconButton className='obd-metric-info-button' onClick={() => handleOpenModal(metric)} aria-label={`info about ${metric}`}>
-                <InfoIcon />
-              </IconButton>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
-  );
-
-  const verifiedEmails = ['miguelmasche@gmail.com', 'rodriguezruizsergio@gmail.com', 'jordanbandur@hotmail.ca']; // List of verified emails
-
-  const getHistoryData = () => (
-    <Grid container spacing={2} className="history-data-container">
-      {historyData.map((entry) => (
-        <Grid item xs={12} key={entry.id}>
-          <Card className="history-data-card">
-            <CardContent>
-              <Typography variant="body2">Date: {new Date(entry.created_at).toLocaleString()}</Typography>
-              <IconButton className='history-metric-info-button' onClick={() => handleOpenHistoryModal(entry)} aria-label="info">
-                <InfoIcon />
-              </IconButton>
-              <IconButton className='history-metric-delete-button' onClick={() => handleDeleteHistoryEntry(entry.id)} aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-              <Button className='download-csv-button' variant="contained" onClick={() => downloadCSV(historyData)}>Download CSV</Button>
-              <Button size="small" onClick={() => handleSendSnapshotEmail(entry.data)} className="snapshot-button">Send Snapshot via Email</Button>
-              <Button size="small" onClick={() => handleSendSnapshotText(entry.data)} className="snapshot-button">Send Snapshot via Text</Button>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-      {/* Move the phone number input field outside the map */}
-      <Grid item xs={12}>
-        <TextField
-          label="Phone Number"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-        />
-        <TextField
-          label="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-        />
-      </Grid>
-    </Grid>
-  );
-
-  const renderRecommendations = () => (
-    <StyledCard className="maintenance-card"> {/* Apply the StyledCard component here */}
-      <CardContent>
-        <Typography variant="h6" className="maintenance-title">Maintenance Recommendations</Typography>
-        {recommendations.length > 0 ? (
-          <ul>
-            {recommendations.map((rec, index) => (
-              <li key={index}>{rec}</li>
-            ))}
-          </ul>
-        ) : (
-          <Typography variant="body1">No recommendations as of {new Date().toLocaleString()}</Typography>
-        )}
-      </CardContent>
-    </StyledCard>
-  );
-
-  return (
-    <Container maxWidth="md" className="dashboard">
-      <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
-      <StyledTypography variant="subtitle1" gutterBottom className="dashboard-subtitle">Welcome to Auto Sentinel</StyledTypography>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <StyledCard variant="outlined" className="vehicle-card">
-            <CardContent>
-              <FormControl fullWidth variant="outlined" margin="normal">
-                <InputLabel id="vehicle-select-label">Select Vehicle</InputLabel>
-                <Select
-                  labelId="vehicle-select-label"
-                  id="vehicle-select"
-                  value={selectedVehicle}
-                  onChange={handleVehicleChange}
-                  label="Select Vehicle"
-                  className="vehicle-select"
-                >
-                  {vehicles.map(vehicle => (
-                    <MenuItem key={vehicle.id} value={vehicle.id}>
-                      {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              {selectedVehicle && (
-                <Box mt={2}>
-                  <Typography variant="h6">
-                    {vehicles.find(vehicle => vehicle.id === selectedVehicle).make} {vehicles.find(vehicle => vehicle.id === selectedVehicle).model} ({vehicles.find(vehicle => vehicle.id === selectedVehicle).year})
-                  </Typography>
-                  <Typography variant="body2">
-                    {vehicles.find(vehicle => vehicle.id === selectedVehicle).license_plate}
-                  </Typography>
-                  <Box mt={2} display="flex" justifyContent="center" id="obd-buttons">
-                    <StyledButton variant="contained" onClick={connectObd} disabled={obdStatus} className="connect-button obd-button">Connect OBD</StyledButton>
-                    <StyledButton variant="contained" onClick={disconnectObd} disabled={!obdStatus} className="disconnect-button obd-button" color="error">Disconnect OBD</StyledButton>
-                  </Box>
-                </Box>
-              )}
+              <Typography variant="h6" className="obd-data-value">{getFormattedValue(metric, selectedHistoryEntry[metric])}</Typography>
             </CardContent>
           </StyledCard>
         </Grid>
-  
-        {selectedVehicle && (
-          <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
-            <Tabs
-              value={selectedTab}
-              onChange={handleTabChange}
-              aria-label="OBD and Performance Views"
-              sx={{ mb: 2 }}
-            >
-              <Tab label="OBD View" />
-              <Tab label="Performance View" />
-              <Tab label="History" />
-              <Tab label="Maintenance" /> {/* New Maintenance Tab */}
-            </Tabs>
-            {selectedTab === 0 ? (
-                <>
-                  <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
-                  <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
-                    {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
-                  </StyledButton>
-                  <StyledCard variant="outlined" className="obd-card">
-                    <CardContent>
-                      {obdStatus ? (
-                        <>
-                          <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
-                            Status: {obdStatus ? 'Connected' : 'Disconnected'}
-                          </StyledTypography>
-                          {obdData && getObdMetrics()}
-                        </>
-                      ) : (
-                        <Typography variant="body1">Please connect OBD</Typography>
-                      )}
-                    </CardContent>
-                    {obdStatus && (
-                      <CardActions className="obd-actions">
-                        <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
-                      </CardActions>
-                    )}
-                  </StyledCard>
-                </>
-              ) : selectedTab === 1 ? (
-                <>
-                  <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
-                  <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
-                  <StyledCard variant="outlined" className="performance-card">
-                    <CardContent>
-                      {performanceData.accelerationData.length > 0 ? (
-                        getPerformanceMetrics()
-                      ) : (
-                        <Typography variant="body1">No performance data available. Please generate a report.</Typography>
-                      )}
-                    </CardContent>
-                  </StyledCard>
-                </>
-              ) : selectedTab === 2 ? (
-                <>
-                  <StyledTypography variant="h5" gutterBottom className="history-title">Historical OBD Data</StyledTypography>
-                  <StyledCard variant="outlined" className="history-card">
-                    <CardContent>
-                      {historyData.length > 0 ? (
-                        getHistoryData()
-                      ) : (
-                        <Typography variant="body1">No historical data available.</Typography>
-                      )}
-                    </CardContent>
-                  </StyledCard>
-                </>
-              ) : selectedTab === 3 ? ( /* Maintenance tab */
-                <>
-                  <StyledTypography variant="h5" gutterBottom className="maintenance-title">Maintenance</StyledTypography>
-                  {renderRecommendations()}
-                </>
-              ) : null}
-            </Grid>
-          )}
-        </Grid>
-  
-        <Dialog open={modalOpen} onClose={handleCloseModal}>
-          <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {selectedMetric ? metricDescriptions[selectedMetric] : ''}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseModal} color="primary">Close</Button>
-          </DialogActions>
-        </Dialog>
-  
-        <StyledDialog open={historyModalOpen} onClose={handleCloseHistoryModal} maxWidth='md' fullWidth>
-          <DialogTitle>Historical OBD Data</DialogTitle>
-          <DialogContent>
-            {selectedHistoryEntry ? (
-              renderHistoryMetrics()
-            ) : (
-              <DialogContentText>No data available</DialogContentText>
+      ))}
+    </Grid>
+  ) : null
+);
+
+const simpleMetrics = ['rpm', 'speed', 'fuelLevel', 'throttlePosition', 'intakeAirTemperature', 'coolantTemp', 'batteryVoltage'];
+const advancedMetrics = [
+  ...simpleMetrics,
+  'engineLoad', 'fuelPressure', 'shortTermFuelTrim', 'longTermFuelTrim', 'massAirFlowRate', 'o2SensorVoltage', 'timingAdvance', 'manifoldAbsolutePressure',
+  'absoluteThrottlePosition', 'controlModuleVoltage', 'fuelRailPressure', 'egrCommanded', 'egrError', 'evaporativePurge', 'warmupsSinceDtcCleared',
+  'distanceSinceDtcCleared', 'ambientAirTemperature', 'engineOilTemperature', 'fuelInjectionTiming', 'engineFuelRate'
+];
+
+const displayedMetrics = isAdvancedView ? advancedMetrics : simpleMetrics;
+
+/**
+ * Renders performance metrics data.
+ * @returns {JSX.Element} - The rendered performance metrics.
+ */
+/**
+ * Renders performance metrics data.
+ * @returns {JSX.Element} - The rendered performance metrics.
+ */
+const getPerformanceMetrics = () => {
+  const generateChartData = (data, label) => ({
+    labels: data.map(d => d.time),
+    datasets: [
+      {
+        label,
+        data: data.map(d => d.speed),
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      }
+    ]
+  });
+
+  const accelerationChartData = generateChartData(performanceData.accelerationData, 'Acceleration Data');
+  const quarterMileChartData = generateChartData(performanceData.quarterMileData, 'Quarter Mile Data');
+  const brakingChartData = generateChartData(performanceData.brakingData, 'Braking Data');
+
+  return (
+    <Grid container spacing={2} className="performance-data-container">
+      <Grid item xs={12}>
+        <PerformanceGraph data={accelerationChartData} title="Acceleration Data" />
+      </Grid>
+      <Grid item xs={12}>
+        <PerformanceGraph data={quarterMileChartData} title="Quarter Mile Data" />
+      </Grid>
+      <Grid item xs={12}>
+        <PerformanceGraph data={brakingChartData} title="Braking Data" />
+      </Grid>
+    </Grid>
+  );
+};
+
+const getObdMetrics = () => (
+  <Grid container spacing={2} className="obd-data-container">
+    {displayedMetrics.map((metric) => (
+      <Grid item xs={12} sm={6} md={4} key={metric}>
+        <Card className="obd-data-card">
+          <CardContent>
+            <Typography variant="body2" className="obd-data-label">{formatLabel(metric)}</Typography>
+            <Typography variant="h6" className="obd-data-value">{getFormattedValue(metric, obdData[metric])}</Typography>
+            <IconButton className='obd-metric-info-button' onClick={() => handleOpenModal(metric)} aria-label={`info about ${metric}`}>
+              <InfoIcon />
+            </IconButton>
+          </CardContent>
+        </Card>
+      </Grid>
+    ))}
+  </Grid>
+);
+
+const verifiedEmails = ['miguelmasche@gmail.com', 'rodriguezruizsergio@gmail.com', 'jordanbandur@hotmail.ca']; // List of verified emails
+
+const getHistoryData = () => (
+  <Grid container spacing={2} className="history-data-container">
+    {historyData.map((entry) => (
+      <Grid item xs={12} key={entry.id}>
+        <Card className="history-data-card">
+          <CardContent>
+            <Typography variant="body2">Date: {new Date(entry.created_at).toLocaleString()}</Typography>
+            <IconButton className='history-metric-info-button' onClick={() => handleOpenHistoryModal(entry)} aria-label="info">
+              <InfoIcon />
+            </IconButton>
+            <IconButton className='history-metric-delete-button' onClick={() => handleDeleteHistoryEntry(entry.id)} aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+            <Button className='download-csv-button' variant="contained" onClick={() => downloadCSV(historyData)}>Download CSV</Button>
+            <Button size="small" onClick={() => handleSendSnapshotEmail(entry.data)} className="snapshot-button">Send Snapshot via Email</Button>
+            <Button size="small" onClick={() => handleSendSnapshotText(entry.data)} className="snapshot-button">Send Snapshot via Text</Button>
+          </CardContent>
+        </Card>
+      </Grid>
+    ))}
+    {/* Move the phone number input field outside the map */}
+    <Grid item xs={12}>
+      <TextField
+        label="Phone Number"
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
+      <TextField
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
+    </Grid>
+  </Grid>
+);
+
+const renderRecommendations = () => (
+  <StyledCard className="maintenance-card"> {/* Apply the StyledCard component here */}
+    <CardContent>
+      <Typography variant="h6" className="maintenance-title">Maintenance Recommendations</Typography>
+      {recommendations.length > 0 ? (
+        <ul>
+          {recommendations.map((rec, index) => (
+            <li key={index}>{rec}</li>
+          ))}
+        </ul>
+      ) : (
+        <Typography variant="body1">No recommendations as of {new Date().toLocaleString()}</Typography>
+      )}
+    </CardContent>
+  </StyledCard>
+);
+
+return (
+  <Container maxWidth="md" className="dashboard">
+    <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
+    <StyledTypography variant="subtitle1" gutterBottom className="dashboard-subtitle">Welcome to Auto Sentinel</StyledTypography>
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <StyledCard variant="outlined" className="vehicle-card">
+          <CardContent>
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel id="vehicle-select-label">Select Vehicle</InputLabel>
+              <Select
+                labelId="vehicle-select-label"
+                id="vehicle-select"
+                value={selectedVehicle}
+                onChange={handleVehicleChange}
+                label="Select Vehicle"
+                className="vehicle-select"
+              >
+                {vehicles.map(vehicle => (
+                  <MenuItem key={vehicle.id} value={vehicle.id}>
+                    {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            {selectedVehicle && (
+              <Box mt={2}>
+                <Typography variant="h6">
+                  {vehicles.find(vehicle => vehicle.id === selectedVehicle).make} {vehicles.find(vehicle => vehicle.id === selectedVehicle).model} ({vehicles.find(vehicle => vehicle.id === selectedVehicle).year})
+                </Typography>
+                <Typography variant="body2">
+                  {vehicles.find(vehicle => vehicle.id === selectedVehicle).license_plate}
+                </Typography>
+                <Box mt={2} display="flex" justifyContent="center" id="obd-buttons">
+                  <StyledButton variant="contained" onClick={connectObd} disabled={obdStatus} className="connect-button obd-button">Connect OBD</StyledButton>
+                  <StyledButton variant="contained" onClick={disconnectObd} disabled={!obdStatus} className="disconnect-button obd-button" color="error">Disconnect OBD</StyledButton>
+                </Box>
+              </Box>
             )}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseHistoryModal} color="primary">Close</Button>
-          </DialogActions>
-        </StyledDialog>
-      </Container>
-    );
-  };
-  
-  export default Dashboard;
+          </CardContent>
+        </StyledCard>
+      </Grid>
+
+      {selectedVehicle && (
+        <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
+          <Tabs
+            value={selectedTab}
+            onChange={handleTabChange}
+            aria-label="OBD and Performance Views"
+            sx={{ mb: 2 }}
+          >
+            <Tab label="OBD View" />
+            <Tab label="Performance View" />
+            <Tab label="History" />
+            <Tab label="Maintenance" /> {/* New Maintenance Tab */}
+          </Tabs>
+          {selectedTab === 0 ? (
+              <>
+                <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
+                <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
+                  {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
+                </StyledButton>
+                <StyledCard variant="outlined" className="obd-card">
+                  <CardContent>
+                    {obdStatus ? (
+                      <>
+                        <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
+                          Status: {obdStatus ? 'Connected' : 'Disconnected'}
+                        </StyledTypography>
+                        {obdData && getObdMetrics()}
+                      </>
+                    ) : (
+                      <Typography variant="body1">Please connect OBD</Typography>
+                    )}
+                  </CardContent>
+                  {obdStatus && (
+                    <CardActions className="obd-actions">
+                      <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
+                    </CardActions>
+                  )}
+                </StyledCard>
+              </>
+            ) : selectedTab === 1 ? (
+              <>
+                <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
+                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
+                <StyledCard variant="outlined" className="performance-card">
+                  <CardContent>
+                    {performanceData.accelerationData.length > 0 ? (
+                      getPerformanceMetrics()
+                    ) : (
+                      <Typography variant="body1">No performance data available. Please generate a report.</Typography>
+                    )}
+                  </CardContent>
+                </StyledCard>
+              </>
+            ) : selectedTab === 2 ? (
+              <>
+                <StyledTypography variant="h5" gutterBottom className="history-title">Historical OBD Data</StyledTypography>
+                <StyledCard variant="outlined" className="history-card">
+                  <CardContent>
+                    {historyData.length > 0 ? (
+                      getHistoryData()
+                    ) : (
+                      <Typography variant="body1">No historical data available.</Typography>
+                    )}
+                  </CardContent>
+                </StyledCard>
+              </>
+            ) : selectedTab === 3 ? ( /* Maintenance tab */
+              <>
+                <StyledTypography variant="h5" gutterBottom className="maintenance-title">Maintenance</StyledTypography>
+                {renderRecommendations()}
+              </>
+            ) : null}
+          </Grid>
+        )}
+      </Grid>
+
+      <Dialog open={modalOpen} onClose={handleCloseModal}>
+        <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {selectedMetric ? metricDescriptions[selectedMetric] : ''}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal} color="primary">Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      <StyledDialog open={historyModalOpen} onClose={handleCloseHistoryModal} maxWidth='md' fullWidth>
+        <DialogTitle>Historical OBD Data</DialogTitle>
+        <DialogContent>
+          {selectedHistoryEntry ? (
+            renderHistoryMetrics()
+          ) : (
+            <DialogContentText>No data available</DialogContentText>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseHistoryModal} color="primary">Close</Button>
+        </DialogActions>
+      </StyledDialog>
+    </Container>
+  );
+};
+
+export default Dashboard;
