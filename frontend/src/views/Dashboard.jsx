@@ -483,151 +483,169 @@ const saveSnapshot = () => {
     </Grid>
   );
 
-return (
-  <Container maxWidth="md" className="dashboard">
-    <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
-    <StyledTypography variant="subtitle1" gutterBottom className="dashboard-subtitle">Welcome to Auto Sentinel</StyledTypography>
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <StyledCard variant="outlined" className="vehicle-card">
-          <CardContent>
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel id="vehicle-select-label">Select Vehicle</InputLabel>
-              <Select
-                labelId="vehicle-select-label"
-                id="vehicle-select"
-                value={selectedVehicle}
-                onChange={handleVehicleChange}
-                label="Select Vehicle"
-                className="vehicle-select"
-              >
-                {vehicles.map(vehicle => (
-                  <MenuItem key={vehicle.id} value={vehicle.id}>
-                    {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            {selectedVehicle && (
-              <Box mt={2}>
-                <Typography variant="h6">
-                  {vehicles.find(vehicle => vehicle.id === selectedVehicle).make} {vehicles.find(vehicle => vehicle.id === selectedVehicle).model} ({vehicles.find(vehicle => vehicle.id === selectedVehicle).year})
-                </Typography>
-                <Typography variant="body2">
-                  {vehicles.find(vehicle => vehicle.id === selectedVehicle).license_plate}
-                </Typography>
-                <Box mt={2} display="flex" justifyContent="center" id="obd-buttons">
-                  <StyledButton variant="contained" onClick={connectObd} disabled={obdStatus} className="connect-button obd-button">Connect OBD</StyledButton>
-                  <StyledButton variant="contained" onClick={disconnectObd} disabled={!obdStatus} className="disconnect-button obd-button" color="error">Disconnect OBD</StyledButton>
-                </Box>
-              </Box>
-            )}
-          </CardContent>
-        </StyledCard>
-      </Grid>
-
-      {selectedVehicle && (
-        <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
-          <Tabs
-            value={selectedTab}
-            onChange={handleTabChange}
-            aria-label="OBD and Performance Views"
-            sx={{ mb: 2 }}
-          >
-            <Tab label="OBD View" />
-            <Tab label="Performance View" />
-            <Tab label="History" />
-            <Tab label="Maintenance" /> {/* New Maintenance Tab */}
-          </Tabs>
-          {selectedTab === 0 ? (
-              <>
-                <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
-                <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
-                  {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
-                </StyledButton>
-                <StyledCard variant="outlined" className="obd-card">
-                  <CardContent>
-                    {obdStatus ? (
-                      <>
-                        <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
-                          Status: {obdStatus ? 'Connected' : 'Disconnected'}
-                        </StyledTypography>
-                        {obdData && getObdMetrics()}
-                      </>
-                    ) : (
-                      <Typography variant="body1">Please connect OBD</Typography>
-                    )}
-                  </CardContent>
-                  {obdStatus && (
-                    <CardActions className="obd-actions">
-                      <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
-                    </CardActions>
-                  )}
-                </StyledCard>
-              </>
-            ) : selectedTab === 1 ? (
-              <>
-                <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
-                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
-                <StyledCard variant="outlined" className="performance-card">
-                  <CardContent>
-                    {performanceData.accelerationData.length > 0 ? (
-                      getPerformanceMetrics()
-                    ) : (
-                      <Typography variant="body1">No performance data available. Please generate a report.</Typography>
-                    )}
-                  </CardContent>
-                </StyledCard>
-              </>
-            ) : selectedTab === 2 ? (
-              <>
-                <StyledTypography variant="h5" gutterBottom className="history-title">Historical OBD Data</StyledTypography>
-                <StyledCard variant="outlined" className="history-card">
-                  <CardContent>
-                    {historyData.length > 0 ? (
-                      getHistoryData()
-                    ) : (
-                      <Typography variant="body1">No historical data available.</Typography>
-                    )}
-                  </CardContent>
-                </StyledCard>
-              </>
-            ) : (
-              <>
-                <Maintenance recommendations={recommendations} /> {/* Maintenance Component */}
-              </>
-            )}
-          </Grid>
+  const renderRecommendations = () => (
+    <StyledCard className="maintenance-card"> {/* Apply the StyledCard component here */}
+      <CardContent>
+        <Typography variant="h6" className="maintenance-title">Maintenance Recommendations</Typography>
+        {recommendations.length > 0 ? (
+          <ul>
+            {recommendations.map((rec, index) => (
+              <li key={index}>{rec}</li>
+            ))}
+          </ul>
+        ) : (
+          <Typography variant="body1">No recommendations as of {new Date().toLocaleString()}</Typography>
         )}
-      </Grid>
-
-      <Dialog open={modalOpen} onClose={handleCloseModal}>
-        <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {selectedMetric ? metricDescriptions[selectedMetric] : ''}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseModal} color="primary">Close</Button>
-        </DialogActions>
-      </Dialog>
-
-      <StyledDialog open={historyModalOpen} onClose={handleCloseHistoryModal} maxWidth='md' fullWidth>
-        <DialogTitle>Historical OBD Data</DialogTitle>
-        <DialogContent>
-          {selectedHistoryEntry ? (
-            renderHistoryMetrics()
-          ) : (
-            <DialogContentText>No data available</DialogContentText>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseHistoryModal} color="primary">Close</Button>
-        </DialogActions>
-      </StyledDialog>
-    </Container>
+      </CardContent>
+    </StyledCard>
   );
-};
 
-export default Dashboard;
+  return (
+    <Container maxWidth="md" className="dashboard">
+      <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
+      <StyledTypography variant="subtitle1" gutterBottom className="dashboard-subtitle">Welcome to Auto Sentinel</StyledTypography>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <StyledCard variant="outlined" className="vehicle-card">
+            <CardContent>
+              <FormControl fullWidth variant="outlined" margin="normal">
+                <InputLabel id="vehicle-select-label">Select Vehicle</InputLabel>
+                <Select
+                  labelId="vehicle-select-label"
+                  id="vehicle-select"
+                  value={selectedVehicle}
+                  onChange={handleVehicleChange}
+                  label="Select Vehicle"
+                  className="vehicle-select"
+                >
+                  {vehicles.map(vehicle => (
+                    <MenuItem key={vehicle.id} value={vehicle.id}>
+                      {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              {selectedVehicle && (
+                <Box mt={2}>
+                  <Typography variant="h6">
+                    {vehicles.find(vehicle => vehicle.id === selectedVehicle).make} {vehicles.find(vehicle => vehicle.id === selectedVehicle).model} ({vehicles.find(vehicle => vehicle.id === selectedVehicle).year})
+                  </Typography>
+                  <Typography variant="body2">
+                    {vehicles.find(vehicle => vehicle.id === selectedVehicle).license_plate}
+                  </Typography>
+                  <Box mt={2} display="flex" justifyContent="center" id="obd-buttons">
+                    <StyledButton variant="contained" onClick={connectObd} disabled={obdStatus} className="connect-button obd-button">Connect OBD</StyledButton>
+                    <StyledButton variant="contained" onClick={disconnectObd} disabled={!obdStatus} className="disconnect-button obd-button" color="error">Disconnect OBD</StyledButton>
+                  </Box>
+                </Box>
+              )}
+            </CardContent>
+          </StyledCard>
+        </Grid>
+  
+        {selectedVehicle && (
+          <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
+            <Tabs
+              value={selectedTab}
+              onChange={handleTabChange}
+              aria-label="OBD and Performance Views"
+              sx={{ mb: 2 }}
+            >
+              <Tab label="OBD View" />
+              <Tab label="Performance View" />
+              <Tab label="History" />
+              <Tab label="Maintenance" /> {/* New Maintenance Tab */}
+            </Tabs>
+            {selectedTab === 0 ? (
+                <>
+                  <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
+                  <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
+                    {isAdvancedView ? 'Switch to Simple View' : 'Switch to Advanced View'}
+                  </StyledButton>
+                  <StyledCard variant="outlined" className="obd-card">
+                    <CardContent>
+                      {obdStatus ? (
+                        <>
+                          <StyledTypography variant="body1" sx={{ color: obdStatus ? 'green' : 'red' }}>
+                            Status: {obdStatus ? 'Connected' : 'Disconnected'}
+                          </StyledTypography>
+                          {obdData && getObdMetrics()}
+                        </>
+                      ) : (
+                        <Typography variant="body1">Please connect OBD</Typography>
+                      )}
+                    </CardContent>
+                    {obdStatus && (
+                      <CardActions className="obd-actions">
+                        <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
+                      </CardActions>
+                    )}
+                  </StyledCard>
+                </>
+              ) : selectedTab === 1 ? (
+                <>
+                  <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
+                  <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">{obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}</StyledButton>
+                  <StyledCard variant="outlined" className="performance-card">
+                    <CardContent>
+                      {performanceData.accelerationData.length > 0 ? (
+                        getPerformanceMetrics()
+                      ) : (
+                        <Typography variant="body1">No performance data available. Please generate a report.</Typography>
+                      )}
+                    </CardContent>
+                  </StyledCard>
+                </>
+              ) : selectedTab === 2 ? (
+                <>
+                  <StyledTypography variant="h5" gutterBottom className="history-title">Historical OBD Data</StyledTypography>
+                  <StyledCard variant="outlined" className="history-card">
+                    <CardContent>
+                      {historyData.length > 0 ? (
+                        getHistoryData()
+                      ) : (
+                        <Typography variant="body1">No historical data available.</Typography>
+                      )}
+                    </CardContent>
+                  </StyledCard>
+                </>
+              ) : selectedTab === 3 ? ( /* Maintenance tab */
+                <>
+                  <StyledTypography variant="h5" gutterBottom className="maintenance-title">Maintenance</StyledTypography>
+                  {renderRecommendations()}
+                </>
+              ) : null}
+            </Grid>
+          )}
+        </Grid>
+  
+        <Dialog open={modalOpen} onClose={handleCloseModal}>
+          <DialogTitle>{selectedMetric ? formatLabel(selectedMetric) : 'Metric Info'}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {selectedMetric ? metricDescriptions[selectedMetric] : ''}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseModal} color="primary">Close</Button>
+          </DialogActions>
+        </Dialog>
+  
+        <StyledDialog open={historyModalOpen} onClose={handleCloseHistoryModal} maxWidth='md' fullWidth>
+          <DialogTitle>Historical OBD Data</DialogTitle>
+          <DialogContent>
+            {selectedHistoryEntry ? (
+              renderHistoryMetrics()
+            ) : (
+              <DialogContentText>No data available</DialogContentText>
+            )}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseHistoryModal} color="primary">Close</Button>
+          </DialogActions>
+        </StyledDialog>
+      </Container>
+    );
+  };
+  
+  export default Dashboard;

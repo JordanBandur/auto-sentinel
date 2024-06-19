@@ -148,3 +148,16 @@
     }
   }
 }
+.history-data-card, .maintenance-card { /* Apply styles to both history and maintenance cards */
+  margin-top: 20px;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.maintenance-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}

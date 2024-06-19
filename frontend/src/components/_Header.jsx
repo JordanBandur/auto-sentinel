@@ -40,10 +40,6 @@ const Header = () => {
         <ListItem button component={NavLink} to="/vehicles" className="nav-link">
           <ListItemText primary="Vehicles" />
         </ListItem>
-        <ListItem button component={NavLink} to="/maintenance" className="nav-link">
-          <ListItemText primary="Maintenance" />
-        </ListItem>
-        {/* Remove Notifications list item */}
         {isAuthenticated ? (
           <ListItem button onClick={logout}>
             <ListItemText primary="Logout" />
@@ -78,10 +74,6 @@ const Header = () => {
                 <ListItem button component={NavLink} to="/vehicles" className="nav-link">
                   <ListItemText primary="Vehicles" />
                 </ListItem>
-                <ListItem button component={NavLink} to="/maintenance" className="nav-link">
-                  <ListItemText primary="Maintenance" />
-                </ListItem>
-                {/* Remove Notifications list item */}
               </List>
             </Box>
             <Box sx={{ display: 'flex' }}>
