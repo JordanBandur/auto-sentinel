@@ -8,34 +8,36 @@ import Register from './views/Register';
 import VehicleManagement from './views/VehicleManagement';
 import Profile from './views/Profile';
 import Notifications from './views/Notifications';
-import Maintenance from './views/Maintenance';
+import Maintenance from './views/Maintenance'; 
 import './assets/styles/main.scss';
 import './App.scss';
 import './styles/register.scss';
 import './styles/login.scss';
 import { AuthProvider } from './hooks/AuthContext';
+import { MaintenanceProvider } from './context/MaintenanceContext';
 
 const App = () => {
   return (
     <SnackbarProvider maxSnack={3}>
       <AuthProvider>
-        <Router>
-          <div className="App">
-            <_Header />
-            <main>
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/vehicles" element={<VehicleManagement />} />
-                <Route path="/maintenance" element={<Maintenance />} />
-                <Route path="/notifications" element={<Notifications />} />
-                <Route path="/profile" element={<Profile />} />
-              </Routes>
-            </main>
-            <_Footer />
-          </div>
-        </Router>
+        <MaintenanceProvider> {/* Wrap your app with MaintenanceProvider */}
+          <Router>
+            <div className="App">
+              <_Header />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/vehicles" element={<VehicleManagement />} />
+                  <Route path="/maintenance" element={<Maintenance />} /> {/* This stays the same */}
+                  <Route path="/profile" element={<Profile />} />
+                </Routes>
+              </main>
+              <_Footer />
+            </div>
+          </Router>
+        </MaintenanceProvider>
       </AuthProvider>
     </SnackbarProvider>
   );

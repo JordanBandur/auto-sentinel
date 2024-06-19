@@ -5,6 +5,9 @@ import { Info as InfoIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import '../assets/styles/views/Dashboard.scss';
+import Maintenance from './Maintenance';
+import { useContext } from 'react';
+import { MaintenanceContext } from '../context/MaintenanceContext';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -156,27 +159,49 @@ const Dashboard = () => {
       });
   };
 
-  const saveSnapshot = () => {
-    if (!obdData) {
-      enqueueSnackbar('No OBD data to save', { variant: 'warning' });
-      return;
-    }
+  const { recommendations, setRecommendations } = useContext(MaintenanceContext);
 
-    if (!selectedVehicle) {
-      enqueueSnackbar('No vehicle selected', { variant: 'warning' });
-      return;
-    }
+const generateRecommendations = (snapshotData) => {
+  const recs = [];
 
-    axiosInstance.post('/obd/snapshot', { vehicleId: selectedVehicle, data: obdData })
-      .then(() => {
-        enqueueSnackbar('Snapshot saved successfully', { variant: 'success' });
-        fetchHistoryData(); // Fetch updated historical data
-      })
-      .catch(error => {
-        console.error('Error saving snapshot:', error.response ? error.response.data : error.message);
-        enqueueSnackbar('Error saving snapshot', { variant: 'error' });
-      });
-  };
+  // Example recommendations based on snapshot data
+  if (snapshotData.engineLoad > 80) {
+    recs.push('Check engine load - high load detected.');
+  }
+  if (snapshotData.coolantTemp > 10) { // Lowered the threshold for testing
+    recs.push('Check coolant temperature - overheating detected.');
+  }
+  if (snapshotData.batteryVoltage < 12) {
+    recs.push('Check battery voltage - low voltage detected.');
+  }
+
+  setRecommendations(recs); // Set the recommendations in the context
+  console.log('Recommendations generated:', recs); // Debug log
+};
+
+const saveSnapshot = () => {
+  if (!obdData) {
+    enqueueSnackbar('No OBD data to save', { variant: 'warning' });
+    return;
+  }
+
+  if (!selectedVehicle) {
+    enqueueSnackbar('No vehicle selected', { variant: 'warning' });
+    return;
+  }
+
+  axiosInstance.post('/obd/snapshot', { vehicleId: selectedVehicle, data: obdData })
+    .then((response) => {
+      enqueueSnackbar('Snapshot saved successfully', { variant: 'success' });
+      generateRecommendations(obdData); // Generate recommendations based on snapshot data
+      fetchHistoryData(); // Fetch updated historical data
+    })
+    .catch(error => {
+      console.error('Error saving snapshot:', error.response ? error.response.data : error.message);
+      enqueueSnackbar('Error saving snapshot', { variant: 'error' });
+    });
+};
+
 
   // Add state for the email
   const [email, setEmail] = useState('');
@@ -458,62 +483,63 @@ const Dashboard = () => {
     </Grid>
   );
 
-  return (
-    <Container maxWidth="md" className="dashboard">
-      <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
-      <StyledTypography variant="subtitle1" gutterBottom className="dashboard-subtitle">Welcome to Auto Sentinel</StyledTypography>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <StyledCard variant="outlined" className="vehicle-card">
-            <CardContent>
-              <FormControl fullWidth variant="outlined" margin="normal">
-                <InputLabel id="vehicle-select-label">Select Vehicle</InputLabel>
-                <Select
-                  labelId="vehicle-select-label"
-                  id="vehicle-select"
-                  value={selectedVehicle}
-                  onChange={handleVehicleChange}
-                  label="Select Vehicle"
-                  className="vehicle-select"
-                >
-                  {vehicles.map(vehicle => (
-                    <MenuItem key={vehicle.id} value={vehicle.id}>
-                      {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              {selectedVehicle && (
-                <Box mt={2}>
-                  <Typography variant="h6">
-                    {vehicles.find(vehicle => vehicle.id === selectedVehicle).make} {vehicles.find(vehicle => vehicle.id === selectedVehicle).model} ({vehicles.find(vehicle => vehicle.id === selectedVehicle).year})
-                  </Typography>
-                  <Typography variant="body2">
-                    {vehicles.find(vehicle => vehicle.id === selectedVehicle).license_plate}
-                  </Typography>
-                  <Box mt={2} display="flex" justifyContent="center" id="obd-buttons">
-                    <StyledButton variant="contained" onClick={connectObd} disabled={obdStatus} className="connect-button obd-button">Connect OBD</StyledButton>
-                    <StyledButton variant="contained" onClick={disconnectObd} disabled={!obdStatus} className="disconnect-button obd-button" color="error">Disconnect OBD</StyledButton>
-                  </Box>
+return (
+  <Container maxWidth="md" className="dashboard">
+    <StyledTypography variant="h3" gutterBottom className="dashboard-title">Dashboard</StyledTypography>
+    <StyledTypography variant="subtitle1" gutterBottom className="dashboard-subtitle">Welcome to Auto Sentinel</StyledTypography>
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <StyledCard variant="outlined" className="vehicle-card">
+          <CardContent>
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel id="vehicle-select-label">Select Vehicle</InputLabel>
+              <Select
+                labelId="vehicle-select-label"
+                id="vehicle-select"
+                value={selectedVehicle}
+                onChange={handleVehicleChange}
+                label="Select Vehicle"
+                className="vehicle-select"
+              >
+                {vehicles.map(vehicle => (
+                  <MenuItem key={vehicle.id} value={vehicle.id}>
+                    {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            {selectedVehicle && (
+              <Box mt={2}>
+                <Typography variant="h6">
+                  {vehicles.find(vehicle => vehicle.id === selectedVehicle).make} {vehicles.find(vehicle => vehicle.id === selectedVehicle).model} ({vehicles.find(vehicle => vehicle.id === selectedVehicle).year})
+                </Typography>
+                <Typography variant="body2">
+                  {vehicles.find(vehicle => vehicle.id === selectedVehicle).license_plate}
+                </Typography>
+                <Box mt={2} display="flex" justifyContent="center" id="obd-buttons">
+                  <StyledButton variant="contained" onClick={connectObd} disabled={obdStatus} className="connect-button obd-button">Connect OBD</StyledButton>
+                  <StyledButton variant="contained" onClick={disconnectObd} disabled={!obdStatus} className="disconnect-button obd-button" color="error">Disconnect OBD</StyledButton>
                 </Box>
-              )}
-            </CardContent>
-          </StyledCard>
-        </Grid>
+              </Box>
+            )}
+          </CardContent>
+        </StyledCard>
+      </Grid>
 
-        {selectedVehicle && (
-          <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
-            <Tabs
-              value={selectedTab}
-              onChange={handleTabChange}
-              aria-label="OBD and Performance Views"
-              sx={{ mb: 2 }}
-            >
-              <Tab label="OBD View" />
-              <Tab label="Performance View" />
-              <Tab label="History" />
-            </Tabs>
-            {selectedTab === 0 ? (
+      {selectedVehicle && (
+        <Grid item xs={12} id="obd-section" sx={{ mb: 8 }}>
+          <Tabs
+            value={selectedTab}
+            onChange={handleTabChange}
+            aria-label="OBD and Performance Views"
+            sx={{ mb: 2 }}
+          >
+            <Tab label="OBD View" />
+            <Tab label="Performance View" />
+            <Tab label="History" />
+            <Tab label="Maintenance" /> {/* New Maintenance Tab */}
+          </Tabs>
+          {selectedTab === 0 ? (
               <>
                 <StyledTypography variant="h5" gutterBottom className="obd-title">OBD-II Sensor</StyledTypography>
                 <StyledButton variant="contained" color="primary" onClick={toggleView} sx={{ ml: 0 }}>
@@ -553,7 +579,7 @@ const Dashboard = () => {
                   </CardContent>
                 </StyledCard>
               </>
-            ) : (
+            ) : selectedTab === 2 ? (
               <>
                 <StyledTypography variant="h5" gutterBottom className="history-title">Historical OBD Data</StyledTypography>
                 <StyledCard variant="outlined" className="history-card">
@@ -565,6 +591,10 @@ const Dashboard = () => {
                     )}
                   </CardContent>
                 </StyledCard>
+              </>
+            ) : (
+              <>
+                <Maintenance recommendations={recommendations} /> {/* Maintenance Component */}
               </>
             )}
           </Grid>

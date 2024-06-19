@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const maintenanceRoutes = require('./src/maintenance');
+// const maintenanceRoutes = require('./src/maintenance');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const obdRoutes = require('./routes/obdRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const maintenanceRoutes = require('./routes/maintenanceRoutes'); 
 
 const app = express();
 
@@ -36,7 +37,7 @@ app.post('/register', registerHandler);
 app.post('/login', loginHandler);
 //app.use('/api/auth', authRoutes);
 app.use('/api/vehicles', vehicleRoutes);
-//app.use('/api/maintenance', maintenanceRoutes);
+app.use('/api/maintenance', maintenanceRoutes);
 //app.use('/api/notifications', notificationRoutes);
 app.use('/api/obd', obdRoutes);
 //app.use('/api/service-reminders', serviceReminderRoutes);
@@ -44,6 +45,6 @@ app.use('/api/obd', obdRoutes);
 //app.use('/api/text', textRoutes);
 //app.use('/api/dtc', dtcRoutes);
 app.use('/api/notifications', notificationRoutes);
-app.use('/api/maintenance', maintenanceRoutes);
+// app.use('/api/maintenance', maintenanceRoutes);
 
 module.exports = app;
