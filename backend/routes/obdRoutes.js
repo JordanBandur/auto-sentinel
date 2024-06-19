@@ -4,6 +4,8 @@ const obdSpoofService = require('../services/obdSpoofService');
 const OBD = require('../models/OBD');
 const sendEmail = require('../src/mailer');
 const sendTextMessage = require('../src/twilioService');
+const multer = require('multer');
+const upload = multer();
 
 router.get('/status', (req, res) => {
   res.json({ connected: obdSpoofService.getStatus() });
@@ -32,6 +34,19 @@ const formatSnapshotData = (data) => {
   return Object.entries(data).map(([key, value]) => `<b>${key}</b>: ${value}`).join('<br>');
 };
 
+const convertToCSV = (data) => {
+  const headers = Object.keys(data);
+  const csvRows = [headers.join(',')];
+
+  const values = headers.map(header => {
+    const escaped = ('' + data[header]).replace(/"/g, '\\"');
+    return `"${escaped}"`;
+  });
+  csvRows.push(values.join(','));
+
+  return csvRows.join('\n');
+};
+
 // Modified route to only save snapshot
 router.post('/snapshot', async (req, res) => {
   const { vehicleId, data } = req.body;
@@ -43,8 +58,8 @@ router.post('/snapshot', async (req, res) => {
   }
 });
 
-// New route to save snapshot and send email
-router.post('/snapshot-email', async (req, res) => {
+// New route to save snapshot and send email with CSV attachment
+router.post('/snapshot-email', upload.none(), async (req, res) => {
   const { vehicleId, data, email } = req.body;
   const verifiedEmails = ['miguelmasche@gmail.com', 'rodriguezruizsergio@gmail.com', 'jordanbandur@hotmail.ca'];
 
@@ -59,13 +74,18 @@ router.post('/snapshot-email', async (req, res) => {
     const snapshotDetails = await obdSpoofService.getSnapshotDetails(snapshot.id);
     const formattedData = formatSnapshotData(snapshotDetails.data);
 
-    // Send an email with the snapshot details
+    // Convert snapshot data to CSV
+    const csvData = convertToCSV(snapshotDetails.data);
+    const csvFileName = 'snapshot.csv';
+    
+    // Send an email with the snapshot details and CSV attachment
     await sendEmail(
       email,
-      'Snapshot Saved',
+      'Snapshot Saved with CSV',
       `<h1 style="color: Black">Vehicle Maintenance Tracker</h1>
-        <p>Snapshot details:</p>
-        <p>${formattedData}</p>`
+       <p>Snapshot details:</p>
+       <p>${formattedData}</p>`,
+      [{ filename: csvFileName, content: csvData }]
     );
 
     res.json(snapshot);
@@ -73,7 +93,6 @@ router.post('/snapshot-email', async (req, res) => {
     res.status(500).json({ error: 'Failed to save snapshot and send email', details: error });
   }
 });
-
 
 router.post('/send-text', async (req, res) => {
   const { vehicleId, data, phoneNumber } = req.body;
