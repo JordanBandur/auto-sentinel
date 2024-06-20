@@ -4,6 +4,7 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, B
 
 const VehicleFormDialog = ({ open, handleClose, handleSubmit, dialogType, vehicleData }) => {
   const [formData, setFormData] = useState({ make: '', model: '', year: '', vin: '', license_plate: '' });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (vehicleData) {
@@ -14,10 +15,24 @@ const VehicleFormDialog = ({ open, handleClose, handleSubmit, dialogType, vehicl
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.make) newErrors.make = 'Make is required';
+    if (!formData.model) newErrors.model = 'Model is required';
+    if (!formData.year) newErrors.year = 'Year is required';
+    if (!formData.vin) newErrors.vin = 'VIN is required';
+    if (!formData.license_plate) newErrors.license_plate = 'License Plate is required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const onSubmit = () => {
-    handleSubmit(formData);
+    if (validateForm()) {
+      handleSubmit(formData);
+    }
   };
 
   return (
@@ -33,6 +48,8 @@ const VehicleFormDialog = ({ open, handleClose, handleSubmit, dialogType, vehicl
             name="make"
             value={formData.make}
             onChange={handleInputChange}
+            error={!!errors.make}
+            helperText={errors.make}
             fullWidth
           />
         </FormControl>
@@ -42,6 +59,8 @@ const VehicleFormDialog = ({ open, handleClose, handleSubmit, dialogType, vehicl
             name="model"
             value={formData.model}
             onChange={handleInputChange}
+            error={!!errors.model}
+            helperText={errors.model}
             fullWidth
           />
         </FormControl>
@@ -51,6 +70,8 @@ const VehicleFormDialog = ({ open, handleClose, handleSubmit, dialogType, vehicl
             name="year"
             value={formData.year}
             onChange={handleInputChange}
+            error={!!errors.year}
+            helperText={errors.year}
             fullWidth
           />
         </FormControl>
@@ -60,6 +81,8 @@ const VehicleFormDialog = ({ open, handleClose, handleSubmit, dialogType, vehicl
             name="vin"
             value={formData.vin}
             onChange={handleInputChange}
+            error={!!errors.vin}
+            helperText={errors.vin}
             fullWidth
           />
         </FormControl>
@@ -69,6 +92,8 @@ const VehicleFormDialog = ({ open, handleClose, handleSubmit, dialogType, vehicl
             name="license_plate"
             value={formData.license_plate}
             onChange={handleInputChange}
+            error={!!errors.license_plate}
+            helperText={errors.license_plate}
             fullWidth
           />
         </FormControl>

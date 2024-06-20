@@ -10,8 +10,8 @@ import Profile from './views/Profile';
 import Maintenance from './views/Maintenance'; 
 import './assets/styles/main.scss';
 import './App.scss';
-import './styles/register.scss';
-import './styles/login.scss';
+import './assets/styles/views/login.scss';
+import './assets/styles/views/register.scss';
 import { AuthProvider } from './hooks/AuthContext';
 import { MaintenanceProvider } from './context/MaintenanceContext';
 
