@@ -17,7 +17,7 @@ MaintenanceTask.belongsTo(Vehicle, { foreignKey: 'vehicle_id' });
 User.hasMany(Notification, { foreignKey: 'user_id' });
 Notification.belongsTo(User, { foreignKey: 'user_id' });
 
-Vehicle.hasMany(OBD, { foreignKey: 'vehicle_id' });
+Vehicle.hasMany(OBD, { foreignKey: 'vehicle_id', onDelete: 'CASCADE' });
 OBD.belongsTo(Vehicle, { foreignKey: 'vehicle_id' });
 
 Vehicle.hasMany(ServiceReminder, { foreignKey: 'vehicle_id' });
