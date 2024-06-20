@@ -433,7 +433,7 @@ const Dashboard = () => {
       </StyledDialog>
 
       <Dialog open={emailModalOpen} onClose={handleCloseEmailModal}>
-        <DialogTitle>Email Snapshot</DialogTitle>
+        <DialogTitle>Send Snapshot</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Enter your phone number or email to send the snapshot.
