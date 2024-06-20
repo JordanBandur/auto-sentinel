@@ -7,7 +7,7 @@ import Login from './views/Login';
 import Register from './views/Register';
 import VehicleManagement from './views/VehicleManagement';
 import Profile from './views/Profile';
-import Maintenance from './views/Maintenance'; 
+import Maintenance from './views/Maintenance';
 import './assets/styles/main.scss';
 import './App.scss';
 import './assets/styles/views/login.scss';
@@ -19,7 +19,7 @@ const App = () => {
   return (
     <SnackbarProvider maxSnack={3}>
       <AuthProvider>
-        <MaintenanceProvider> {/* Wrap your app with MaintenanceProvider */}
+        <MaintenanceProvider>
           <Router>
             <div className="App">
               <_Header />
@@ -29,7 +29,7 @@ const App = () => {
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/vehicles" element={<VehicleManagement />} />
-                  <Route path="/maintenance" element={<Maintenance />} /> {/* This stays the same */}
+                  <Route path="/maintenance" element={<Maintenance />} />
                   <Route path="/profile" element={<Profile />} />
                 </Routes>
               </main>
