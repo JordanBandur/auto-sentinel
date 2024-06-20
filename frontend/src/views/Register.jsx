@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../hooks/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ const Register = () => {
   const [name, setName] = useState(''); // Added name field
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
 
   const handleRegister = async (e) => {
@@ -24,7 +26,7 @@ const Register = () => {
       console.log('Registration successful:', response.data);
     } catch (error) {
       console.error('Registration failed:', error);
-      alert('Registration failed');
+      enqueueSnackbar('email already exists', { variant: 'error' });
     }
   };
 
