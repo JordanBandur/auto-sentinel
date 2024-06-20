@@ -2,7 +2,6 @@ import { useState, useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -14,6 +13,7 @@ import Box from '@mui/material/Box';
 import Hidden from '@mui/material/Hidden';
 import { AuthContext } from '../hooks/AuthContext'; // Import AuthContext
 import '../assets/styles/components/_Header.scss';
+import logo from '../assets/logo/auto-sentinel-logo-3.png';
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -62,9 +62,7 @@ const Header = () => {
     <AppBar position="fixed" className="header-app-bar">
       <Toolbar className="header-toolbar">
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6" className="header-title">
-            Auto Sentinel
-          </Typography>
+          <img src={logo} alt="Auto Sentinel Logo" className="header-logo" />
           <Hidden smDown>
             <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
               <List component="nav" sx={{ display: 'flex' }}>

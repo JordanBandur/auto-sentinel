@@ -15,14 +15,18 @@ const VehicleSelect = ({ vehicles, selectedVehicle, handleVehicleChange, obdStat
           label="Select Vehicle"
           className="vehicle-select"
         >
-          {vehicles.map((vehicle) => (
-            <MenuItem key={vehicle.id} value={vehicle.id}>
-              {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
-            </MenuItem>
-          ))}
+          {vehicles.length === 0 ? (
+            <MenuItem value="" disabled>No vehicles available</MenuItem>
+          ) : (
+            vehicles.map((vehicle) => (
+              <MenuItem key={vehicle.id} value={vehicle.id}>
+                {vehicle.make} {vehicle.model} ({vehicle.year}) - {vehicle.license_plate}
+              </MenuItem>
+            ))
+          )}
         </Select>
       </FormControl>
-      {selectedVehicle && (
+      {selectedVehicle && vehicles.length > 0 && (
         <Box mt={2}>
           <Typography variant="h6">
             {vehicles.find((vehicle) => vehicle.id === selectedVehicle).make}{' '}
