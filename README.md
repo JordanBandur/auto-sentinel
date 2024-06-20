@@ -13,6 +13,8 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
 - **Backend**: Node.js, Express, PostgreSQL, Sequelize
 - **Frontend**: React, Vite, Axios, React Router
 
+## Screenshots
+
 ## Setup
 
 ### Backend
@@ -76,6 +78,12 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
 - **cli-progress**: A simple and easy to use progress bar for command-line/terminal applications
 - **sanitize-html**: Library for sanitizing HTML
 - **html-entities**: Library for decoding and encoding HTML entities
+- **multer**: Middleware for handling multipart/form-data, which is primarily used for uploading files
+- **nodemailer**: Module for sending emails from Node.js applications
+- **obd-parser**: Library for parsing OBD-II data, used for vehicle diagnostics
+- **puppeteer**: Headless Chrome Node.js API for generating screenshots, PDFs, and automating web page interactions
+- **sanitize-html**: Library for cleaning up user-submitted HTML, removing potentially dangerous or unwanted tags and attributes
+- **twilio**: Library for interacting with the Twilio API to send messages and make phone calls
 
 ### Frontend
 - **react**: Library for building user interfaces
@@ -88,6 +96,12 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
 - **@emotion/react**: Library designed for writing css styles with JavaScript
 - **@emotion/styled**: Styled component library for writing actual css code to style components
 - **@mui/icons-material**: Material-UI icons for faster and easier web development
+- **notistack**: Library for displaying snackbars (temporary notifications) in React applications
+- **cors**: Middleware to enable Cross-Origin Resource Sharing, allowing controlled access to resources on a web server from a different origin
+- **dotenv**: Module to load environment variables from a .env file into process.env
+- **react-chart**: Library for creating charts in React applications
+- **react-chartjs-2**: React wrapper for Chart.js, a popular charting library
+- **aws-sdk**: Software Development Kit (SDK) for integrating with Amazon Web Services (AWS) in JavaScript applications
 
 ### Dev
 - **nodemon**: Utility to automatically restart the server on file changes
