@@ -33,3 +33,36 @@ export const verifiedEmails = [
   'rodriguezruizsergio@gmail.com',
   'jordanbandur@hotmail.ca'
 ];
+
+export const simpleMetrics = [
+  'rpm',
+  'speed',
+  'fuelLevel',
+  'throttlePosition',
+  'intakeAirTemperature',
+  'coolantTemp',
+  'batteryVoltage',
+];
+export const advancedMetrics = [
+  ...simpleMetrics,
+  'engineLoad',
+  'fuelPressure',
+  'shortTermFuelTrim',
+  'longTermFuelTrim',
+  'massAirFlowRate',
+  'o2SensorVoltage',
+  'timingAdvance',
+  'manifoldAbsolutePressure',
+  'absoluteThrottlePosition',
+  'controlModuleVoltage',
+  'fuelRailPressure',
+  'egrCommanded',
+  'egrError',
+  'evaporativePurge',
+  'warmupsSinceDtcCleared',
+  'distanceSinceDtcCleared',
+  'ambientAirTemperature',
+  'engineOilTemperature',
+  'fuelInjectionTiming',
+  'engineFuelRate',
+];

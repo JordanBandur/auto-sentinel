@@ -11,7 +11,8 @@ import PerformanceMetrics from '../components/PerformanceMetrics';
 import HistoryData from '../components/HistoryData';
 import MaintenanceRecommendations from '../components/MaintenanceRecommendations';
 import { StyledCard, StyledTypography, StyledButton, StyledDialog } from '../components/StyledComponents';
-import { metricDescriptions, verifiedEmails } from '../constants';
+import { metricDescriptions, verifiedEmails, simpleMetrics, advancedMetrics } from '../constants';
+import { formatLabel, getFormattedValue, convertToCSV, downloadCSV } from '../utils/utils';
 
 const Dashboard = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -34,27 +35,6 @@ const Dashboard = () => {
   const [selectedHistoryEntry, setSelectedHistoryEntry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
-
-  const formatLabel = (label) => {
-    if (!label) return '';
-    return label.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
-  };
-
-  const getFormattedValue = (metric, value) => {
-    const decimals = [
-      'batteryVoltage',
-      'o2SensorVoltage',
-      'shortTermFuelTrim',
-      'longTermFuelTrim',
-      'massAirFlowRate',
-      'timingAdvance',
-      'controlModuleVoltage',
-      'egrError',
-      'fuelInjectionTiming',
-      'engineFuelRate',
-    ];
-    return decimals.includes(metric) ? parseFloat(value).toFixed(2) : parseInt(value);
-  };
 
   useEffect(() => {
     axiosInstance.get('/vehicles')
@@ -218,39 +198,6 @@ const Dashboard = () => {
       .catch((error) => console.error('Error generating performance data:', error));
   };
 
-  const convertToCSV = (data) => {
-    const headers = Object.keys(data[0]);
-    const csvRows = [];
-
-    // Add headers
-    csvRows.push(headers.join(','));
-
-    // Add rows
-    for (const row of data) {
-      const values = headers.map((header) => {
-        const escaped = ('' + row[header]).replace(/"/g, '\\"');
-        return `"${escaped}"`;
-      });
-      csvRows.push(values.join(','));
-    }
-
-    return csvRows.join('\n');
-  };
-
-  const downloadCSV = (data, filename = 'obd_data.csv') => {
-    const csv = convertToCSV(data);
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.setAttribute('hidden', '');
-    a.setAttribute('href', url);
-    a.setAttribute('download', filename);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
-
   const handleVehicleChange = (event) => {
     setSelectedVehicle(event.target.value);
   };
@@ -323,39 +270,6 @@ const Dashboard = () => {
       </Grid>
     ) : null
   );
-
-  const simpleMetrics = [
-    'rpm',
-    'speed',
-    'fuelLevel',
-    'throttlePosition',
-    'intakeAirTemperature',
-    'coolantTemp',
-    'batteryVoltage',
-  ];
-  const advancedMetrics = [
-    ...simpleMetrics,
-    'engineLoad',
-    'fuelPressure',
-    'shortTermFuelTrim',
-    'longTermFuelTrim',
-    'massAirFlowRate',
-    'o2SensorVoltage',
-    'timingAdvance',
-    'manifoldAbsolutePressure',
-    'absoluteThrottlePosition',
-    'controlModuleVoltage',
-    'fuelRailPressure',
-    'egrCommanded',
-    'egrError',
-    'evaporativePurge',
-    'warmupsSinceDtcCleared',
-    'distanceSinceDtcCleared',
-    'ambientAirTemperature',
-    'engineOilTemperature',
-    'fuelInjectionTiming',
-    'engineFuelRate',
-  ];
 
   const displayedMetrics = isAdvancedView ? advancedMetrics : simpleMetrics;
 
