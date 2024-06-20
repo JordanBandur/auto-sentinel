@@ -1,7 +1,20 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from 'react';
-import axiosInstance from '../utils/axiosInstance';
-import { CardActions, Container, Tabs, Tab, Grid, Typography, Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, CardContent } from '@mui/material';
+import {
+  CardActions,
+  Container,
+  Tabs,
+  Tab,
+  Grid,
+  Typography,
+  Button,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+  DialogActions,
+  CardContent,
+} from '@mui/material';
 import { useSnackbar } from 'notistack';
 import '../assets/styles/views/Dashboard.scss';
 import { MaintenanceContext } from '../context/MaintenanceContext';
@@ -10,9 +23,36 @@ import ObdMetrics from '../components/ObdMetrics';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import HistoryData from '../components/HistoryData';
 import MaintenanceRecommendations from '../components/MaintenanceRecommendations';
-import { StyledCard, StyledTypography, StyledButton, StyledDialog } from '../components/StyledComponents';
-import { metricDescriptions, verifiedEmails, simpleMetrics, advancedMetrics } from '../constants';
-import { formatLabel, getFormattedValue, convertToCSV, downloadCSV } from '../utils/utils';
+import {
+  StyledCard,
+  StyledTypography,
+  StyledButton,
+  StyledDialog,
+} from '../components/StyledComponents';
+import {
+  metricDescriptions,
+  verifiedEmails,
+  simpleMetrics,
+  advancedMetrics,
+} from '../constants';
+import {
+  formatLabel,
+  getFormattedValue,
+  downloadCSV,
+} from '../utils/utils';
+import {
+  fetchVehicles,
+  connectObd,
+  disconnectObd,
+  fetchObdStatus,
+  fetchObdData,
+  saveSnapshot,
+  fetchHistoryData,
+  sendSnapshotEmail,
+  sendSnapshotText,
+  deleteHistoryEntry,
+  generatePerformanceData,
+} from '../utils/api';
 
 const Dashboard = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -24,7 +64,7 @@ const Dashboard = () => {
   const [performanceData, setPerformanceData] = useState({
     accelerationData: [],
     quarterMileData: [],
-    brakingData: []
+    brakingData: [],
   });
   const [historyData, setHistoryData] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
@@ -37,24 +77,22 @@ const Dashboard = () => {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    axiosInstance.get('/vehicles')
-      .then((response) => {
-        console.log('Vehicles fetched:', response.data);
-        setVehicles(response.data);
+    fetchVehicles()
+      .then((data) => {
+        setVehicles(data);
       })
-      .catch((error) => console.error('Error fetching vehicles:', error));
+      .catch((error) => console.error(error));
 
-    axiosInstance.post('/obd/disconnect')
+    disconnectObd()
       .then(() => setObdStatus(false))
-      .catch((error) => console.error('Error disconnecting OBD on mount:', error));
+      .catch((error) => console.error(error));
 
     const checkObdStatus = () => {
-      axiosInstance.get('/obd/status')
-        .then((response) => {
-          console.log('OBD status:', response.data);
-          setObdStatus(response.data.connected);
+      fetchObdStatus()
+        .then((data) => {
+          setObdStatus(data.connected);
         })
-        .catch((error) => console.error('Error fetching OBD status:', error));
+        .catch((error) => console.error(error));
     };
 
     const interval = setInterval(checkObdStatus, 5000);
@@ -64,39 +102,32 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (selectedVehicle) {
-      fetchHistoryData();
+      fetchHistoryData(selectedVehicle)
+        .then((data) => setHistoryData(data))
+        .catch((error) => console.error(error));
     }
   }, [selectedVehicle]);
 
-  const fetchHistoryData = async () => {
-    try {
-      const response = await axiosInstance.get(`/obd/history/${selectedVehicle}`);
-      setHistoryData(response.data);
-    } catch (error) {
-      console.error('Error fetching historical OBD data:', error);
-    }
-  };
-
-  const connectObd = () => {
-    axiosInstance.post('/obd/connect')
+  const handleConnectObd = () => {
+    connectObd()
       .then(() => {
         setObdStatus(true);
         enqueueSnackbar('OBD-II connected successfully', { variant: 'success' });
       })
       .catch((error) => {
-        console.error('Error connecting OBD:', error);
+        console.error(error);
         enqueueSnackbar('Failed to connect OBD-II', { variant: 'error' });
       });
   };
 
-  const disconnectObd = () => {
-    axiosInstance.post('/obd/disconnect')
+  const handleDisconnectObd = () => {
+    disconnectObd()
       .then(() => {
         setObdStatus(false);
         enqueueSnackbar('OBD-II disconnected successfully', { variant: 'info' });
       })
       .catch((error) => {
-        console.error('Error disconnecting OBD:', error);
+        console.error(error);
         enqueueSnackbar('Failed to disconnect OBD-II', { variant: 'error' });
       });
   };
@@ -106,22 +137,20 @@ const Dashboard = () => {
   const generateRecommendations = (snapshotData) => {
     const recs = [];
 
-    // Example recommendations based on snapshot data
     if (snapshotData.engineLoad > 80) {
       recs.push('Check engine load - high load detected.');
     }
-    if (snapshotData.coolantTemp > 10) { // Lowered the threshold for testing
+    if (snapshotData.coolantTemp > 100) {
       recs.push('Check coolant temperature - overheating detected.');
     }
     if (snapshotData.batteryVoltage < 12) {
       recs.push('Check battery voltage - low voltage detected.');
     }
 
-    setRecommendations(recs); // Set the recommendations in the context
-    console.log('Recommendations generated:', recs); // Debug log
+    setRecommendations(recs);
   };
 
-  const saveSnapshot = () => {
+  const handleSaveSnapshot = () => {
     if (!obdData) {
       enqueueSnackbar('No OBD data to save', { variant: 'warning' });
       return;
@@ -132,70 +161,67 @@ const Dashboard = () => {
       return;
     }
 
-    axiosInstance.post('/obd/snapshot', { vehicleId: selectedVehicle, data: obdData })
+    saveSnapshot(selectedVehicle, obdData)
       .then(() => {
         enqueueSnackbar('Snapshot saved successfully', { variant: 'success' });
-        generateRecommendations(obdData); // Generate recommendations based on snapshot data
-        fetchHistoryData(); // Fetch updated historical data
+        generateRecommendations(obdData);
+        fetchHistoryData(selectedVehicle).then((data) => setHistoryData(data));
       })
       .catch((error) => {
-        console.error('Error saving snapshot:', error.response ? error.response.data : error.message);
+        console.error(error);
         enqueueSnackbar('Error saving snapshot', { variant: 'error' });
       });
   };
 
-  // Function to send snapshot email
   const handleSendSnapshotEmail = (data) => {
     if (!verifiedEmails.includes(email)) {
       enqueueSnackbar('Please enter a verified email', { variant: 'warning' });
       return;
     }
 
-    axiosInstance.post('/obd/snapshot-email', { vehicleId: selectedVehicle, data, email })
+    sendSnapshotEmail(selectedVehicle, data, email)
       .then(() => {
         enqueueSnackbar('Snapshot saved and email sent successfully', { variant: 'success' });
       })
       .catch((error) => {
-        console.error('Error saving snapshot and sending email:', error.response ? error.response.data : error.message);
+        console.error(error);
         enqueueSnackbar('Error saving snapshot and sending email', { variant: 'error' });
       });
   };
 
-  // Function to send snapshot text
   const handleSendSnapshotText = (data) => {
     if (!phoneNumber) {
       enqueueSnackbar('No phone number entered', { variant: 'warning' });
       return;
     }
 
-    axiosInstance.post('/obd/send-text', { vehicleId: selectedVehicle, data, phoneNumber })
+    sendSnapshotText(selectedVehicle, data, phoneNumber)
       .then(() => {
-        enqueueSnackbar('Snapshot saved successfully and text message sent', { variant: 'success' });
+        enqueueSnackbar('Snapshot saved and text message sent', { variant: 'success' });
       })
       .catch((error) => {
-        console.error('Error saving snapshot and sending text message:', error.response ? error.response.data : error.message);
+        console.error(error);
         enqueueSnackbar('Error saving snapshot and sending text message', { variant: 'error' });
       });
   };
 
   useEffect(() => {
-    const fetchObdData = () => {
+    const fetchObdDataInterval = () => {
       if (obdStatus) {
-        axiosInstance.get('/obd/data')
-          .then((response) => setObdData(response.data))
-          .catch((error) => console.error('Error fetching OBD data:', error));
+        fetchObdData()
+          .then((data) => setObdData(data))
+          .catch((error) => console.error(error));
       }
     };
 
-    const interval = setInterval(fetchObdData, 1000);
-
+    const interval = setInterval(fetchObdDataInterval, 1000);
     return () => clearInterval(interval);
   }, [obdStatus]);
 
-  const generatePostDriveAnalysis = () => {
-    axiosInstance.post('/obd/generatePerformanceData')
-      .then((response) => setPerformanceData(response.data))
-      .catch((error) => console.error('Error generating performance data:', error));
+  const handleGeneratePostDriveAnalysis = () => {
+    generatePerformanceData()
+      .then((data) => setPerformanceData(data))
+      .catch((error) => console.error(error));
   };
 
   const handleVehicleChange = (event) => {
@@ -209,7 +235,9 @@ const Dashboard = () => {
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
     if (newValue === 2) {
-      fetchHistoryData();
+      fetchHistoryData(selectedVehicle)
+        .then((data) => setHistoryData(data))
+        .catch((error) => console.error(error));
     }
   };
 
@@ -245,11 +273,11 @@ const Dashboard = () => {
 
   const handleDeleteHistoryEntry = async (id) => {
     try {
-      await axiosInstance.delete(`/obd/history/${id}`);
+      await deleteHistoryEntry(id);
       enqueueSnackbar('OBD entry deleted successfully', { variant: 'info' });
-      fetchHistoryData();
+      fetchHistoryData(selectedVehicle).then((data) => setHistoryData(data));
     } catch (error) {
-      console.error('Error deleting OBD entry:', error);
+      console.error(error);
       enqueueSnackbar('Error deleting OBD entry', { variant: 'error' });
     }
   };
@@ -284,8 +312,8 @@ const Dashboard = () => {
             selectedVehicle={selectedVehicle}
             handleVehicleChange={handleVehicleChange}
             obdStatus={obdStatus}
-            connectObd={connectObd}
-            disconnectObd={disconnectObd}
+            connectObd={handleConnectObd}
+            disconnectObd={handleDisconnectObd}
           />
         </Grid>
 
@@ -326,7 +354,7 @@ const Dashboard = () => {
                   </CardContent>
                   {obdStatus && (
                     <CardActions className="obd-actions">
-                      <Button size="small" onClick={saveSnapshot} className="snapshot-button">Save Snapshot</Button>
+                      <Button size="small" onClick={handleSaveSnapshot} className="snapshot-button">Save Snapshot</Button>
                     </CardActions>
                   )}
                 </StyledCard>
@@ -334,7 +362,7 @@ const Dashboard = () => {
             ) : selectedTab === 1 ? (
               <>
                 <StyledTypography variant="h5" gutterBottom className="performance-title">Performance Metrics</StyledTypography>
-                <StyledButton variant="contained" onClick={generatePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">
+                <StyledButton variant="contained" onClick={handleGeneratePostDriveAnalysis} disabled={!obdStatus} id="generate-report-button">
                   {obdStatus ? 'Generate Post-Drive Analysis' : 'Connect OBD'}
                 </StyledButton>
                 <StyledCard variant="outlined" className="performance-card">
