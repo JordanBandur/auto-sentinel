@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, TextField, FormControl } from '@mui/material';
 

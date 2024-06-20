@@ -7,7 +7,6 @@ import Login from './views/Login';
 import Register from './views/Register';
 import VehicleManagement from './views/VehicleManagement';
 import Profile from './views/Profile';
-import Notifications from './views/Notifications';
 import Maintenance from './views/Maintenance'; 
 import './assets/styles/main.scss';
 import './App.scss';

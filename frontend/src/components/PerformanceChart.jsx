@@ -1,6 +1,4 @@
-// src/components/PerformanceGraph.jsx
-
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { Line } from 'react-chartjs-2';
 import { Card, CardContent, Typography } from '@mui/material';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';

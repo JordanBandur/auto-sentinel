@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Card, CardContent, IconButton, Typography, Box } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
