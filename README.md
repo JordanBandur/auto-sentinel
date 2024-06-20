@@ -14,6 +14,43 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
 - **Frontend**: React, Vite, Axios, React Router
 
 ## Screenshots
+### Dashboard
+![Dashboard](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-1.png)
+
+![Dashboard 2](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-2.png)
+
+![Dashboard OBD Connected 1](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-obd-connect-1.png)
+
+![Dashboard OBD Connected 2](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-obd-connect-2.png)
+
+![Dashboard OBD Advanced View 1](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-obd-connect-adv-1.png)
+
+![Dashboard OBD Advanced View 2](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-obd-connect-adv-2.png)
+
+![Dashboard OBD Save Snaphot](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-obd-connect-adv-2-save.png)
+
+![Dashboard Performance View 1](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-perf-1.png)
+
+![Dashboard Performance View 2](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-perf-2.png)
+
+![Dashboard Historic Data View 1](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-history-1.png)
+
+![Dashboard Historic Data View Modal info](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-history-modal.png)
+
+![Dashboard Historic Data View Send Modal](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-history-modal-send.png)
+
+![Dashboard Maintenance View](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/dash-maint.png)
+
+### Vehicle Management
+![Vehicle Management 1](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/vehicle-management-1.png)
+
+![Vehicle Management 2](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/vehicle-management-2.png)
+
+![Vehicle Management 3](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/vehicle-management-3.png)
+
+![Vehicle Management 4](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/vehicle-management-4.png)
+
+![Vehicle Management 5](https://github.com/JordanBandur/auto-sentinel/blob/main/frontend/src/assets/screenshots/vehicle-management-5.png)
 
 ## Setup
 
