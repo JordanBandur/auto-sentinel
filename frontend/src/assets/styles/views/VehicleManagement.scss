@@ -1,9 +1,12 @@
 #add-vehicle-button {
   padding-top: 0px;
-  margin-bottom: 2rem;
+  margin: 2rem;
 
   button {
     margin-left: 0;
   }
-
+}
+#vehicle-management{
+  display: flex;
+  flex-direction: column;
 }
