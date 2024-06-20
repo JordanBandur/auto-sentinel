@@ -140,7 +140,7 @@ const Dashboard = () => {
     if (snapshotData.engineLoad > 80) {
       recs.push('Check engine load - high load detected.');
     }
-    if (snapshotData.coolantTemp > 100) {
+    if (snapshotData.coolantTemp > 70) {
       recs.push('Check coolant temperature - overheating detected.');
     }
     if (snapshotData.batteryVoltage < 12) {
