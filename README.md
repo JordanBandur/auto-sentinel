@@ -10,8 +10,39 @@ Auto Sentinel is a web application designed to help vehicle owners manage and mo
 - Notifications
 
 ## Tech Stack
-- **Backend**: Node.js, Express, PostgreSQL, Sequelize
-- **Frontend**: React, Vite, Axios, React Router
+### **Backend**: 
+- Node.js
+- Express
+- PostgreSQL (pg)
+- Sequelize
+- bcrypt
+- jsonwebtoken
+- Multer
+- Nodemailer
+- Twilio
+- Puppeteer
+- Obd-parser
+- Sanitize-html
+- dotenv
+- cors
+- body-parser
+- axios
+- cli-progress
+- Nodemon
+- Sequelize CLI
+### **Frontend**: 
+- Vite
+- React
+- React DOM
+- Sass
+- Emotion
+- MUI (Material-UI)
+- Notistack
+- Axios
+- Chart.js
+- React-Chartjs-2
+- React Router DOM
+- ESLint
 
 ## Screenshots
 ### Dashboard
