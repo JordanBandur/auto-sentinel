@@ -1,6 +1,6 @@
 # Auto Sentinel
 
-Auto Sentinel is a web application designed to help vehicle owners manage and monitor their car maintenance needs efficiently. The app leverages OBD-II data to provide real-time insights into the vehicle's health, track maintenance tasks, and send timely reminders for upcoming services.
+Auto Sentinel is a web application designed to help vehicle owners manage and monitor their car maintenance needs. The app leverages OBD-II data to provide real-time insights into the vehicle's health, track maintenance tasks, and send timely reminders for upcoming services. The App currently simulates the OBD sensor.
 
 ## Features
 - User Authentication
